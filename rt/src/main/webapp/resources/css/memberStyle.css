@@ -1,0 +1,184 @@
+@charset "UTF-8";
+
+/* 회원가입 페이지  */
+.title{
+	border-bottom: 2px double #34495e;
+	padding-bottom: 0.5em;
+	margin-top: 2em;
+	color: #34495e;
+}
+
+.signForm{
+	display: block;
+	margin-top: 0em;
+}
+
+.signTable{
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	border: 1px solid #cbcbcb;
+	display: table;
+}
+
+.signTd{
+	border-left: 1px solid #cbcbcb;
+	font-size: inherit;
+	margin: 0;
+	overflow: visible;
+	padding: 0.5em 1em;
+}
+
+.signInput{
+	padding: 0.5em 0.6em;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 3px #ddd;
+	border-radius: 4px;
+	vertical-align:middle;
+	box-sizing: border-box;
+}
+
+.singButton{
+	display: inline-block;
+	line-height: normal;
+	white-space: nowrap;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	box-sizing: border-box;
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+}
+
+/* 로그인 페이지 */
+.loginDiv{
+	margin: 1em auto;
+	padding: 1em 2em;
+	background-color: #e7e7e7;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 300px;
+	display: block;
+}
+
+.loginInput{
+	margin-bottom: 0.3em;
+	display: block;
+	padding: 0.5em 0.6em;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 3px #ddd;
+	border-radius: 4px;
+	vertical-align: middle;
+	box-sizing: border-box; 
+}
+
+#loginbtn{
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+}
+
+#signbtn{
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+	margin-left: 50px;
+}
+
+a{
+	background-color: #1f8dd6;
+	color: white;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+	text-align:center;
+	margin-left: 150px;
+	text-decoration: none;
+}
+
+.searchIdPw{
+	margin: 1em auto;
+	padding: 1em 2em;
+	text-align: center;
+	padding-right: 200px;
+}
+
+/* 아이디,비번 찾기 */
+.search{
+	margin: 1em auto;
+	padding: 1em 2em;
+	background-color: #e7e7e7;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 300px;
+	display: block;
+}
+.searchIn{
+	margin-bottom: 0.3em;
+	display: block;
+	padding: 0.5em 0.6em;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 3px #ddd;
+	border-radius: 4px;
+	vertical-align: middle;
+	box-sizing: border-box; 
+}
+#find{
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+}
+
+#findPw{
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+}
+/* 비밀번호 변경하기 */
+#updatePw{
+	margin: 1em auto;
+	padding: 1em 2em;
+	background-color: #e7e7e7;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 300px;
+	display: block;
+}
+.changeId{
+	margin-bottom: 0.3em;
+	display: block;
+	padding: 0.5em 0.6em;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 3px #ddd;
+	border-radius: 4px;
+	vertical-align: middle;
+	box-sizing: border-box; 
+}
+#change{
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;
+	font-family: inherit;
+	font-size: 100%;
+	border: none rgba(0, 0, 0, 0);
+}

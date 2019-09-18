@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+/* 스킵 내비게이션 */
+#skip {position: relative;}
+#skip a {position: absolute; left: 0px; top: -35px; border: 1px solid #fff; color: #fff;
+background: #333; line-height: 30px; width: 200px; text-align: center;}
+#skip a:active, /* 탭을 눌렀을때 활성화시킴 */
+#skip a:focus {top: 0;}
+
+/* 레이아웃 */
+#wrap {}
+#menu {height: 60px; background: #59098a;}
+#header {height: 425px; background: url(../img/header_bg.png) center top repeat-x}
+#content {}
+#footer {height: 230px; background: #333;}
+
+/* 컨텐츠 레이아웃 */
+#cont_nav {} 
+#cont_tit {width: 100%; height: 400px; background: #f6fdff;}
+#cont_ban {width: 100%; height: 250px; background: #fff;}
+#cont_cont {width: 100%; height: 200px; background: #fff;}
+
+/* 컨테이너 */
+.container {width: 990px; margin: 0 auto; height: inherit; /*background: rgba(255,255,255,0.3)*/;}
+
+/* 헤더 */
+.header {}
+.header .header_menu {text-align: right; font-family: 'Nanum Pen Script', cursive; font-size: 25px;}
+.header .header_menu a {color: #222; padding: 10px 0px 10px 13px; display: inline-block;}
+.header .header_menu a:hover {color: #666;}
+.header .header-tit {text-align: center; }
+.header .header-tit h1 {background-color: $4aa8d4; font-size: 48px;
+padding: 8px 20px 6px 20px; display: inline-block; margin-top: 40px; font-weight: bold;
+font-family: 'Nanum Pen Script', cursive;
+}
+/* .header .header-tit a {display: inline-block; background-color: white; font-size: 18px; color:black;
+padding: 5px 20px 6px 20px;
+} */
+.header .header-icon {text-align: center; margin: 30px;}
+.header .header-icon a {width: 60px; height: 60px; display: inline-block; background: url(../img/);}
+
+/* 네비게이션 */
+.nav {padding: 20px 0;}
+.nav .nav_tit {text-align: center; font-size: 40px; color: #222; letter-spacing: 2px;}
+.nav .nav_tit h2 {font-family: 'Nanum Pen Script', cursive;}
+.nav .nav_sub {text-align: center; font-size: 25px;}
+.nav .nav_sub p {font-family: 'Nanum Pen Script', cursive;}
+
+/* 전체 메뉴 */
+
+.menu {overflow: hidden;}
+.menu > div {float: left; width: 20%;}
+.menu > div h3 {font-size: 35px; margin-top: 15px; cursor: pointer; font-family: 'Nanum Pen Script', cursive;}
+.menu .font_color {color: #fff;}
+.menu .menu_nav {font-size: 25px; background: #2f005e; color: #fff; font-family: 'Nanum Pen Script', cursive;}
+.menu .menu_nav:hover {background: #6500ca;}
+
+/* 메뉴 호바 기능 */
+.dropbtn {
+		  background-color: #4CAF50;
+		  color: white;
+		  padding: 16px;
+		  font-size: 16px;
+		  border: none;
+		  cursor: pointer;
+		}
+		
+		.dropdown {
+		  position: relative;
+		  display: inline-block;
+		}
+		
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: #2f005e;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
+		}
+		
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}
+		
+		.dropdown-content a:hover {background-color: #f1f1f1}
+		
+		.dropdown:hover .dropdown-content {
+		  display: block;
+		}
+		
+		.dropdown:hover .dropbtn {
+		  background-color: #2f005e;
+		}
+
+/* test부분 */
+.test {background: #fff; width: 100%; height: 400px;}
+.test .test1 {position: relative; background: #fff; width: 50%; height: 350px; font-family: 'Nanum Pen Script', cursive; font-size: 25px; float: left;}
+.test .test2 {position: relative; background: #fff; width: 50%; height: 350px; font-family: 'Nanum Pen Script', cursive; font-size: 25px; float: left;}
+.test .test3 {float : left; background: #fff; width: 50%; font-family: 'Nanum Pen Script', cursive; font-size: 25px; text-align: center;}
+.test .test4 {float : left; background: #fff; width: 50%; font-family: 'Nanum Pen Script', cursive; font-size: 25px; text-align: center;}
+.test .test1 .ctemp {width: 28%;}
+.test .test1 .chightemp {width: 28%;}
+.test .test1 .clowtemp {width: 28%;}
+
+/* 날씨 위젯 위치 */
+.test .test1 .weather-wrapper {position: absolute; top:50px; left: 180px;}
+.test .test2 .weather-wrapper {position: absolute; top:50px; left: 180px;}
+
+/* 컨텐츠 */
+.cont {overflow: hidden;}
+.cont .column {width: 100%; height: 450px; background: #fff; float: left; padding-top: 30px; position: relative;}
+
+.cont .column .ico_img {display: block; width: 60px; height: 60px;
+background: url(../img/button_1.png) no-repeat; position: absolute; left: 0; top: 0;}
+.cont .column .ico_tit {padding-left: 70px; font-size: 24px; color: #2c94c4;}
+.cont .column .col_desc {padding-left: 70px; border-bottom: 1px solid #d0d0d0; padding-bottom: 15px; font-size: 28px; font-family: 'Nanum Pen Script', cursive; margin-bottom: 15px;}
+
+
+/* 게시판 */
+.notice {}
+.notice h4 {font-size: 24px; color: #0093bd; padding-bottom: 3px; font-weight: bold;}
+.notice ul {}
+.notice ul li {overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.notice ul li a {}
+.notice a.more {}
+
+/* 게시판 테이블 */
+table.type_01 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-left: 1px solid #ccc;
+    margin: 20px 10px;
+}
+
+table.type_01 thead th {
+    padding: 10px;
+    font-weight: bold;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 2px solid #c00;
+    background: #dcdcd1;
+}
+table.type_01 tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background: #ececec;
+}
+table.type_01 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+
+
+
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="typeADAO">
+	<select id="select" parameterType="String" resultMap="rsMap">
+		SELECT
+		*
+		FROM typeA
+		WHERE id = #{id}
+	</select>
+	<select id="selectAll" resultMap="rsMap">
+		SELECT * FROM tablename1
+	</select>
+	<select id="select" parameterType="typeADTO" resultMap="rsMap">
+		SELECT * FROM typeA
+		WHERE no = #{no}
+	</select>
+	
+	<select id="selectCnt" resultType="int">
+		SELECT count(*) FROM typeA
+	</select>
+
+	<resultMap type="typeADTO" id="rsMap">
+		<!-- <id property="no" column="no" /> -->
+		<result property="no" column="no" />
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="travel_day" column="travel_day" />
+		<result property="day_start" column="day_start" />
+		<result property="travel_type" column="travel_type" />
+		<result property="travel_theme" column="travel_theme" />
+		<result property="choice_public" column="choice_public" />
+		<result property="travel_intro" column="travel_intro" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="rsMap">
+		SELECT * FROM typeA
+	</select>
+	
+	<insert id="insert" parameterType="typeADTO">
+		INSERT INTO typeA
+		VALUES(typeA_no_seq.nextval,#{id},#{title},#{travel_day},#{day_start},#{travel_type},#{travel_theme},
+		#{choice_public},#{travel_intro})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bDAO">
+
+	<select id="select" parameterType="bDTO" resultMap="rsMap">
+		SELECT * FROM board
+		WHERE id = #{id}
+	</select>
+
+	<resultMap type="bDTO" id="rsMap">
+		<result property="bno" column="bno" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="writer" column="writer" />
+		<result property="regdate" column="regdate" />
+		<result property="viewcnt" column="viewcnt" />
+	</resultMap>
+
+	<select id="listAll" resultMap="rsMap">
+		SELECT * from board
+	</select>
+
+	<insert id="insert">
+		INSERT INTO board(
+		bno,
+		title,
+		content,
+		writer
+	) VALUES (
+		 (SELECT NVL(MAX(bno)+1, 1)FROM board),
+		#{title},
+		#{content},
+		#{writer}
+	)
+	</insert>
+
+	<update id="update" parameterType="bDTO">
+		UPDATE board
+		SET
+		content=#{content}
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="bDTO">
+		DELETE FROM board WHERE
+		id = #{id}
+	</delete>
+
+</mapper>

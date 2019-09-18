@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="typeBDAO">
+
+	<select id="select" parameterType="typeBDTO" resultMap="rsMap">
+		SELECT * FROM typeB
+		WHERE no = #{no}
+	</select>
+
+	<resultMap type="typeBDTO" id="rsMap">
+		<!-- <id property="no" column="no" /> -->
+		<result property="no" column="no" />
+		<result property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="travel_day" column="travel_day" />
+		<result property="day_start_year" column="day_start_year" />
+		<result property="travel_type" column="travel_type" />
+		<result property="travel_theme" column="travel_theme" />
+		<result property="m_choice" column="m_choice" />
+		<result property="m_gender" column="m_gender" />
+		<result property="m_age" column="m_age" />
+		<result property="choice_public" column="choice_public" />
+		<result property="travel_intro" column="travel_intro" />
+		<result property="day_start_mon" column="day_start_mon" />
+		<result property="day_start_time" column="day_start_time" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="rsMap">
+		SELECT * FROM typeB
+	</select>
+	
+	<insert id="insert" parameterType="typeBDTO">
+		INSERT INTO typeB
+		VALUES(typeB_no_seq.nextval,#{id},#{title},#{travel_day},#{day_start_year},#{day_start_mon},#{day_start_time},#{travel_type},#{travel_theme},
+		#{m_choice},#{m_gender},#{m_age},#{choice_public},#{travel_intro})
+	</insert>
+	
+</mapper>

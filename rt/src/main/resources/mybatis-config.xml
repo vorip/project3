@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.rt.travel.chat.dto.ChatRoomDTO" alias="chatRoomDTO"></typeAlias>
+		<typeAlias type="com.rt.travel.chat.dto.ChatContentDTO" alias="chatContentDTO"></typeAlias>
+		<typeAlias type="com.rt.travel.member.dto.MemberDTO" alias="memberDTO"></typeAlias>
+		<typeAlias type="com.rt.travel.chat.dto.FriendDTO" alias="friendDTO"></typeAlias>
+		<typeAlias type="com.rt.travel.course.dto.TypeBDTO" alias="typeBDTO"></typeAlias>
+		<typeAlias type="com.rt.travel.course.dto.TypeADTO" alias="typeADTO"></typeAlias>
+		<typeAlias type="com.rt.travel.course.dto.CourseDTO" alias="courseDTO"></typeAlias>
+		<typeAlias type="com.rt.travel.member.dto.CompanionDTO" alias="companionDTO"></typeAlias>
+		<typeAlias type="com.rt.travel.board.dto.BoardDTO" alias="bDTO"></typeAlias>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/chat-mapper.xml" />
+		<mapper resource="mapper/member-mapper.xml" />
+		<mapper resource="mapper/courseMapper.xml" />
+		<mapper resource="mapper/typeAMapper.xml" />
+		<mapper resource="mapper/typeBMapper.xml" />
+	</mappers>
+</configuration>

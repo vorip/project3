@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+/* 동행자 리스트 */
+
+h2{
+	color: #34495e;
+}
+p{
+	display: block;
+	margin-top: -1em;
+	box-sizing: border-box;
+}
+.comTable{
+	border-collapse : collapse;
+	border-spacing:0;
+	empty-cells : show;
+	border: 1px solid #cbcbcb; 
+}
+
+th{
+	border-width: 0 0 1px 0;
+	border-bottom: 1px solid #cbcbcb;
+	border-left: 1px solid #cbcbcb;
+	font-size: inherit;
+	margin: 0;
+	overflow: visible;
+	padding: 0.5em 1em;
+	font-weight: bold;
+	color: #666;
+}
+
+td{
+	text-align: center;
+	border-bottom: 1px solid #cbcbcb;
+}
+
+/* 여행계획서 자세히보기 */
+#title{
+	padding: .4em 1em;
+	position: relative;
+	background-color: #cbcbcb;
+	height: 20px;
+}
+
+#course{
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    position: absolute;
+    border: 1px solid;
+    left: 500px;
+    top: 90px;
+}
+
+#courseList{
+	padding : 0.5em;
+	border-bottom: 1px dashed #ccc;
+}
