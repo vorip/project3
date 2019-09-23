@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chatDAO">
+	<select id="selectRoomNums" parameterType="String"
+		resultType="Integer">
+		SELECT
+		chatRoomNum
+		FROM chatRoom
+		WHERE members like #{member}
+	</select>
+	<select id="isMembers" parameterType = "chatRoomDTO" resultType="Integer">
+		select count(*)
+		from chatRoom
+		where members like #{members} and chatRoomNum = #{chatRoomNum}
+	</select>
+	<select id="selectRooms" parameterType="String"
+		resultType="chatRoomDTO">
+		SELECT
+		*
+		FROM chatRoom
+		WHERE members like #{member}
+	</select>
+	<select id = "selectRoom" parameterType="int" resultType = "chatRoomDTO">
+		select * from chatRoom where chatRoomNum = #{chatRoomNum}
+	</select>
+	<select id="getContent" parameterType="int"
+		resultType="chatContentDTO">
+		select * from chatContent where
+		chatRoomNum = #{chatRoomNum} AND contentTime = (select max(contentTime)
+		from chatContent
+		where chatRoomNum = #{chatRoomNum})
+	</select>
+
+	<resultMap type="chatRoomDTO" id="roomRs">
+		<result property="members" column="members" />
+		<result property="chatRoomName" column="chatRoomName" />
+		<result property="startTime" column="startTime" />
+		<result property="chatRoomNum" column="chatRoomNum" />
+		<result property="limitMember" column="limitMembers" />
+		<result property="leader" column="leader" />
+		<result property="thumbnail" column="thumbnail" />
+		<result property="endTime" column="endTime" />
+	</resultMap>
+	<resultMap type="chatContentDTO" id="conRs">
+		<result property="content" column="content" />
+		<result property="contentTime" column="contentTime" />
+		<result property="chatRoomNum" column="chatRoomNum" />
+		<result property="member" column="member" />
+	</resultMap>
+
+	<select id="getContents" parameterType="int" resultType = 'chatContentDTO'>
+		select content,contentTime,member
+		from chatContent 
+		where chatRoomNum = #{chatRoomNum}
+		ORDER BY contentTime ASC
+	</select>
+
+	<insert id="createRoom" parameterType="chatRoomDTO">
+		INSERT INTO chatRoom
+		values
+		(#{members},#{chatRoomName},to_timestamp(#{startTime}),
+		chatRoom_seq.NEXTVAL,#{limitMember},#{leader},{#thumbnail},to_timestamp(#{endTime}))
+	</insert>
+	<insert id="addContent" parameterType="chatContentDTO">
+		INSERT INTO chatContent
+		VALUES(#{content},SYSTIMESTAMP,#{chatRoomNum},#{member})
+	</insert>
+
+	<update id="acceptCompanion" parameterType="chatRoomDTO">
+		UPDATE chatRoom 
+		SET members=#{members} WHERE chatRoomNum = #{chatRoomNum}
+	</update>
+
+	<delete id="deleteRoom">
+		DELETE FROM chatRoom
+		WHERE endTime <![CDATA[<]]> SYSDATE
+	</delete>
+
+</mapper>
