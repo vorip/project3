@@ -28,19 +28,19 @@ public class ChatRoomSelectServiceImpl implements ChatRoomSelectService {
 	public String getEachChat(String name,int chatRoomNum) {
 		eachHtml = "";
 		list_content = chatDAO.getContents(chatRoomNum);
-		eachHtml += "<div class = \'chatRoom\'id = \'chatRoom" + chatRoomNum + "\'>" + chatRoomScript(chatRoomNum)
-				+ "<div class = \'roomInfo\' id = \'roomInfo" + chatRoomNum + "\'>" + roomInfo(chatRoomNum) + "</div>"
-				+ "<div class = \'notice\'>" + notice(chatRoomNum) + "</div>" + "<div id = \'roomContent" + chatRoomNum
-				+ "\' class = \'roomContent\'>";
+		eachHtml += "<div style=\"position: absolute;width: 300px;height: 530px;background: white;margin: 0px;left: 35%;top: 10%;\" class = \'chatRoom\'id = \'chatRoom" + chatRoomNum + "\'>" + chatRoomScript(chatRoomNum)
+				+ "<div style=\"width: 300px;height: 60px;background: #555a9c;\" class = \'roomInfo\' id = \'roomInfo" + chatRoomNum + "\'>" + roomInfo(chatRoomNum) + "</div>"
+				+ "<div class = \'notice\'>" + notice(chatRoomNum) + "</div>" 
+				+"<div style=\"overflow: scroll;width: 300px;height: 370px;overflow-x: hidden;background: white;\" id = \'roomContent" + chatRoomNum + "\' class = \'roomContent\'>";
 		if (list_content != null) {
 			for (int i = 0; i < list_content.size(); i++) {
 				chatContentDTO = list_content.get(i);
 				eachHtml += chatRoomCon(chatContentDTO, name);
 			}
 		}
-		eachHtml += "</div><div class = \'addContentDiv\'>" + "<textarea id = \'textA" + chatRoomNum
-				+ "\'class = \'textA\' cols=\'30\' rows=\'5\'></textarea>" + "<button id = \'addCon" + chatRoomNum
-				+ "\' value = \'" + chatRoomNum + "\'class = \'addCon\'disabled=\'disabled\'>전송</button>"
+		eachHtml += "</div><div style=\"width: 300px;height: 100px;\" class = \'addContentDiv\'>" 
+				+ "<textarea style=\"width:250px;height:75px;margin: 5px;float: left;\" id = \'textA" + chatRoomNum + "\'class = \'textA\' cols=\'30\' rows=\'5\'></textarea>" 
+				+ "<button style=\"height: 77px;margin: 5px;\" id = \'addCon" + chatRoomNum + "\' value = \'" + chatRoomNum + "\'class = \'addCon\'disabled=\'disabled\'>전송</button>"
 				+ "</div></div>";
 		return eachHtml;
 	}
@@ -54,14 +54,14 @@ public class ChatRoomSelectServiceImpl implements ChatRoomSelectService {
 		chatRoomDTO = chatDAO.selectRoom(chatRoomNum);
 		roomInfoHtml =  "<div class = \'roomInfoDiv\'>"
 							//나중에 썸네일 제대로 고치기(roomThumb)
-				+			"<div class=\'roomInfoThumb\'><img src='resources/img/thumb.jpg'></div>"
+				+			"<div style=\"float: left;margin: 5px;\" class=\'roomInfoThumb\'><img src='resources/img/thumb.jpg'></div>"
 				+			"<div class=\'roomInfoCon\'>"
-				+				"<div class=\'leftRoomInfo\'>"
-				+					"<span>"+chatRoomDTO.getchatRoomName()+"</span>"
-				+					"<span>"+chatRoomDTO.getLimitMember()+"</span><br>"
+				+				"<div style=\"float: left;\" class=\'leftRoomInfo\'>"
+				+					"<span style=\"color: white;font-size: 15px;font-weight: bold;font-family: 맑은고딕;\">"+chatRoomDTO.getchatRoomName()+"</span>"
+				+					"<span style=\"font-family: 맑은고딕;font-size: 13px;margin-left: 10px;color: #b5b1a7;font-weight: bold;\">"+chatRoomDTO.getMembers().split(",").length+"</span><br>"
 				+				"</div>"
-				+				"<div class=\'rightRoomInfo\'>"
-				+					"<button class =\'exit\' value=\'"+chatRoomNum+"\'>닫기</button><br>"
+				+				"<div style=\"float: right;\" class=\'rightRoomInfo\'>"
+				+					"<img src=\"resources/img/minimi.png\" onclick=\"minimiEachChat('chatRoom"+chatRoomNum+"')\"class =\'exit\' value=\'"+chatRoomNum+"\'><br>"
 				+				"</div>"
 				+			"</div>"
 				+ 		"</div>";
@@ -86,7 +86,7 @@ public class ChatRoomSelectServiceImpl implements ChatRoomSelectService {
 					+		"</div>"
 					+	"</div>";
 		else
-			return  "<div class = \'myChatConThumb\'><img src = \'resources/img/thumb.jpg\'></div>"
+			return  "<div style=\"padding: 10px;float: right;width: 50px;height: 50px;margin-right: 15px;\" class = \'myChatConThumb\'><img src = \'resources/img/thumb.jpg\'></div>"
 					+"<div class = \'myMsg\'>"
 					+	"<div class=\'myConDiv\'>"
 					+		"<span class=\'myChatM\'>나</span><br>"

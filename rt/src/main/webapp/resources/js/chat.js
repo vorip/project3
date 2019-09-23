@@ -28,12 +28,6 @@ $(function() {
 				success : function(result) {
 					$("body").append(result)
 					$("#roomContent"+chatRoomNum).scrollTop(8000);
-					$(".exit").click(function() {
-						$(this).each(function() {
-							var num = $(this).val()+"";
-							$("#chatRoom"+num).remove()
-						})
-					})
 					$(".textA").keyup(function() {
 						$(this).each(function() {
 							if($(this).val().trim().length>0){
@@ -56,8 +50,6 @@ $(function() {
 														},
 												success : function(result) {
 													var con_ = result.split("{}");
-													alert(con_[0]);
-													alert(con_[1]);
 													$("#roomContent"+chatRoomNum).append(con_[0])
 													$("#textA"+chatRoomNum).val("")
 													$("#addCon"+chatRoomNum).attr('disabled','disabled')
@@ -95,12 +87,6 @@ $(function() {
 								success : function(result){ 
 									$("#roomContent"+chatRoomNum).scrollTop(8000);
 									$("body").append(result)
-									$(".exit").click(function() {
-										$(this).each(function() {
-											var num = $(this).val()+"";
-											$("#chatRoom"+num).remove()
-										})
-									})
 									$(".textA").keyup(function() {
 										$(this).each(function() {
 											if($(this).val().trim().length>0){
@@ -195,7 +181,7 @@ function addFriendButton(myName,friendName) {
 	})
 }
 function add() {
-	$("#menuType").append("<img onclick = \'plus()\'id = \'plus\' src = \'resources/img/plus.jpg\'>");
+	$("#menuType").append("<img onclick = \'plus()\'id = \'plus\' src = \'resources/img/plus.png\'>");
 }
 function getMove(divId) {
 	dragElement(document.getElementById(divId)); 
@@ -391,4 +377,7 @@ function menuChange_friend() {
 			})
 		}
 	})
+}
+function minimiEachChat(chatRoomNum) {
+	$("#chatRoom"+chatRoomNum).remove();
 }
