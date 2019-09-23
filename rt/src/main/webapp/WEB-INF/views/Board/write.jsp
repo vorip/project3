@@ -140,7 +140,7 @@
 				<div class="container">
 					<div class="notice">
 						<h4>여행후기 게시판</h4>
-						<form method="post" action="insert.do" id="form1" name="form1">
+						<form method="get" action="insert.do" id="form1" name="form1">
 							<table class="type_01" border="2" style="width: 100%;">
 								<thead>
 									<tr>

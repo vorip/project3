@@ -29,7 +29,7 @@
 		content,
 		writer
 	) VALUES 
-	(seq_board.nextval, #{title}, #{content}, #{writer)
+	(seq_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
 
 	<!-- 게시글 상세보기 조회 -->

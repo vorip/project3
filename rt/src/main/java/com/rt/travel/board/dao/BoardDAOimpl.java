@@ -17,6 +17,7 @@ public class BoardDAOimpl implements BoardDAO {
 	
 	@Override
 	public void insert(BoardDTO bDTO) throws Exception {
+		System.out.println(bDTO.toString());
 		SqlSession.insert("bDAO.insert", bDTO);
 	}
 

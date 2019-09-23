@@ -20,6 +20,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void insert(BoardDTO bDTO) throws Exception {
 		System.out.println(bDTO.getTitle());
+		System.out.println(bDTO.getContent());
+		bDTO.setWriter("aaaaa");
 		boardDao.insert(bDTO);
 	}
 

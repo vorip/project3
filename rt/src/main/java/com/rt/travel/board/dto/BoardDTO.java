@@ -1,5 +1,6 @@
 package com.rt.travel.board.dto;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardDTO {
@@ -73,6 +74,13 @@ public class BoardDTO {
 	}
 	public void setFiles(String[] files) {
 		this.files = files;
+	}
+	
+	@Override
+	public String toString() {
+		return "BoardDTO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", regdate=" + regdate + ", viewcnt=" + viewcnt + ", name=" + name + ", cnt=" + cnt + ", show=" + show
+				+ ", files=" + Arrays.toString(files) + "]";
 	}
 
 	
