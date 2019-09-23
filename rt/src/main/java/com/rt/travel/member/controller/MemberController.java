@@ -25,13 +25,15 @@ public class MemberController {
 	MemberTools tool;
 
 	@RequestMapping("loginPage")
-	public void loginPage(Model model) {
+	public String loginPage(Model model) {
 		model.addAttribute("loginPage", tool.login());
+		return "member/loginPage";
 	}
 
 	// 회원가입
 	@RequestMapping("sign")
-	public void sign() {
+	public String sign() {
+		return "member/sign";
 	}
 
 	@RequestMapping("insert")
@@ -45,7 +47,7 @@ public class MemberController {
 		mail.setId("leesoyun702");
 		mail.setPw("verycuteso0425");
 		mail.setSndUsr("이소윤", "leesoyun702@gmail");
-		String id = "\"http://localhost:9002/travle/authkey?id=" + memberDTO.getId() + "\"";
+		String id = "\"http://localhost:9002/travel/authkey?id=" + memberDTO.getId() + "\"";
 		mail.SendMail(memberDTO.getEmail(), "가입완료 메일입니다.", "<a href=" + id + ">회원가입 인증하기</a>");
 
 		response.setContentType("text/html; charset=UTF-8");
@@ -55,16 +57,17 @@ public class MemberController {
 		out.println("</script>");
 		out.flush();
 		model.addAttribute("loginPage", tool.login());
-		return "loginPage";
+		return "member/loginPage";
 	}
 
 	@RequestMapping("selectId")
-	public void selectId(String id, Model model) {
+	public String selectId(String id, Model model) {
 		if (memberDAO.select(id) != null) {
 			model.addAttribute("result", "중복됨");
 		} else {
 			model.addAttribute("result", "중복안됨");
 		}
+		return "member/selectId";
 	}
 
 	// 인증키 인증된 처리
@@ -79,9 +82,14 @@ public class MemberController {
 			out.println("</script>");
 			out.flush();
 			model.addAttribute("loginPage", tool.login());
-			return "loginPage";
+			return "member/loginPage";
 		} else {
-			return "";
+			model.addAttribute("loginPageScript","<script>$(function() {" + 
+					"	$(\"#loginPageHref\").remove();" + 
+					"	$(\"#signHref\").remove();" + 
+					"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
+					"})</script>");
+			return "main/main";
 		}
 	}
 
@@ -99,7 +107,7 @@ public class MemberController {
 			out.println("</script>");
 			out.flush();
 			model.addAttribute("loginPage", tool.login());
-			return "loginPage";
+			return "member/loginPage";
 		} else {
 			if (pw.equals(dto.getPw())) {
 				char authkey = dto.getAuthkey();
@@ -111,7 +119,7 @@ public class MemberController {
 					out.println("</script>");
 					out.flush();
 					model.addAttribute("loginPage", tool.login());
-					return "loginPage";
+					return "member/loginPage";
 				} else {
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
@@ -121,7 +129,12 @@ public class MemberController {
 					out.flush();
 					session.setAttribute("id", dto.getId());
 					session.setAttribute("name", dto.getName() + "_" + dto.getId());
-					return "success";
+					model.addAttribute("loginPageScript","<script>$(function() {" + 
+							"	$(\"#loginPageHref\").remove();" + 
+							"	$(\"#signHref\").remove();" + 
+							"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
+							"})</script>");
+					return "main/main";
 				}
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
@@ -131,14 +144,15 @@ public class MemberController {
 				out.println("</script>");
 				out.flush();
 				model.addAttribute("loginPage", tool.login());
-				return "loginPage";
+				return "member/loginPage";
 			}
 		}
 	}
 
 	// 아이디 찾기
 	@RequestMapping("searchId")
-	public void searchId() {
+	public String searchId() {
+		return "member/searchId";
 	}
 
 	@RequestMapping("findId")
@@ -152,7 +166,7 @@ public class MemberController {
 			out.println("alert('등록된 정보가 없습니다')");
 			out.println("</script>");
 			out.flush();
-			return "searchId";
+			return "member/searchId";
 		} else {
 			JinsMail mail = new JinsMail();
 			mail.setId("leesoyun702");
@@ -167,13 +181,14 @@ public class MemberController {
 			out.println("</script>");
 			out.flush();
 			model.addAttribute("loginPage", tool.login());
-			return "loginPage";
+			return "member/loginPage";
 		}
 	}
 
 	// 비밀번호 찾기
 	@RequestMapping("searchPw")
-	public void searchPw() {
+	public String searchPw() {
+		return "member/searchPw";
 	}
 
 	@RequestMapping("findPw")
@@ -187,10 +202,10 @@ public class MemberController {
 			out.println("alert('등록된 정보가 없습니다')");
 			out.println("</script>");
 			out.flush();
-			return "searchPw";
+			return "member/searchPw";
 		} else {
 			JinsMail mail = new JinsMail();
-			String pw = "\"http://localhost:9002/travle/updatePw?id=" + dto.getId() + "\"";
+			String pw = "\"http://localhost:9002/travel/updatePw?id=" + dto.getId() + "\"";
 			mail.setId("leesoyun702");
 			mail.setPw("verycuteso0425");
 			mail.setSndUsr("이소윤", "leesoyun702@gmail");
@@ -203,28 +218,29 @@ public class MemberController {
 			out.println("</script>");
 			out.flush();
 			model.addAttribute("loginPage", tool.login());
-			return "loginPage";
+			return "member/loginPage";
 		}
 	}
 
 	// 비밀번호 찾고 변경하기
 	@RequestMapping("updatePw")
-	public void updatePw(MemberDTO memberDTO, Model model) {
+	public String updatePw(MemberDTO memberDTO, Model model) {
 		String id = memberDTO.getId();
 		MemberDTO dto = memberDAO.select(id);
 		model.addAttribute("id", dto.getId());
+		return "member/updatePw";
 	}
 
 	@RequestMapping("updatePw2")
 	public String updatePw2(MemberDTO memberDTO, Model model) {
 		memberDAO.updatePw(memberDTO);
 		model.addAttribute("loginPage", tool.login());
-		return "loginPage";
+		return "member/loginPage";
 	}
 
 	// 마이페이지로 이동하기
 	@RequestMapping("my")
-	public void my(MemberDTO memberDTO, HttpSession session, Model model) {
+	public String my(MemberDTO memberDTO, HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
 		MemberDTO dto = memberDAO.select(id);
 		model.addAttribute("dto", dto);
@@ -234,6 +250,7 @@ public class MemberController {
 		model.addAttribute("addr1",addrs[1]);
 		model.addAttribute("addr2",addrs[2]);
 		model.addAttribute("addr3",addrs[3]);
+		return "member/my";
 	}
 
 	// 회원수정하기
@@ -254,7 +271,7 @@ public class MemberController {
 			out.println("alert('수정이 완료되었습니다!!!')");
 			out.println("</script>");
 			out.flush();
-			return "updateAll";
+			return "member/my";
 		}else {
 			memberDTO.setTotaddr();
 			memberDAO.updateAll(memberDTO);
@@ -264,7 +281,7 @@ public class MemberController {
 			out.println("alert('수정이 완료되었습니다!!!')");
 			out.println("</script>");
 			out.flush();
-			return "updateAll";
+			return "member/my";
 		}
 	}
 	
@@ -281,15 +298,14 @@ public class MemberController {
 		out.flush();
 		session.invalidate();
 		model.addAttribute("loginPage", tool.login());
-		return "loginPage";
+		return "member/loginPage";
 	}
 	
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout(Model model,HttpSession session) {
 		session.invalidate();
-		model.addAttribute("loginPage", tool.login());
-		return "loginPage";
+		return "main/main";
 	}
 }
 

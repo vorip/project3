@@ -44,4 +44,8 @@
 		#{choice_public},#{travel_intro})
 	</insert>
 	
+	<select id="typeASelectAll" parameterType="String" resultMap="rsMap">
+		SELECT * FROM typeA where choice_public = #{choice_public}
+	</select>
+	
 </mapper>

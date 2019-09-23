@@ -1,16 +1,37 @@
 package com.rt.travel.course.dto;
 
 public class TypeADTO {
-	int no;
-	String id;
-	String title;
-	int travel_day;
-	String day_start;
-	String travel_type;
-	String travel_theme;
-	String choice_public;
-	String travel_intro;
+	private int no;
+	private String id;
+	private String title;
+	private int travel_day;
+	private String day_start;
+	private String travel_type;
+	private String travel_theme;
+	private String choice_public;
+	private String travel_intro;
+	private int current_mem;
+	private int max_mem;
+	private String day_end;
 	
+	public int getCurrent_mem() {
+		return current_mem;
+	}
+	public void setCurrent_mem(int current_mem) {
+		this.current_mem = current_mem;
+	}
+	public int getMax_mem() {
+		return max_mem;
+	}
+	public void setMax_mem(int max_mem) {
+		this.max_mem = max_mem;
+	}
+	public String getDay_end() {
+		return day_end;
+	}
+	public void setDay_end(String day_end) {
+		this.day_end = day_end;
+	}
 	@Override
 	public String toString() {
 		return "TypeADTO [no=" + no + ", id=" + id + ", title=" + title + ", travel_day=" + travel_day + 

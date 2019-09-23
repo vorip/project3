@@ -61,6 +61,7 @@
 </script>
 
 <body>
+${loginPageScript}
 	<img id='getChat'onclick = "getChat();" src = "resources/img/logo.png">
 	<!-- 스킵 내비게이션 -->
 	<div id="skip">
@@ -86,10 +87,7 @@
 					<div class="dropdown">
 						<h3 class="font_color">동행찾기</h3>
 						<div class="dropdown-content">
-							<a class="menu_nav" href="#">전체동맹찾기 리스트</a>
-							<a class="menu_nav" href="#">동행찾기 리스트</a>
-							<a class="menu_nav" href="#">같은 여행지 사람찾기</a>
-							<a class="menu_nav" href="#">동행찾는 여행일정</a>
+							<a class="menu_nav" href="companion">전체동맹찾기 리스트</a>
 						</div>
 					</div>
 					<div class="dropdown">
@@ -105,11 +103,8 @@
 						<h3 class="font_color">마이페이지</h3>
 						<ul>
 							<li><a class="menu_nav" href="#">나의 여행일정</a></li>
-							<li><a class="menu_nav" href="#">즐겨찾는 여행일정</a></li>
 							<li><a class="menu_nav" href="#">나의 동행찾기 수정</a></li>
-							<li><a class="menu_nav" href="#">받는 쪽지함</a></li>
-							<li><a class="menu_nav" href="#">보낸 쪽지함</a></li>
-							<li><a class="menu_nav" href="#">회원정보수정</a></li>
+							<li><a class="menu_nav" href="my">회원정보보기</a></li>
 						</ul>
 					</div>
 				</div>
@@ -120,8 +115,8 @@
 				<div class="container">
 					<div class="header">
 						<div class="header_menu">
-							<a href="로그인 경로 페이지">로그인</a>
-							<a href="회원가입 경로 페이지">회원가입</a>
+							<a id="loginPageHref" href="loginPage">로그인</a>
+							<a id="signHref" href="sign">회원가입</a>
 						</div>
 					<!-- //헤더 메뉴 -->
 					<div class="header-tit">
@@ -272,5 +267,6 @@
 		
 	</div>
 	<!-- wrap -->
+	
 </body>
 </html>

@@ -46,5 +46,20 @@
 		DELETE FROM course WHERE
 		no = #{no} AND id = #{id} AND memo_index = #{memo_index}
 	</delete>
+	
+	<select id="placeSelectStart" parameterType="Integer" resultType="String">
+		SELECT
+		place_address_name
+		FROM course
+		WHERE no= 1 and day=(select travel_day from typeA where no = #{no}) and memo_index=1
+	</select>
+	
+	<select id="placeSelectEnd" parameterType="Integer" resultType="String">
+		SELECT
+		place_address_name
+		FROM course
+		WHERE no= #{no} and day=(select travel_day from typeA where no = #{no}) and memo_index=(select count(*) from
+		course where no = #{no} and day = (select travel_day from typeA where no = #{no}))
+	</select>
 
 </mapper>

@@ -11,4 +11,6 @@ public interface TypeADAO {
 	List<TypeADTO> selectAll();
 
 	public TypeADTO select(String inputId);
+	
+	List<TypeADTO> typeASelectAll(String choice_public);
 }

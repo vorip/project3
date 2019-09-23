@@ -28,4 +28,9 @@ public class TypeADAOImpl implements TypeADAO{
 	public List<TypeADTO> selectAll() {
 		return my.selectList("typeADAO.selectAll");
 	}
+	
+	@Override
+	public List<TypeADTO> typeASelectAll(String choice_public){
+		return my.selectList("typeADAO.typeASelectAll",choice_public);
+	}
 }

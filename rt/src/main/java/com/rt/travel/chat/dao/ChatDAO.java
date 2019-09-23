@@ -29,4 +29,7 @@ public interface ChatDAO {
 
 	int isMembers(ChatRoomDTO chatRoomDTO);
 
+	List<Integer> selectChatRoomNums();
+	
+	List<ChatRoomDTO> chatSelectAll();
 }

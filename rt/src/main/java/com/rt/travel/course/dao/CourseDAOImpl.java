@@ -52,4 +52,13 @@ public class CourseDAOImpl implements CourseDAO {
 	public CourseDTO select(String inputId) {
 		return my.selectOne("courseDAO.select",inputId);
 	}
+	
+	@Override
+	public String placeSelectStart(int no) {
+		return my.selectOne("courseDAO.placeSelectStart",no);
+	}
+	@Override
+	public String placeSelectEnd(int no) {
+		return my.selectOne("courseDAO.placeSelectEnd",no);
+	}
 }

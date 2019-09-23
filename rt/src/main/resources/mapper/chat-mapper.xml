@@ -56,6 +56,14 @@
 		where chatRoomNum = #{chatRoomNum}
 		ORDER BY contentTime ASC
 	</select>
+	<select id="selectChatRoomNums"  resultType = 'Integer'>
+		select chatRoomNum
+		from chatRoom
+	</select>
+	<select id="chatSelectAll"  resultType = "chatRoomDTO">
+		select *
+		from chatRoom
+	</select>
 
 	<insert id="createRoom" parameterType="chatRoomDTO">
 		INSERT INTO chatRoom

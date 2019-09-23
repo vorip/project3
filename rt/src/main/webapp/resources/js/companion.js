@@ -8,7 +8,8 @@ $(function() {
 			var leader = $(this).val();
 			$.ajax({
 				url:"detail",
-				data : {"leader": leader},
+				data : {"leader": leader
+						},
 				success: function(result) {
 					$("body").append(result);
 					$("#compaList").css("pointer-events","none");

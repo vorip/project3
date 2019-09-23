@@ -21,4 +21,7 @@ public interface CourseDAO {
 	
 	public CourseDTO select(String inputId);
 
+	public String placeSelectStart(int no);
+	
+	public String placeSelectEnd(int no);
 }
