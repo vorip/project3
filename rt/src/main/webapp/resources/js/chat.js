@@ -82,7 +82,6 @@ $(function() {
 			url : "menuChange_chat.do",
 			success : function(result) {
 				$("#typeName").text("채팅")
-				$("#friendSearch").attr('id','roomSearch')
 				$(".friends").remove()
 				$(".rooms").remove()
 				$("#menuContent").append(result)
@@ -151,8 +150,8 @@ function plus() {
 		url : "addFriend",
 		success : function(result) {
 			$("body").append(result);
-			$("#chatDiv").css("pointer-events","none");
 			getMove("addFriend");
+			$("#chatDiv").css("pointer-events","none");
 		}
 	})
 }
@@ -167,12 +166,8 @@ function searchFriend() {
 		}
 	})
 }
-function exitAddFriend() {
-	$("#addFriend").remove();
-	$("#chatDiv").css("pointer-events","all");
-}
-function addChatRoom(title,name,id,limitMember,startTime,endTime) {
-	var members = name+"_"+id;
+function addChatRoom(title,name,limitMember,startTime,endTime) {
+	var members = name;
 	$.ajax({
 		url : "createRoom",
 		data : {
@@ -185,16 +180,6 @@ function addChatRoom(title,name,id,limitMember,startTime,endTime) {
 		},
 		success : function() {
 			alert("여행계획서를 기반으로 채팅방이 자동으로 생성되었습니다.");
-		}
-	})
-}
-function companionApply(name,leader) {
-	$.ajax({
-		url : "companionApply",
-		data : {"name" : name,
-				"leader" : leader},
-		success : function() {
-			alert("신청이 완료되었습니다. Leader의 수락 시 채팅에 참여할 수 있습니다.");
 		}
 	})
 }
@@ -216,8 +201,8 @@ function getMove(divId) {
 	dragElement(document.getElementById(divId)); 
 	function dragElement(elmnt) {  
 	  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0; 
-	  if (document.getElementById(divId)) { 
-	    document.getElementById(divId).onmousedown = dragMouseDown; 
+	  if (document.getElementById(divId+"1")) { 
+	    document.getElementById(divId+"1").onmousedown = dragMouseDown; 
 	  } else { 
 	    elmnt.onmousedown = dragMouseDown; 
 	  } 
@@ -245,12 +230,82 @@ function getMove(divId) {
 	  }
 	}
 }
+function minimiAddFriend() {
+	$("#addFriend").remove();
+	$("#chatDiv").css('pointer-events','all');
+}
 function minimiInfo() {
 	$(".friendInfo").remove();
 	$("#chatDiv").css('pointer-events','all');
 }
-function sendNote(name) {
-	
+function noteList(changeMinimi) {
+	$.ajax({
+		url : "noteSelectAll",
+		success : function(result) {
+			$("body").append(result);
+			$("#chatDiv").css('pointer-events','none');
+			getMove("noteList");
+			$("#minimiNoteList").attr("onclick","minimiNoteList"+changeMinimi+"()")
+		}
+	})
+}
+function minimiNote() {
+	$("#sendNoteDiv").remove();
+	if($("#noteList").length>0){
+		$("#noteList").css('pointer-events','all');
+	}else{
+		$("#chatDiv").css('pointer-events','all');
+	}
+}
+function sendNoteDiv(name) {
+	$(".friendInfo").remove();
+	$("#chatDiv").css('pointer-events','all');
+	$.ajax({
+		url : "sendNoteDiv",
+		data : {"otherName" : name},
+		success : function(result) {
+			$("body").append(result);
+			getMove("sendNoteDiv");
+			$("#chatDiv").css('pointer-events','none');
+			$("#noteList").css('pointer-events','none')
+			$("#sendNote").attr('disabled',true);
+			$("#noteContent").keyup(function() {
+				if($("#noteContent").val().trim().length>0){
+					$("#sendNote").attr('disabled',false);
+				}else{
+					$("#sendNote").attr('disabled',true);
+				}
+			})
+		}
+	})
+}
+function minimiNoteList() {
+	$("#noteList").remove();
+	$("#chatDiv").css('pointer-events','all');
+}
+function minimiNoteList_friend() {
+	$("#noteList").remove();
+	$("#chatDiv").css('pointer-events','all');
+	menuChange_friend();
+}
+function minimiNoteList_companion() {
+	$("#noteList").remove();
+	$("#chatDiv").remove();
+	getChat();
+}
+function sendNote() {
+	var meName = $("#meName").val();
+	var noteContent = $("#noteContent").val();
+	$.ajax({
+		url : "sendNote",
+		data : {"content" : noteContent,
+			"me" : meName},
+			success : function() {
+				alert("쪽지전송이 완료되었습니다.");
+				$("#sendNoteDiv").remove();
+				$("#chatDiv").css('pointer-events','all');
+			}
+	})
 }
 function deleteFriend(name) {
 	if(confirm('정말로 삭제하시겠습니까?')){
@@ -267,13 +322,53 @@ function deleteFriend(name) {
 		})
 	}
 }
+function deleteNote(noteNum,changeMinimi) {
+	$.ajax({
+		url : "noteDelete",
+		data : {"noteNum" : noteNum.trim()},
+		success : function() {
+			alert("삭제가 완료되었습니다.")
+			$("#noteList").remove();
+			noteList(changeMinimi);
+		}
+	})
+}
+function acceptFriend(other,me,noteNum) {
+	$.ajax({
+		url : "acceptFriend",
+		data : {"other" : other,
+				"me" : me},
+		success : function() {
+			alert(other+"님의 친구신청을 수락하셨습니다.");
+			deleteNote(noteNum,"_friend");
+		}
+	})
+}
+function acceptCompanion(otherName,noteNum,chatRoomNum) {
+	$.ajax({
+		url : "acceptCompanion",
+		data : {"otherName" : otherName,
+				"chatRoomNum" : chatRoomNum},
+		success : function() {
+			alert(otherName+"님의 동행신청을 수락하셨습니다.");
+			deleteNote(noteNum,"_companion");
+		}
+	})
+}
+function rejectFriend(otherName,noteNum) {
+	alert(otherName+"님의 친구신청을 거절하셨습니다.");
+	deleteNote(noteNum,"_friend");
+}
+function rejectCompanion(otherName,noteNum) {
+	alert(otherName+"님의 동행신청을 거절하셨습니다.");
+	deleteNote(noteNum,"_companion");
+}
 function menuChange_friend() {
 	$("#plus").remove();
 	$.ajax({
 		url : "menuChange_friend.do",
 		success : function(result) {
 			$("#typeName").text("친구")
-			$("#roomSearch").attr('id','friendSearch')
 			$(".rooms").remove()
 			$(".friends").remove()
 			$("#menuContent").append(result)
@@ -287,8 +382,8 @@ function menuChange_friend() {
 							data : { "friendName" : friendName},
 							success : function(result) {
 								$("body").append(result);
-								$("#chatDiv").css('pointer-events','none');
 								getMove("friendInfo");
+								$("#chatDiv").css('pointer-events','none');
 							}
 						})
 					})

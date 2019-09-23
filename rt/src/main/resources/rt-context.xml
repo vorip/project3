@@ -7,9 +7,10 @@
 
 <context:component-scan base-package="com.rt.*"></context:component-scan>
 
-<bean id = 'chatService' class = 'com.rt.travel.chat.service.ChatService'></bean>
-<bean id = 'html' class = 'com.rt.travel.chat.service.ChatHtmlSetter'></bean>
 <bean id = 'chatDAO' class = 'com.rt.travel.chat.dao.ChatDAOImpl'></bean>
+<bean id = 'noteDAO' class = 'com.rt.travel.note.dao.NoteDAOImpl'></bean>
+<bean id = 'memberDAO' class = 'com.rt.travel.member.dao.MemberDAOImpl'></bean>
+
 <!-- mybatis설정 -->
 <bean id = "myBatis" class="org.mybatis.spring.SqlSessionTemplate">
 	<constructor-arg name = "sqlSessionFactory" ref="config"></constructor-arg>

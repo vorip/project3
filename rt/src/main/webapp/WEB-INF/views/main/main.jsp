@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>모정</title>
+	<link rel="stylesheet" href="resources/css/chat.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="resources/js/getChat.js"></script>
 
 	<!-- CSS STYLE -->
 	<link rel="stylesheet" href="resources/assets/css/reset.css">
@@ -58,6 +61,7 @@
 </script>
 
 <body>
+	<img id='getChat'onclick = "getChat();" src = "resources/img/logo.png">
 	<!-- 스킵 내비게이션 -->
 	<div id="skip">
 		<a href="#cont_nav">전체 메뉴 바로가기</a>

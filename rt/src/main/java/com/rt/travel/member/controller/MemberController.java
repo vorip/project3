@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jin.mail.JinsMail;
-import com.rt.travel.member.dao.MemberDAO;
+import com.rt.travel.member.dao.MemberDAOImpl;
 import com.rt.travel.member.dto.MemberDTO;
 import com.rt.travel.member.service.MemberTools;
 
@@ -20,7 +20,7 @@ import com.rt.travel.member.service.MemberTools;
 public class MemberController {
 
 	@Autowired
-	MemberDAO memberDAO;
+	MemberDAOImpl memberDAO;
 	@Autowired
 	MemberTools tool;
 

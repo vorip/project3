@@ -3,15 +3,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="chatDAO">
-	<!-- <select id="select" parameterType="String" resultMap="rsMap">
-		SELECT
-		*
-		FROM chatroom
-		WHERE leader = #{leader}
-	</select> -->
-	<!-- <select id="selectAll" resultMap="rsMap">
-		SELECT * FROM chatroom
-	</select> -->
 	<select id="selectRoomNums" parameterType="String"
 		resultType="Integer">
 		SELECT
@@ -19,7 +10,11 @@
 		FROM chatRoom
 		WHERE members like #{member}
 	</select>
-	
+	<select id="isMembers" parameterType = "chatRoomDTO" resultType="Integer">
+		select count(*)
+		from chatRoom
+		where members like #{members} and chatRoomNum = #{chatRoomNum}
+	</select>
 	<select id="selectRooms" parameterType="String"
 		resultType="chatRoomDTO">
 		SELECT
@@ -55,7 +50,7 @@
 		<result property="member" column="member" />
 	</resultMap>
 
-	<select id="getContents" parameterType="int" resultMap = 'conRs'>
+	<select id="getContents" parameterType="int" resultType = 'chatContentDTO'>
 		select content,contentTime,member
 		from chatContent 
 		where chatRoomNum = #{chatRoomNum}
@@ -73,8 +68,10 @@
 		VALUES(#{content},SYSTIMESTAMP,#{chatRoomNum},#{member})
 	</insert>
 
-	<!-- <update id="updateSomething" parameterType="#modelname"> UPDATE tablename1 
-		SET columnname1=#{param1} WHERE columnname2 = #{param2} </update> -->
+	<update id="acceptCompanion" parameterType="chatRoomDTO">
+		UPDATE chatRoom 
+		SET members=#{members} WHERE chatRoomNum = #{chatRoomNum}
+	</update>
 
 	<delete id="deleteRoom">
 		DELETE FROM chatRoom

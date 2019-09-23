@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="noteDAO">
+
+	<resultMap type="noteDTO" id="noteRs">
+		<result property="noteNum" column="noteNum"/>
+		<result property="me" column="me"/>
+		<result property="other" column="other"/>
+		<result property="noteType" column="noteType"/>
+		<result property="sendTime" column="sendTime"/>
+		<result property="content" column="content"/>
+		<result property="applyType" column="applyType"/>
+	</resultMap>
+	
+	<insert id="send" parameterType="noteDTO">
+		insert into note values
+		(note_seq.nextval,#{me},
+		#{other},#{noteType},TO_TIMESTAMP(sysdate,'YY/MM/DD'),#{content},#{applyType})
+	</insert>
+	
+	<delete id="noteDelete" parameterType="Integer">
+		delete from note where noteNum = #{noteNum}
+	</delete>
+	
+	<select id="noteSelectAll" parameterType="String" resultMap="noteRs">
+		select * from note where me=#{me}
+	</select>
+	
+	<select id = "isApplyCompanion" parameterType = "noteDTO" resultType = "int">
+		select count(*) from note where applyType=#{applyType} and me = #{me} and other=#{other}
+	</select>
+	
+</mapper>

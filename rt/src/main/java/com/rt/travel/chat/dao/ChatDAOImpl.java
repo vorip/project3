@@ -5,8 +5,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.rt.travel.chat.dto.ChatContentDTO;
-import com.rt.travel.chat.dto.ChatRoomDTO;
+import com.rt.travel.chatContent.dto.ChatContentDTO;
+import com.rt.travel.chatRoom.dto.ChatRoomDTO;
 
 
 public class ChatDAOImpl implements ChatDAO {
@@ -14,14 +14,9 @@ public class ChatDAOImpl implements ChatDAO {
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
-	//채팅방관련 DB처리
 	@Override
 	public void createRoom(ChatRoomDTO chatRoomDTO) {
 		mybatis.insert("chatDAO.createRoom",chatRoomDTO);
-	}
-	@Override
-	public void reNameRoom(ChatRoomDTO chatRoomDTO) {
-		mybatis.update("chatDAO.reNameRoom", chatRoomDTO);
 	}
 	@Override
 	public List<ChatRoomDTO> selectRooms(String member) {
@@ -35,7 +30,6 @@ public class ChatDAOImpl implements ChatDAO {
 	public void deleteRoom() {
 		mybatis.delete("chatDAO.deleteRoom");
 	}
-	//채팅내용관련 DB처리
 	@Override
 	public void addContent(ChatContentDTO chatContentDTO) {
 		mybatis.insert("chatDAO.addContent", chatContentDTO);
@@ -57,7 +51,13 @@ public class ChatDAOImpl implements ChatDAO {
 		return mybatis.selectList("chatDAO.selectRoomNums",name);
 	}
 	@Override
-	public ChatRoomDTO select(String leader) {
-		return mybatis.selectOne("chatroomDAO.select",leader);
+	public void acceptCompanion(ChatRoomDTO chatRoomDTO) {
+		mybatis.update("chatDAO.acceptCompanion",chatRoomDTO);
 	}
+	@Override
+	public int isMembers(ChatRoomDTO chatRoomDTO) {
+		return mybatis.selectOne("chatDAO.isMembers",chatRoomDTO);
+	}
+	
+	
 }
