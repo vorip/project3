@@ -43,7 +43,7 @@
 			<div class="container">
 				<div class="menu">
 					<div>
-						<h3><a class="font_color" href="#">홈</a></h3>
+						<h3><a class="font_color" href="main.do">홈</a></h3>
 					</div>
 					<div class="dropdown">
 						<h3 class="font_color">여행일정</h3>
@@ -140,7 +140,7 @@
 										    <tr>
 										        <th scope="row">${row.bno}</th>
 										        <td>${row.writer}</td>
-										        <td><a href="${path}/board/view.do?bno=${row.bno}">${row.title}</a></td>
+										        <td><a href="${path}view.do?bno=${row.bno}">${row.title}</a></td>
 										        <td>${row.viewcnt}</td>
 										        <td><fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd HH:mm"/></td>
 										    </tr>

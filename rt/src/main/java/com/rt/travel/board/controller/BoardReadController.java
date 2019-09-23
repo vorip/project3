@@ -17,6 +17,7 @@ import com.rt.travel.board.service.BoardService;
 
 @Controller
 public class BoardReadController {
+	
 	@Inject
 	BoardService boardService;
 	
@@ -34,16 +35,22 @@ public class BoardReadController {
 	public String write() {
 		return "Board/write"; //write.jsp로 이동
 	}
-
+	
 	//게시글 작성처리
-	@RequestMapping(value="insert.do", method=RequestMethod.POST)
-	public String insert(@ModelAttribute BoardDTO bDTO) throws Exception {
+	@RequestMapping(value="insert.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String insert(@ModelAttribute BoardDTO bDTO, HttpSession session) throws Exception {
+		//로그인한 사용자의 아이디
+		String writer = (String)session.getAttribute("userid");
+		bDTO.setWriter(writer);
+		//레코드 저장
 		boardService.insert(bDTO);
+		//목록 갱신
 		return "redirect:list.do";
 	}
-	
+		
+	//게시글 상세내용 조회 및 조회수 증가
 	@RequestMapping(value="view.do", method=RequestMethod.GET)
-	public ModelAndView view(@RequestParam int bno, HttpSession session) throws Exception {
+	public ModelAndView detailView(@RequestParam int bno, HttpSession session) throws Exception {
 		//조회수 증가 처리
 		boardService.increaseViewcnt(bno, session);
 		//모델(데이터)+뷰(화면)를 함께 전달하는 객체
@@ -53,5 +60,19 @@ public class BoardReadController {
 		//뷰에 전달할 데이터
 		mav.addObject("dto", boardService.read(bno));
 		return mav;
+	}
+		
+	//게시글 수정
+	@RequestMapping(value="update.do", method=RequestMethod.POST)
+	public String update(@ModelAttribute BoardDTO bDTO) throws Exception {
+		boardService.update(bDTO);
+		return "redirect:list.do";
+	}
+		
+	//게시글 삭제
+	@RequestMapping("Board_delete.do")
+	public String delete(@RequestParam int bno) throws Exception {
+		boardService.delete(bno);
+		return "redirect:list.do";
 	}
 }

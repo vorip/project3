@@ -30,9 +30,9 @@
 	</resultMap>
 	
 	<!-- 일차별 버튼 눌렀을 때, 아이디, no값, day별 -->
-	<select id="select" parameterType="courseDTO" resultMap="rsMap">
+	<!-- <select id="select" parameterType="courseDTO" resultMap="rsMap">
 		SELECT * FROM course WHERE no = #{no} AND id = #{id} AND day = #{day} 
-	</select>
+	</select> -->
 	
 	<select id="select_report" parameterType="courseDTO" resultMap="rsMap">
 		SELECT * FROM course WHERE no = #{no} AND id = #{id} 

@@ -4,12 +4,12 @@
 
 <mapper namespace="bDAO">
 
-	<select id="select" parameterType="bDTO" resultMap="rsMap">
+	<select id="select" parameterType="bDTO" resultMap="board_map">
 		SELECT * FROM board
 		WHERE id = #{id}
 	</select>
 
-	<resultMap type="bDTO" id="rsMap">
+	<resultMap type="bDTO" id="board_map">
 		<result property="bno" column="bno" />
 		<result property="title" column="title" />
 		<result property="content" column="content" />
@@ -18,7 +18,7 @@
 		<result property="viewcnt" column="viewcnt" />
 	</resultMap>
 
-	<select id="listAll" resultMap="rsMap">
+	<select id="listAll" resultMap="board_map">
 		SELECT * from board
 	</select>
 
@@ -28,25 +28,35 @@
 		title,
 		content,
 		writer
-	) VALUES (
-		 (SELECT NVL(MAX(bno)+1, 1)FROM board),
-		#{title},
-		#{content},
-		#{writer}
-	)
+	) VALUES 
+	(seq_board.nextval, #{title}, #{content}, #{writer)
 	</insert>
 
-	<update id="update" parameterType="bDTO">
-		UPDATE board
-		SET
-		content=#{content}
+	<!-- 게시글 상세보기 조회 -->
+	<select id="view" resultMap="board_map">
+		SELECT * FROM board
+		WHERE bno = #{bno}
+	</select>
+	
+	<!-- 게시글 조회수 증가처리 -->
+	<update id="increaseViewcnt">
+		UPDATE board SET viewcnt=viewcnt+1
 		WHERE
-		id = #{id}
+		bno = #{bno}
 	</update>
+	
+	<!-- 게시글 수정처리 -->
+	<update id="updateArticle">
+		UPDATE board SET
+		title = #{title},
+		content = #{content}
+		WHERE bno = #{bno}
+	</update>
+	
 
 	<delete id="delete" parameterType="bDTO">
 		DELETE FROM board WHERE
-		id = #{id}
+		bno = #{bno}
 	</delete>
 
 </mapper>

@@ -5,7 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>모정</title>
+<title>모정</title> 
+<!-- ckeditor 포함 -->
+<script src="resources/ckeditor/ckeditor.js"></script>
+
+<!-- 글쓰기 기능 -->
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#btnSave").click(function () {
+			var title = $("#title").val();
+			var content = $(".content").val();
+			if(title == ""){
+				alert("제목을 입력하세요");
+				document.form1.title.focus();
+				return;
+			}
+			if(content == ""){
+				alert("내용을 입력하세요");
+				document.form1.content.focus();
+				return;
+			}
+			document.form1.submit();
+		});
+	});
+</script>
+
 
 <!-- CSS STYLE -->
 <link rel="stylesheet" href="resources/assets/css/Boardreset.css">
@@ -38,7 +62,7 @@
 				<div class="menu">
 					<div>
 						<h3>
-							<a class="font_color" href="#">홈</a>
+							<a class="font_color" href="main.do">홈</a>
 						</h3>
 					</div>
 					<div class="dropdown">
@@ -59,7 +83,7 @@
 					<div class="dropdown">
 						<h3 class="font_color">소통광장</h3>
 						<div class="dropdown-content">
-							<a class="menu_nav" href="Board.do">여행후기 게시판</a> <a
+							<a class="menu_nav" href="list.do">여행후기 게시판</a> <a
 								class="menu_nav" href="#">?? 게시판</a> <a class="menu_nav"
 								href="#">?? 게시판</a> <a class="menu_nav" href="#">동행찾는 여행일정</a>
 						</div>
@@ -112,11 +136,11 @@
 		</div>
 
 		<div id="content">
-			<div id="cont_nav">
+			<div id="cont_nav_bo">
 				<div class="container">
 					<div class="notice">
 						<h4>여행후기 게시판</h4>
-						<form method="post" action="writeAction.jsp">
+						<form method="post" action="insert.do" id="form1" name="form1">
 							<table class="type_01" border="2" style="width: 100%;">
 								<thead>
 									<tr>
@@ -126,16 +150,20 @@
 								<tbody>
 									<tr>
 										<td><input type="text"
-											placeholder="글 제목" name="title" maxlength="50" style="width: 100%;  height:30px;"></td>
+											placeholder="글 제목" name="title" id='title' maxlength="50" style="width: 100%;  height:30px;"></td>
 									</tr>
 									<tr>
 										<td><textarea
-												placeholder="글 내용" name="content" maxlength="4000" rows=14 style="width: 100%;"></textarea></td>
+											placeholder="글 내용" name="content" id="p_content" class="content" maxlength="4000" rows=14 style="width: 100%;"></textarea></td>
 									</tr>
 								</tbody>
 							</table>
+									<script>
+										CKEDITOR.replace("p_content", {height: "450px"
+											});
+									</script>
 							<div><!--  -->
-								<input type="submit" class="btn btn-primary button_position"
+								<input type="submit" class="btn btn-primary button_position" id="btnSave"
 									value="등록">
 							</div>
 						</form>
