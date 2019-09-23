@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-.sendNoteBtn{}
-.deleteFriendBtn{}
-.friendName{}
-.friendEmail{}
-.friendInfoBtnDiv{}
 .sender{
 	margin-left : 10px;
 	font-size : 13px;
