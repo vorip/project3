@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rt.travel.course.dao.CourseDAO;
 import com.rt.travel.course.dto.CourseDTO;
@@ -16,15 +17,25 @@ public class CourseController {
 	@Autowired
 	CourseDAO dao;
 	
-	// typeADTO
+	// 양식에서 map으로 이동
 	@RequestMapping("index.do")
-	public void index(TypeADTO typeADTO) {
-		dao.typeAInsert(typeADTO);
+	public String index(TypeADTO typeADTO, Model model) {
+		dao.typeAInsert(typeADTO);	
+		System.out.println("ㅎㅇ");
+		model.addAttribute("no",dao.returnno());
+		System.out.println("ㅂㅇ");
+		return "course/index";
 	}
 	
+	@RequestMapping("show_index.do")
+	public String only_show_index(TypeADTO typeADTO , Model model) {
+		model.addAttribute("no",dao.returnno());
+		return "course/index";
+	}
+	
+	// v버튼 누르고, 코스 정보 insert
 	@RequestMapping("insert.do")
 	public String insert(CourseDTO courseDTO) {
-		System.out.println(courseDTO.toString());
 		dao.courseInsert(courseDTO);
 		return "insert";
 	}
@@ -53,6 +64,17 @@ public class CourseController {
 	@RequestMapping("delete.do")
 	public void delete(CourseDTO courseDTO) {
 		dao.delete(courseDTO);
+	}
+	
+	@RequestMapping("memoedit.do")
+	public void memoedit(CourseDTO courseDTO) {
+		dao.memoedit(courseDTO);
+	}
+	
+	@RequestMapping("memoselect.do")
+	public void memoselect(CourseDTO courseDTO, Model model) {
+		CourseDTO memoresult = dao.memoselect(courseDTO);
+		model.addAttribute("memoresult",memoresult);
 	}
 	
 }

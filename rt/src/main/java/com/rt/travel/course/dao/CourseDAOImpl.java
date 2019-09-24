@@ -24,10 +24,11 @@ public class CourseDAOImpl implements CourseDAO {
 		my.insert("typeADAO.insert", typeADTO);
 	}
 	
-	/*
-	 * public CourseDTO select(CourseDTO courseDTO) { return
-	 * my.selectOne("courseDAO.select", courseDTO); }
-	 */ 
+	@Override
+	public int returnno() {
+		return my.selectOne("typeADAO.select_index");
+	}
+	
 	@Override
 	public List<CourseDTO> select(CourseDTO courseDTO) {
 		return my.selectList("courseDAO.select", courseDTO);
@@ -57,8 +58,19 @@ public class CourseDAOImpl implements CourseDAO {
 	public String placeSelectStart(int no) {
 		return my.selectOne("courseDAO.placeSelectStart",no);
 	}
+	
 	@Override
 	public String placeSelectEnd(int no) {
 		return my.selectOne("courseDAO.placeSelectEnd",no);
+	}
+	
+	@Override
+	public void memoedit(CourseDTO courseDTO) {
+		my.update("courseDAO.memoedit", courseDTO);
+	}
+	
+	@Override
+	public CourseDTO memoselect(CourseDTO courseDTO) {
+		return my.selectOne("courseDAO.memoselect", courseDTO);
 	}
 }

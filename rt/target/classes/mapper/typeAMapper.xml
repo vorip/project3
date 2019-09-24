@@ -4,25 +4,16 @@
 
 <mapper namespace="typeADAO">
 	<select id="select" parameterType="String" resultMap="rsMap">
-		SELECT
-		*
-		FROM typeA
+		SELECT * FROM typeA
 		WHERE id = #{id}
 	</select>
-	<select id="selectAll" resultMap="rsMap">
-		SELECT * FROM tablename1
-	</select>
-	<!-- <select id="select" parameterType="typeADTO" resultMap="rsMap">
-		SELECT * FROM typeA
-		WHERE no = #{no}
-	</select>
-	 -->
+	
+	<!-- 주안오빠한테 물어보기 쓰는건지! -->
 	<select id="selectCnt" resultType="int">
 		SELECT count(*) FROM typeA
 	</select>
 
 	<resultMap type="typeADTO" id="rsMap">
-		<!-- <id property="no" column="no" /> -->
 		<result property="no" column="no" />
 		<result property="id" column="id" />
 		<result property="title" column="title" />
@@ -32,16 +23,23 @@
 		<result property="travel_theme" column="travel_theme" />
 		<result property="choice_public" column="choice_public" />
 		<result property="travel_intro" column="travel_intro" />
+		<result property="current_mem" column="current_mem" />
+		<result property="max_mem" column="max_mem" />
+		<result property="day_end" column="day_end" />
 	</resultMap>
+	
+	<select id = "select_index" resultType="int">
+		SELECT TYPEA_SEQ.CURRVAL AS DEPT_NO FROM DUAL
+	</select>
 
-	<!-- <select id="selectAll" resultMap="rsMap">
+	<select id="selectAll_typea" resultMap="rsMap">
 		SELECT * FROM typeA
-	</select> -->
+	</select>
 	
 	<insert id="insert" parameterType="typeADTO">
 		INSERT INTO typeA
-		VALUES(typeA_no_seq.nextval,#{id},#{title},#{travel_day},#{day_start},#{travel_type},#{travel_theme},
-		#{choice_public},#{travel_intro})
+		VALUES(typeA_seq.nextval,#{id},#{title},#{travel_day},#{day_start},#{travel_type},#{travel_theme},
+		#{choice_public},#{travel_intro},#{current_mem},#{max_mem},to_timestamp(to_timestamp(#{day_start})+#{travel_day}-1))
 	</insert>
 	
 	<select id="typeASelectAll" parameterType="String" resultMap="rsMap">

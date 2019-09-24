@@ -20,7 +20,6 @@ public class BoardReadController {
 	
 	@Inject
 	BoardService boardService;
-	
 	//게시글 목록
 	@RequestMapping("list.do")
 	public ModelAndView list() throws Exception {

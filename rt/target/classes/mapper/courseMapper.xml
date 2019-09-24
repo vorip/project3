@@ -8,12 +8,6 @@
 		INSERT INTO course
 		VALUES(#{no},#{id},#{place_url},#{place_name},#{place_address_name},#{place_phone},#{place_x},#{place_y},#{place_memo},#{day},#{memo_index})
 	</insert>
-	<select id="select" parameterType="String" resultMap="rsMap">
-		SELECT
-		*
-		FROM course
-		WHERE id = #{id}
-	</select>
 	
 	<resultMap type="courseDTO" id="rsMap">
 		<result property="no" column="no"/>
@@ -30,9 +24,9 @@
 	</resultMap>
 	
 	<!-- 일차별 버튼 눌렀을 때, 아이디, no값, day별 -->
-	<!-- <select id="select" parameterType="courseDTO" resultMap="rsMap">
+	<select id="select" parameterType="courseDTO" resultMap="rsMap">
 		SELECT * FROM course WHERE no = #{no} AND id = #{id} AND day = #{day} 
-	</select> -->
+	</select>
 	
 	<select id="select_report" parameterType="courseDTO" resultMap="rsMap">
 		SELECT * FROM course WHERE no = #{no} AND id = #{id} 
@@ -47,6 +41,15 @@
 		no = #{no} AND id = #{id} AND memo_index = #{memo_index}
 	</delete>
 	
+	<update id="memoedit" parameterType="courseDTO">
+		UPDATE COURSE SET PLACE_MEMO = #{place_memo} WHERE DAY = #{day} AND MEMO_INDEX = #{memo_index} AND no = #{no}
+	</update>
+	
+	<select id="memoselect" parameterType="courseDTO" resultMap="rsMap">
+		SELECT PLACE_MEMO FROM course WHERE DAY = #{day} AND MEMO_INDEX = #{memo_index} AND no = #{no}
+	</select>
+	
+	<!-- 주아니2 -->
 	<select id="placeSelectStart" parameterType="Integer" resultType="String">
 		SELECT
 		place_address_name
@@ -54,6 +57,7 @@
 		WHERE no= 1 and day=(select travel_day from typeA where no = #{no}) and memo_index=1
 	</select>
 	
+	<!-- 주아니3 -->
 	<select id="placeSelectEnd" parameterType="Integer" resultType="String">
 		SELECT
 		place_address_name

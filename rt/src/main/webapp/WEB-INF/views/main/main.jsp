@@ -80,8 +80,8 @@ ${loginPageScript}
 					<div class="dropdown">
 						<h3 class="font_color">여행일정</h3>
 						<div class="dropdown-content">
-							<a class="menu_nav" href="#">여행일정 만들기</a>
-							<a class="menu_nav" href="#">여행일정 리스트</a>
+							<a class="menu_nav" href="typea.do">여행일정 만들기</a>
+							<a class="menu_nav" href="selectAll.do">여행일정 리스트</a>
 						</div>
 					</div>
 					<div class="dropdown">

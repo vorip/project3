@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.course.dto.TypeADTO;
@@ -13,11 +14,11 @@ public class TypeAController {
 	@Autowired
 	TypeADAO dao;
 	
-	@RequestMapping("course.do")
-	public void list(TypeADTO typeADTO, Model model) {
-			System.out.println(typeADTO.toString());
-		dao.insert(typeADTO);
-			System.out.println("입력!");
-		model.addAttribute("list2", dao.selectAll());
+	// 여행일정 만들기 탭 클릭시 A양식으로 이동
+	@RequestMapping("typea.do")
+	public ModelAndView typea() throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("course/MapMain_TypeA");
+		return mav;
 	}
 }

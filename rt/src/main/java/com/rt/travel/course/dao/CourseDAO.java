@@ -10,6 +10,8 @@ public interface CourseDAO {
 	void courseInsert(CourseDTO courseDTO);
 
 	void typeAInsert(TypeADTO typeADTO);
+	
+	public int returnno();
 
 	List<CourseDTO> select(CourseDTO courseDTO);
 
@@ -24,4 +26,8 @@ public interface CourseDAO {
 	public String placeSelectStart(int no);
 	
 	public String placeSelectEnd(int no);
+	
+	void memoedit(CourseDTO courseDTO);
+	
+	public CourseDTO memoselect(CourseDTO courseDTO);
 }
