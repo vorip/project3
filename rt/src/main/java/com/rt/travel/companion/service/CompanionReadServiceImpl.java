@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rt.travel.chat.dao.ChatDAO;
 import com.rt.travel.course.dao.CourseDAO;
 import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.course.dto.TypeADTO;
@@ -21,6 +22,8 @@ public class CompanionReadServiceImpl {
 	MemberDAOImpl memberDAO;
 	@Autowired
 	CourseDAO courseDAO;
+	@Autowired
+	ChatDAO chatDAO;
 	
 	public String companionList() {
 		List<TypeADTO> list = typeADAO.typeASelectAll("공개");
@@ -41,8 +44,7 @@ public class CompanionReadServiceImpl {
 					"		<td>"+courseStart[0]+courseStart[1]+"</td>\r\n" + 
 					"		<td>"+courseEnd[0]+courseEnd[1]+"</td>\r\n" + 
 					"		<td>"+start[0]+"~"+end[0]+"</td>\r\n" + 
-					"		<td><button class = 'detail' value = '"+typeADTO.getId()+"'>자세히보기</button>\r\n" + 
-					"		<input type='hidden' value=''></td>\r\n" + 
+					"		<td><button class = 'detail' onclick = \"showPlan('"+typeADTO.getNo()+"')\">자세히보기</button>\r\n" + 
 					"	</tr>";
 		}
 		return companionListHtml;

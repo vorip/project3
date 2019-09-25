@@ -13,4 +13,6 @@ public interface TypeADAO {
 	public TypeADTO select(String inputId);
 	
 	List<TypeADTO> typeASelectAll(String choice_public);
+	
+	public void addCurrentMem(int chatRoomNum);
 }

@@ -22,20 +22,20 @@ function getChat() {
 		alert("로그인이 필요합니다.");
 	}
 }
-function applyCompanion(me,chatRoomNum) {
-	$.ajax({
-		url : "applyCompanion",
-		data : {"me" : me,
-				"chatRoomNum" : chatRoomNum},
-		success : function(result) {
-			if(result.trim()=="O")
-				alert("동행신청이 완료되었습니다.")
-				//동행신청완료시 typeA의 현재인원 +1하는 처리가 들어갈 자리
-			else
-				alert("이미 신청했거나 동행중입니다.")
-		}
-	})
-}
+//function applyCompanion(me,chatRoomNum) {
+//	$.ajax({
+//		url : "applyCompanion",
+//		data : {"me" : me,
+//				"chatRoomNum" : chatRoomNum},
+//		success : function(result) {
+//			if(result.trim()=="O")
+//				alert("동행신청이 완료되었습니다.")
+//				//동행신청완료시 typeA의 현재인원 +1하는 처리가 들어갈 자리
+//			else
+//				alert("이미 신청했거나 동행중입니다.")
+//		}
+//	})
+//}
 var ws;
 var messages;
 function openSocket(){

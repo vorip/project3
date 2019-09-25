@@ -2,6 +2,7 @@ package com.rt.travel.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jin.mail.JinsMail;
+import com.rt.travel.course.dao.CourseDAO;
+import com.rt.travel.course.dao.TypeADAO;
+import com.rt.travel.course.dto.TypeADTO;
 import com.rt.travel.member.dao.MemberDAOImpl;
 import com.rt.travel.member.dto.MemberDTO;
 import com.rt.travel.member.service.MemberTools;
@@ -23,6 +27,10 @@ public class MemberController {
 	MemberDAOImpl memberDAO;
 	@Autowired
 	MemberTools tool;
+	@Autowired
+	TypeADAO typeADAO;
+	@Autowired
+	CourseDAO courseDAO;
 
 	@RequestMapping("loginPage")
 	public String loginPage(Model model) {
@@ -240,17 +248,28 @@ public class MemberController {
 
 	// 마이페이지로 이동하기
 	@RequestMapping("my")
-	public String my(MemberDTO memberDTO, HttpSession session, Model model) {
+	public String my(MemberDTO memberDTO, HttpSession session, Model model,HttpServletResponse response) throws IOException {
 		String id = (String) session.getAttribute("id");
-		MemberDTO dto = memberDAO.select(id);
-		model.addAttribute("dto", dto);
-		String addr = dto.getTotaddr();
-		String[] addrs = addr.split("\\.");
-		model.addAttribute("addr",addrs[0]);
-		model.addAttribute("addr1",addrs[1]);
-		model.addAttribute("addr2",addrs[2]);
-		model.addAttribute("addr3",addrs[3]);
-		return "member/my";
+		if(id==null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script type='text/javascript'>");
+			out.println("alert('로그인 하고 이용해주세요!!')");
+			out.println("</script>");
+			out.flush();
+			model.addAttribute("loginPage", tool.login());
+			return "member/loginPage";
+		}else {
+			MemberDTO dto = memberDAO.select(id);
+			model.addAttribute("dto", dto);
+			String addr = dto.getTotaddr();
+			String[] addrs = addr.split("\\.");
+			model.addAttribute("addr",addrs[0]);
+			model.addAttribute("addr1",addrs[1]);
+			model.addAttribute("addr2",addrs[2]);
+			model.addAttribute("addr3",addrs[3]);
+			return "member/my";
+		}
 	}
 
 	// 회원수정하기
@@ -306,6 +325,25 @@ public class MemberController {
 	public String logout(Model model,HttpSession session) {
 		session.invalidate();
 		return "main/main";
+	}
+	
+	//나의 여행계획 출력
+	@RequestMapping("myPerfectPlanList")
+	public String myPerfectPlanList(HttpSession session,HttpServletResponse response,Model model) throws IOException {
+		if(session.getAttribute("id")!=null) {
+			List<TypeADTO> list = courseDAO.selectPlan((String)session.getAttribute("id"));
+			model.addAttribute("list",list);
+			return "member/myPlanList";
+		}else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script type='text/javascript'>");
+			out.println("alert('로그인 하고 이용해주세요!!')");
+			out.println("</script>");
+			out.flush();
+			model.addAttribute("loginPage", tool.login());
+			return "member/loginPage";
+		} 
 	}
 }
 

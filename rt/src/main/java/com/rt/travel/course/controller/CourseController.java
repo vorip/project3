@@ -2,28 +2,46 @@ package com.rt.travel.course.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rt.travel.chat.dao.ChatDAO;
+import com.rt.travel.chatRoom.dto.ChatRoomDTO;
 import com.rt.travel.course.dao.CourseDAO;
 import com.rt.travel.course.dto.CourseDTO;
 import com.rt.travel.course.dto.TypeADTO;
+import com.rt.travel.member.dao.MemberDAOImpl;
 
 @Controller
 public class CourseController {
 	@Autowired
 	CourseDAO dao;
+	@Autowired
+	MemberDAOImpl memberDAO;
+	@Autowired
+	ChatDAO chatDAO;
 	
 	// 양식에서 map으로 이동
 	@RequestMapping("index.do")
-	public String index(TypeADTO typeADTO, Model model) {
+	public String index(TypeADTO typeADTO, Model model,HttpSession session) {
+		ChatRoomDTO chatRoomDTO = new ChatRoomDTO();
+		chatRoomDTO.setMembers((String)session.getAttribute("name"));
+		chatRoomDTO.setchatRoomName(typeADTO.getTitle());
+		chatRoomDTO.setStartTime(typeADTO.getDay_start());
+		chatRoomDTO.setLimitMember(typeADTO.getMax_mem());
+		chatRoomDTO.setEndTime(typeADTO.getDay_end());
+		chatRoomDTO.setLeader((String)session.getAttribute("id"));
+		
+		chatRoomDTO.setThumbnail("thumb.jpg");
+		chatDAO.createRoom(chatRoomDTO);
+		typeADTO.setChatRoomNum(chatDAO.chatRoomIndex());
 		dao.typeAInsert(typeADTO);	
-		System.out.println("ㅎㅇ");
 		model.addAttribute("no",dao.returnno());
-		System.out.println("ㅂㅇ");
 		return "course/index";
 	}
 	

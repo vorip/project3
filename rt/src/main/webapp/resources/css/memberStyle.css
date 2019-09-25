@@ -96,14 +96,14 @@
 	margin-left: 50px;
 }
 
-a{
+.aTag{
 	background-color: #1f8dd6;
 	color: white;
 	font-family: inherit;
 	font-size: 100%;
 	border: none rgba(0, 0, 0, 0);
 	text-align:center;
-	margin-left: 150px;
+	margin-left: 120px;
 	text-decoration: none;
 }
 
@@ -111,7 +111,7 @@ a{
 	margin: 1em auto;
 	padding: 1em 2em;
 	text-align: center;
-	padding-right: 200px;
+	padding-right: 150px;
 }
 
 /* 아이디,비번 찾기 */

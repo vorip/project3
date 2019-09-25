@@ -13,12 +13,23 @@ public class TypeADTO {
 	private int current_mem;
 	private int max_mem;
 	private String day_end;
-	
+	private int chatRoomNum;
+
+
 	@Override
 	public String toString() {
-		return "TypeADTO [no=" + no + ", id=" + id + ", title=" + title + ", travel_day=" + travel_day + 
-				",travel_type="+ travel_type + ", travel_theme=" + travel_theme +", choice_public=" + choice_public
-				+ ", travel_intro=" + travel_intro + "]";
+		return "TypeADTO [no=" + no + ", id=" + id + ", title=" + title + ", travel_day=" + travel_day + ", day_start="
+				+ day_start + ", travel_type=" + travel_type + ", travel_theme=" + travel_theme + ", choice_public="
+				+ choice_public + ", travel_intro=" + travel_intro + ", current_mem=" + current_mem + ", max_mem="
+				+ max_mem + ", day_end=" + day_end + ", chatRoomNum=" + chatRoomNum + "]";
+	}
+
+	public int getChatRoomNum() {
+		return chatRoomNum;
+	}
+	
+	public void setChatRoomNum(int chatRoomNum) {
+		this.chatRoomNum = chatRoomNum;
 	}
 	
 	public int getCurrent_mem() {

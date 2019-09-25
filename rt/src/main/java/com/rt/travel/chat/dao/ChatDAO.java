@@ -32,4 +32,6 @@ public interface ChatDAO {
 	List<Integer> selectChatRoomNums();
 	
 	List<ChatRoomDTO> chatSelectAll();
+	
+	int chatRoomIndex();
 }

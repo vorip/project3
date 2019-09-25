@@ -2,6 +2,9 @@ function exit() {
 	$("#course").remove();
 	location.reload();
 }
+function showPlan(no) {
+	window.location.href = "index.list?no="+no
+}
 $(function() {
 	$(".detail").click(function() {
 		$(this).each(function() {

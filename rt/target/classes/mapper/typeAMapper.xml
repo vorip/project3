@@ -26,6 +26,7 @@
 		<result property="current_mem" column="current_mem" />
 		<result property="max_mem" column="max_mem" />
 		<result property="day_end" column="day_end" />
+		<result property="chatRoomNum" column="chatRoomNum" />
 	</resultMap>
 	
 	<select id = "select_index" resultType="int">
@@ -43,7 +44,11 @@
 	</insert>
 	
 	<select id="typeASelectAll" parameterType="String" resultMap="rsMap">
-		SELECT * FROM typeA where choice_public = #{choice_public}
+		SELECT * FROM typeA where choice_public = #{choice_public} and current_mem <![CDATA[<]]> max_mem 
 	</select>
+	
+	<update id="addCurrentMem" parameterType="Integer">
+		UPDATE TYPEA SET current_mem = current_mem + 1 where chatRoomNum = #{chatRoomNum} 
+	</update>
 	
 </mapper>

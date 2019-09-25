@@ -73,4 +73,8 @@ public class CourseDAOImpl implements CourseDAO {
 	public CourseDTO memoselect(CourseDTO courseDTO) {
 		return my.selectOne("courseDAO.memoselect", courseDTO);
 	}
+	
+	public List<TypeADTO> selectPlan(String id){
+		return my.selectList("typeADAO.select",id);
+	}
 }

@@ -15,8 +15,8 @@ public class MemberTools {
 				"</div>"+
 				"</form>" + 
 				"<div class=\"searchIdPw\">"+
-				"<a href=\"searchId\" style=\"text-decoration: none;\">아이디 찾기</a>" + 
-				"<a href=\"searchPw\" style=\"text-decoration: none; \" >비밀번호 찾기</a>"+
+				"<a href=\"searchId\" class=\"aTag\" style=\"text-decoration: none;\">아이디 찾기</a>" + 
+				"<a href=\"searchPw\" class=\"aTag\" style=\"text-decoration: none;\" >비밀번호 찾기</a>"+
 				"</div>";
 	}
 }

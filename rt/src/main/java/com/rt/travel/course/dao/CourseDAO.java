@@ -30,4 +30,6 @@ public interface CourseDAO {
 	void memoedit(CourseDTO courseDTO);
 	
 	public CourseDTO memoselect(CourseDTO courseDTO);
+	
+	List<TypeADTO> selectPlan(String id);
 }

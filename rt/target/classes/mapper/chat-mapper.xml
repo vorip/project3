@@ -85,5 +85,8 @@
 		DELETE FROM chatRoom
 		WHERE endTime <![CDATA[<]]> SYSDATE
 	</delete>
+	<select id="chatRoomIndex" resultType="Integer">
+	SELECT ChatRoom_SEQ.CURRVAL AS DEPT_NO FROM DUAL
+	</select>
 
 </mapper>

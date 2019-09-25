@@ -18,9 +18,11 @@ public class MainController {
 					"	$(\"#signHref\").remove();" + 
 					"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
 					"})</script>");
+			mv.setViewName("main/main");
+		}else {
+			
+			mv.setViewName("main/main");
 		}
-		mv.setViewName("main/main");
 		return mv.getViewName();
 	}
-
 }

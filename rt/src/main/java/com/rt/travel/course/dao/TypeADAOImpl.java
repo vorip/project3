@@ -33,4 +33,8 @@ public class TypeADAOImpl implements TypeADAO{
 	public List<TypeADTO> typeASelectAll(String choice_public){
 		return my.selectList("typeADAO.typeASelectAll",choice_public);
 	}
+	
+	public void addCurrentMem(int chatRoomNum) {
+		my.update("typeADAO.addCurrentMem",chatRoomNum);
+	}
 }
