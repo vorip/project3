@@ -18,9 +18,19 @@
 		<result property="viewcnt" column="viewcnt" />
 	</resultMap>
 
+	<!-- 게시글 전체목록 조회 및 검색 조회 -->
 	<select id="listAll" resultMap="board_map">
 		SELECT * from board
+		<!-- WHERE절을 include 태그로 삽입
+		<include refid="search"></include>
+		ORDER BY bno desc, regdate desc -->
 	</select>
+	
+	<!-- <select id ="countArticle" resultType="int">
+		SELECT COUNT(*) FROM board
+		WHERE절을 include 태그로 삽입
+		<include refid="search"></include>
+	</select> -->
 
 	<insert id="insert">
 		INSERT INTO board(
@@ -54,7 +64,7 @@
 	</update>
 	
 
-	<delete id="delete" parameterType="bDTO">
+	<delete id="deleteArticle" parameterType="bDTO">
 		DELETE FROM board WHERE
 		bno = #{bno}
 	</delete>

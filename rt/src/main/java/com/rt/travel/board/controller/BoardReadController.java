@@ -1,6 +1,8 @@
 package com.rt.travel.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -21,14 +23,29 @@ public class BoardReadController {
 	@Inject
 	BoardService boardService;
 	//게시글 목록
+	/*
+	 * @RequestMapping("list.do") public ModelAndView
+	 * list(@RequestParam(defaultValue="title") String
+	 * searchOption, @RequestParam(defaultValue="") String keyword) throws Exception
+	 * { List<BoardDTO> list = boardService.listAll(searchOption, keyword); //레코드 개수
+	 * int count = boardService.countArticle(searchOption, keyword);
+	 * 
+	 * ModelAndView mav = new ModelAndView(); Map<String, Object> map = new
+	 * HashMap<String, Object>(); map.put("list", list); map.put("count", count);
+	 * //레코드의 개수 map.put("searchOption", searchOption); //검색옵션 map.put(keyword,
+	 * keyword); //검색키워드 mav.addObject("map", map); //맵에 저장된 데이터를 mav에 저장
+	 * mav.setViewName("Board/list"); //뷰를 list.jsp로 설정 //mav.addObject("list",
+	 * list); return mav; }
+	 */
+	
 	@RequestMapping("list.do")
-	public ModelAndView list() throws Exception {
-		List<BoardDTO> list = boardService.listAll();
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("Board/list");
-		mav.addObject("list", list);
-		return mav;
-	}
+	  public ModelAndView list() throws Exception {
+	     List<BoardDTO> list = boardService.listAll();
+	     ModelAndView mav = new ModelAndView();
+	     mav.setViewName("Board/list");
+	     mav.addObject("list", list);
+	     return mav;
+	 }
 	
 	@RequestMapping(value="write.do", method=RequestMethod.GET)
 	public String write() {
@@ -62,7 +79,7 @@ public class BoardReadController {
 	}
 		
 	//게시글 수정
-	@RequestMapping(value="update.do", method=RequestMethod.POST)
+	@RequestMapping(value="Board_update.do", method=RequestMethod.POST)
 	public String update(@ModelAttribute BoardDTO bDTO) throws Exception {
 		boardService.update(bDTO);
 		return "redirect:list.do";

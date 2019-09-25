@@ -19,8 +19,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void insert(BoardDTO bDTO) throws Exception {
-		System.out.println(bDTO.getTitle());
-		System.out.println(bDTO.getContent());
 		bDTO.setWriter("aaaaa");
 		boardDao.insert(bDTO);
 	}
@@ -39,12 +37,18 @@ public class BoardServiceImpl implements BoardService {
 	public void delete(int bno) throws Exception {
 		boardDao.delete(bno);
 	}
-
+	
+	//게시글 전체 목록
 	@Override
 	public List<BoardDTO> listAll() throws Exception {
 		return boardDao.listAll();
 	}
 
+	/*
+	 * @Override public int countArticle(String searchOption, String keyword) throws
+	 * Exception { return boardDao.countArticle(searchOption, keyword); }
+	 */
+	
 	@Override
 	public void increaseViewcnt(int bno, HttpSession session) throws Exception {
 		long update_time = 0;
@@ -64,5 +68,6 @@ public class BoardServiceImpl implements BoardService {
 			session.setAttribute("update_time_"+bno, current_time);
 		}
 	}
+
 
 }

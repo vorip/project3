@@ -8,30 +8,31 @@
 <meta charset="UTF-8">
 <title>모정</title>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function () {
 		$("#btnDelete").click(function () {
 			if(confirm("삭제하시겠습니까?")){
-				document.form1.action = "delete.do"
+				document.form1.action = "Board_delete.do"
 				document.form1.submit();
 			}
 		});
 		
 	$('#btnUpdate').click(function () {
 		
-		var title = $("#title").val();
-		var content = $("#content").val();
-		if(title == ""){
+		var title = $("#title").text();
+		var content = $("#p_content").val();
+		/* if(title == ""){
 			alert("제목을 입력하세요");
 			document.form1.title.focus();
-			return;
+			return false;
 		}
 		if(content == ""){
 			alert("내용을 입력하세요")
 			document.form1.content.focus();
-			return;
-		}
-		document.form1.action="update.do"
+			return false;
+		} */
+		document.form1.action="Board_update.do"
 		//폼에 입력한 데이터를 서버로 전송
 		document.form1.submit();
 		});
@@ -151,7 +152,7 @@
 							<table class="type_01" border="2" style="width: 100%;">
 								<thead>
 									<tr>
-										<th scope="co_0" colspan="2" style="width: 100%;" name="title">${dto.title }</th>
+										<th scope="co_0" colspan="2" style="width: 100%;"><input type="text" name="title" value="${dto.title }"></th>
 									</tr>
 									<tr>
 										${dto.writer}<span class="bar2">&nbsp;|&nbsp;</span><span class="p11">&nbsp;조회 ${dto.viewcnt}&nbsp;</span><span class="bar2">&nbsp;|&nbsp;</span><span class="p11"><fmt:formatDate value="${dto.regdate }" pattern="yyyy-MM-dd a HH:mm"/></span>

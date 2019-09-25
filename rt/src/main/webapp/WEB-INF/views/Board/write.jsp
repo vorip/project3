@@ -8,23 +8,23 @@
 <title>모정</title> 
 <!-- ckeditor 포함 -->
 <script src="resources/ckeditor/ckeditor.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 글쓰기 기능 -->
 <script type="text/javascript">
 	$(document).ready(function () {
 		$("#btnSave").click(function () {
 			var title = $("#title").val();
-			var content = $(".content").val();
+			var content = $("#p_content").val();
 			if(title == ""){
 				alert("제목을 입력하세요");
 				document.form1.title.focus();
-				return;
+				return false;
 			}
-			if(content == ""){
+			/* if(content == ""){
 				alert("내용을 입력하세요");
 				document.form1.content.focus();
 				return;
-			}
+			} */
 			document.form1.submit();
 		});
 	});
@@ -104,7 +104,7 @@
 		</div>
 		<!-- menu -->
 		<div id="header">
-			<div class="container">
+			<div class="container">-
 				<div class="header">
 					<div class="header_menu">
 						<a href="로그인 경로 페이지">로그인</a> <a href="회원가입 경로 페이지">회원가입</a>

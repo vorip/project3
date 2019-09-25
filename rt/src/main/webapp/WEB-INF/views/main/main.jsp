@@ -11,7 +11,7 @@
 
 	<!-- CSS STYLE -->
 	<link rel="stylesheet" href="resources/assets/css/reset.css">
-	<link rel="stylesheet" href="resources/assets/css/style.css">
+	<link rel="stylesheet" href="resources/assets/css/Boardstyle.css">
 	<link rel="stylesheet" href="resources/assets/css/weather.css">
 
 	<!-- 웹 폰트 -->
@@ -99,13 +99,13 @@ ${loginPageScript}
 							<a class="menu_nav" href="#">동행찾는 여행일정</a>
 						</div>
 					</div>
-					<div>
+					<div class="dropdown">
 						<h3 class="font_color">마이페이지</h3>
-						<ul>
-							<li><a class="menu_nav" href="#">나의 여행일정</a></li>
-							<li><a class="menu_nav" href="#">나의 동행찾기 수정</a></li>
-							<li><a class="menu_nav" href="my">회원정보보기</a></li>
-						</ul>
+						<div class="dropdown-content">
+							<a class="menu_nav" href="#">나의 여행일정</a>
+							<a class="menu_nav" href="#">나의 동행찾기 수정</a>
+							<a class="menu_nav" href="my">회원정보보기</a>
+						</div>
 					</div>
 				</div>
 			</div>

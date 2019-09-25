@@ -1,6 +1,8 @@
 package com.rt.travel.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,7 +19,6 @@ public class BoardDAOimpl implements BoardDAO {
 	
 	@Override
 	public void insert(BoardDTO bDTO) throws Exception {
-		System.out.println(bDTO.toString());
 		SqlSession.insert("bDAO.insert", bDTO);
 	}
 
@@ -36,6 +37,15 @@ public class BoardDAOimpl implements BoardDAO {
 		SqlSession.delete("bDAO.deleteArticle", bno);
 	}
 
+	//게시글 전체 목록
+	/*
+	 * @Override public List<BoardDTO> listAll(String searchOption, String keyword)
+	 * throws Exception { //검색옵션, 키워드 맵에 저장 Map<String, String> map = new
+	 * HashMap<String, String>(); map.put(searchOption, searchOption);
+	 * map.put(keyword, keyword); return SqlSession.selectList("bDAO.listAll", map);
+	 * }
+	 */
+	
 	@Override
 	public List<BoardDTO> listAll() throws Exception {
 		return SqlSession.selectList("bDAO.listAll");
@@ -45,5 +55,14 @@ public class BoardDAOimpl implements BoardDAO {
 	public void increaseViewcnt(int bno) throws Exception {
 		SqlSession.update("bDAO.increaseViewcnt", bno);
 	}
+
+	/*
+	 * //게시글 레코드 갯수
+	 * 
+	 * @Override public int countArticle(String searchOption, String keyword) throws
+	 * Exception { //검색옵션, 키워드 맵에 저장 Map<String, String> map = new HashMap<String,
+	 * String>(); map.put(searchOption, searchOption); map.put(keyword, keyword);
+	 * return SqlSession.selectOne("bDAO.countArticle", map); }
+	 */
 
 }
