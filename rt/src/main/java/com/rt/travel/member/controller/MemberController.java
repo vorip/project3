@@ -31,6 +31,8 @@ public class MemberController {
 	TypeADAO typeADAO;
 	@Autowired
 	CourseDAO courseDAO;
+	@Autowired
+	MyPlanList myplanList;
 
 	@RequestMapping("loginPage")
 	public String loginPage(Model model) {
@@ -268,6 +270,11 @@ public class MemberController {
 			model.addAttribute("addr1",addrs[1]);
 			model.addAttribute("addr2",addrs[2]);
 			model.addAttribute("addr3",addrs[3]);
+			model.addAttribute("loginPageScript","<script>$(function() {" + 
+					"	$(\"#loginPageHref\").remove();" + 
+					"	$(\"#signHref\").remove();" + 
+					"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
+					"})</script>");
 			return "member/my";
 		}
 	}
@@ -330,9 +337,14 @@ public class MemberController {
 	//나의 여행계획 출력
 	@RequestMapping("myPerfectPlanList")
 	public String myPerfectPlanList(HttpSession session,HttpServletResponse response,Model model) throws IOException {
+		String id = (String)session.getAttribute("id");
 		if(session.getAttribute("id")!=null) {
-			List<TypeADTO> list = courseDAO.selectPlan((String)session.getAttribute("id"));
-			model.addAttribute("list",list);
+			model.addAttribute("myPlan",myplanList.myPlan(id));
+			model.addAttribute("loginPageScript","<script>$(function() {" + 
+					"	$(\"#loginPageHref\").remove();" + 
+					"	$(\"#signHref\").remove();" + 
+					"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
+					"})</script>");
 			return "member/myPlanList";
 		}else {
 			response.setContentType("text/html; charset=UTF-8");

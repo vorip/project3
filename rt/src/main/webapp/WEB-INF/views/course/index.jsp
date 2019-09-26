@@ -1,6 +1,8 @@
 <%@page import="com.rt.travel.course.dto.TypeADTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -67,32 +69,43 @@
 .white_content:target { opacity:1; pointer-events: auto;  z-index: 3;}
 .white_content > div {   position: absolute;   top: 25%;   left: 25%;   width: 50%;   height: 50%;   padding: 16px;   border: 16px solid orange;   background-color: white; overflow: auto;}
 
-.tabmenu {width : 70px; margin-bottom: 10px;}
+.tabmenu {width : 100px; margin-bottom: 10px;}
 .nextbtn {width : 100px;}
+
+.radius_border{border:1px solid #919191;border-radius:5px;}     
+.custom_typecontrol {position:absolute;top:10px;right:10px;overflow:hidden;width:195px;height:30px;margin:0;padding:0;z-index:4;font-size:12px;font-family:'Malgun Gothic', '맑은 고딕', sans-serif;}
+.custom_typecontrol span {display:block;width:65px;height:30px;float:left;text-align:center;line-height:30px;cursor:pointer;}
+.custom_typecontrol .btn {background:#fff;background:linear-gradient(#fff,  #e6e6e6);}       
+.custom_typecontrol .btn:hover {background:#f5f5f5;background:linear-gradient(#f5f5f5,#e3e3e3);}
+.custom_typecontrol .btn:active {background:#e6e6e6;background:linear-gradient(#e6e6e6, #fff);}    
+.custom_typecontrol .selected_btn {color:#fff;background:#425470;background:linear-gradient(#425470, #5b6d8a);}
+.custom_typecontrol .selected_btn:hover {color:#fff;}
+
 
 </style>
 </head>
 <body>
- 
 <div class="container" style = "width : 2000px ; height : 1000px"><!-- 메인 컨테이너 -->
    <div id = "left-container" style = "float:left; height : 88%; width : 400px; "><!-- 좌측 div  -->
       <div id="memberinfo" style="border: 1px solid red; width: 398px; height: 100px; float:left">
       
       <div id="memberpic"style="margin : 10px 10px 0px 10px; background:#B7F0B1; width: 80px; height: 80px; float:left;">작성자 프사</div><!-- 사진 div -->
-		제목 : ${typeADTO.title}<br>
-		작성자 : ${typeADTO.id}<br>
-		${typeADTO.travel_type} / 추천: / 즐겨찾기<br>
+		제목 : ${typeADTO_model.title}<br>
+		작성자 : ${typeADTO_model.id}<br>
+		${typeADTO_model.travel_type} / 추천: / 즐겨찾기<br>
 		
       </div> <!-- 회원 정보 div  -->
       
-      <div id="road_date" style="border-bottom: 1px solid red; border-right: 1px solid red; border-left: 1px solid red; float: left; height: 94%; width: 148px;padding-top: 9px; text-align: center;">
+      <div id="road_date" style="border-bottom: 1px solid red; border-right: 1px solid red; border-left: 1px solid red; float: left; height: 94%; width: 148px;padding-top: 9px; text-align: center; overflow: auto;">
+      
+    <%--   	<c:forEach var="courseDTO" items="${select_list}" varStatus="stat">
+		</c:forEach> --%>
+	
       <%
-     	 int daytest = Integer.parseInt(request.getParameter("travel_day"));
-         for(int i = 1 ; i <= daytest ; i++){
+      	TypeADTO adto = (TypeADTO)request.getAttribute("typeADTO_model");
+         for(int i = 1 ; i <= adto.getTravel_day() ; i++){
       %>
-      	<div>
-        	<button class="tabmenu" value=<%=i%> id="default"><%=i%>일차</button>
-        </div>
+         <button class="tabmenu" value=<%=i%> id="default"><%=i%>일차</button>
       <%
          }
       %>
@@ -120,11 +133,21 @@
 							<button type="submit">검색하기</button> 
                       </form>
                   </div>
+                  
+    
               </div>
               <hr>
               <ul id="placesList"></ul>
               <div id="pagination"></div>
+              
           </div>
+          
+	            <div class="custom_typecontrol radius_border">
+			        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+			        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+			        <span id="btnTraffic" class="btn" onclick="setMapType('traffic')">교통정보</span>
+			    </div>
+			    
        </div>
    </div>
    
@@ -141,8 +164,7 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=afbdd676e0cb9858d78365c02cbc33b7&libraries=services"></script>
 <script>
-
-sessionStorage.setItem('nowid', 'jang');
+sessionStorage.setItem('nowid', 'soyun');
 
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -156,6 +178,37 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+function setMapType(maptype) { 
+    var roadmapControl = document.getElementById('btnRoadmap');
+    var skyviewControl = document.getElementById('btnSkyview');
+    var trafficControl = document.getElementById('btnTraffic');
+      
+    
+    if (maptype === 'roadmap') {
+        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+        roadmapControl.className = 'selected_btn';
+        skyviewControl.className = 'btn';
+    } 
+    else if(maptype === 'skyview') {
+        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+        roadmapControl.className = 'btn';
+        skyviewControl.className = 'selected_btn';
+    }
+    else if(maptype === 'traffic'){
+		 if(trafficControl.className == "btn"){
+			map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+         	trafficControl.className = 'selected_btn';
+		 }
+		 
+		 else{
+			 trafficControl.className = 'btn';
+			 map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);  
+		 }
+		 
+    }
+}
+
 
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();  
@@ -271,12 +324,12 @@ function displayPlaceInfo(place) {
 var ourmarker = [];
 var ourindex = 0;
 function ourmarkeradd(y,x){                                       // -----------------HONG(내가 정한 장소 지도에 마커로 표시)
-   alert("ourmarkeradd : "+ y +" , "+ x);
-   var markerPosition  = new kakao.maps.LatLng(y, x); 
-   
-   var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-   imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-   imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+   var markerPosition  = new kakao.maps.LatLng(y, x);
+   /* var imageSrc = 'https://postfiles.pstatic.net/MjAxOTA5MjBfMzEg/MDAxNTY4OTYyMzE3ODUw.4tdESTi8sQRVpQgsSjxwVToiyvrMv4UDG5sGI7gi4f8g.I9ERXc5QnIqR2emhT0ZEk_B-Xx6-rbWoN3lYVsWdRSsg.PNG.jooahn424/Untitled.png?type=w773', */ 
+   /* var imageSrc = 'https://postfiles.pstatic.net/MjAxOTA5MjBfMTI4/MDAxNTY4OTYzNjQ0NzY3.faER9cg_yYIzrIhFJDhvqy1mS3EvgXnExJLB03uLH-Eg.kENpQnWGeHoDW-BGCDH4Vx1f40lrT31CB_8Gbdy0HF8g.PNG.jooahn424/markermarker.png?type=w773', // 마커이미지의 주소입니다 */
+   var imageSrc = "resources/img/markermarker.png",
+   imageSize = new kakao.maps.Size(58, 60), // 마커이미지의 크기입니다
+   imageOption = {offset: new kakao.maps.Point(23, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
      
    //마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
@@ -289,11 +342,17 @@ function ourmarkeradd(y,x){                                       // -----------
    marker.setMap(map);
 }
 
+function ourmarker_alldel(){
+	for(var i = 0 ; i < ourmarker.length ; i++){
+		ourmarker[i].setMap(null);
+	}
+	ourindex = 0;
+	ourmarker = [];
+}
 
 function ourmarkerdel(delete_num){
    var marker = ourmarker[delete_num-1]; 
    ourindex--;
-   
    for(var i = delete_num ; i<=ourindex; i++){
       ourmarker[i-1] = ourmarker[i];
    }
@@ -304,8 +363,8 @@ var delete_index = 0;
 var memo_index = 0;
 var day = 1;
 // **********************
-var no = ${no}; 
-var id = "${typeADTO.id}";
+var no = ${typeADTO_model.no}; 
+var id = "${typeADTO_model.id}";
 var nowid = sessionStorage.getItem("nowid");
 var memo = "메모를 입력하지 않았습니다!";
 alert(nowid);
@@ -334,8 +393,8 @@ alert(nowid);
         delete_index = $("#select_delete_index").val();
         if(id!=nowid){
         	$("#place_delete").attr("disabled","disabled");
-        	
         }
+        refreshline();
        },
        error: function() {
          alert("실패:/");
@@ -358,7 +417,8 @@ $(function() {
 			 "no" : no
          },
          success: function() {
-            alert("성공:>");
+            alert("메모 추가 완료:>");
+            
          },
          error: function() {
             alert("실패:/");
@@ -368,7 +428,7 @@ $(function() {
 });
 
 $(function() {
-     $(".tabmenu").click(function(){
+     $(".tabmenu").click(function(){/* 일차변경 */
          day = $(this).val();
       $.ajax({
        url: 'select.do',
@@ -381,7 +441,13 @@ $(function() {
         if(id!=nowid){
            $("#place_delete").attr("disabled","disabled");
         }
-        
+        refreshline();
+        ourmarker_alldel();
+        for(var i = 0 ; i <= delete_index ; i++){
+        	var x = $("#road_place_"+i).find("#place_x").val();
+        	var y = $("#road_place_"+i).find("#place_y").val();
+        	ourmarkeradd(y,x);
+        }
        },
        error: function() {
          alert("실패:/");
@@ -393,6 +459,7 @@ $(function() {
 function customoverlay_add(place_url,place_name,place_address_name,place_road_address_name,place_phone,x,y){   
    memo_index++;
      // 만약 일차버튼이 on일 때, 버튼 상태값을 변수에 담고 넘겨주기!:>
+     
       // V버튼 눌렀을 때, insert 실행
           $.ajax({
             url: 'insert.do',
@@ -407,7 +474,8 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
                "place_address_name": place_address_name,
                "place_phone": place_phone,
                "place_memo": memo,
-               "memo_index": memo_index
+               "memo_index": memo_index,
+               "place_road_address_name": place_road_address_name
             },
             success: function(result) {
             },
@@ -443,6 +511,7 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
    }
     document.getElementById('roadsidebar').appendChild(div);
    ourmarkeradd(y,x);
+   refreshline();
 }
 
 function memo_open(memo_index_open){
@@ -520,7 +589,7 @@ function customoverlay_delete(delete_num,memo_index){
        
     }
     delete_index--;
-    
+    refreshline();
 }
 
 
@@ -716,6 +785,53 @@ function removeAllChildNods(el) {
     while (el.hasChildNodes()) {
         el.removeChild (el.lastChild);
     }
+}
+ 
+var lineshow;
+
+function deleteClickLine() {
+    if (lineshow) {
+    	lineshow.setMap(null);    
+    	lineshow = null;        
+    }
+}
+
+function refreshline(){
+	
+ 	deleteClickLine();
+	
+	var line_x;
+	var line_y;
+	
+	var line_setpos = [delete_index];
+
+	
+	for(var i = 1 ; i <= delete_index ; i++){
+
+		line_x = $("#road_place_"+i).find("#place_x").val();
+		line_y = $("#road_place_"+i).find("#place_y").val();
+		
+		var lineloc = new kakao.maps.LatLng(line_y, line_x);
+		line_setpos[i-1] = lineloc;
+		
+		if(i==1){
+			 lineshow = new kakao.maps.Polyline({
+				map:map,
+				path:[lineloc],
+				strokeWeight: 5, // 선의 두께입니다 
+			    strokeColor: '#FE7AFA', // 선의 색깔입니다
+			    strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+			    strokeStyle: 'solid' // 선의 스타일입니다
+			 })
+		}
+		else{
+			 var path = lineshow.getPath();
+			 path.push(lineloc);
+			 lineshow.setPath(path);
+		}
+		
+	} 
+		
 }
 </script>
 </div>

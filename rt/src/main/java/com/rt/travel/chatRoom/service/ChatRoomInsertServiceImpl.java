@@ -14,7 +14,7 @@ public class ChatRoomInsertServiceImpl implements ChatRoomInsertService {
 	
 	@Override
 	public void createRoom(ChatRoomDTO chatRoomDTO) {
-		chatRoomDTO.setThumbnail("thumb.jpg");
+		chatRoomDTO.setThumbNail("thumb.jpg");
 		chatDAO.createRoom(chatRoomDTO);
 	}
 }

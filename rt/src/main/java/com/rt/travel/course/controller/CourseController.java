@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rt.travel.chat.dao.ChatDAO;
 import com.rt.travel.chatRoom.dto.ChatRoomDTO;
 import com.rt.travel.course.dao.CourseDAO;
+import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.course.dto.CourseDTO;
 import com.rt.travel.course.dto.TypeADTO;
 import com.rt.travel.member.dao.MemberDAOImpl;
@@ -25,29 +26,35 @@ public class CourseController {
 	MemberDAOImpl memberDAO;
 	@Autowired
 	ChatDAO chatDAO;
+	@Autowired
+	TypeADAO typeADAO;
 	
 	// 양식에서 map으로 이동
 	@RequestMapping("index.do")
 	public String index(TypeADTO typeADTO, Model model,HttpSession session) {
+		System.out.println("1번");
+		
+		dao.typeAInsert(typeADTO);
+		typeADTO.setNo(dao.returnno());
+		
 		ChatRoomDTO chatRoomDTO = new ChatRoomDTO();
 		chatRoomDTO.setMembers((String)session.getAttribute("name"));
 		chatRoomDTO.setchatRoomName(typeADTO.getTitle());
-		chatRoomDTO.setStartTime(typeADTO.getDay_start());
+		chatRoomDTO.setStartTime(typeADTO.getDay_start().split(" ")[0]);
 		chatRoomDTO.setLimitMember(typeADTO.getMax_mem());
-		chatRoomDTO.setEndTime(typeADTO.getDay_end());
-		chatRoomDTO.setLeader((String)session.getAttribute("id"));
+		chatRoomDTO.setEndTime(typeADAO.day_endSelect(typeADTO.getNo()).split(" ")[0]);
+		chatRoomDTO.setLeader((String)session.getAttribute("name"));
+		System.out.println("2번");
 		
-		chatRoomDTO.setThumbnail("thumb.jpg");
+		chatRoomDTO.setThumbNail("thumb.jpg");
+		System.out.println(chatRoomDTO.toString());
 		chatDAO.createRoom(chatRoomDTO);
 		typeADTO.setChatRoomNum(chatDAO.chatRoomIndex());
-		dao.typeAInsert(typeADTO);	
-		model.addAttribute("no",dao.returnno());
-		return "course/index";
-	}
-	
-	@RequestMapping("show_index.do")
-	public String only_show_index(TypeADTO typeADTO , Model model) {
-		model.addAttribute("no",dao.returnno());
+		System.out.println(typeADTO.toString());
+		
+		typeADAO.chatRoomNumUpdate(typeADTO);
+		System.out.println("3번");
+		model.addAttribute("typeADTO_model",typeADTO);
 		return "course/index";
 	}
 	
@@ -60,39 +67,29 @@ public class CourseController {
 	
 	// 일차별 버튼 눌렀을 때, select해서 일차, no값, id에 맞는 장소들 출력
 	@RequestMapping("select.do")
-	public void select(CourseDTO courseDTO, Model model) {
+	public String select(CourseDTO courseDTO, Model model) {
 		List<CourseDTO> list = dao.select(courseDTO);
 		model.addAttribute("select_list", list);
-	}
-	
-	// report에 띄우는 select
-	@RequestMapping("report.do")
-	public void select_report(CourseDTO courseDTO, Model model) {
-		List<CourseDTO> list = dao.select_report(courseDTO);
-		model.addAttribute("select_report", list);
-	}
-	
-	// selectAll
-	@RequestMapping("selectAll.do")
-	public void selectAll(Model model) {
-		List<CourseDTO> list = dao.selectAll();
-		model.addAttribute("selectAll_list", list);
+		return "course/select";
 	}
 	
 	@RequestMapping("delete.do")
-	public void delete(CourseDTO courseDTO) {
+	public String delete(CourseDTO courseDTO) {
 		dao.delete(courseDTO);
+		return "course/delete";
 	}
 	
 	@RequestMapping("memoedit.do")
-	public void memoedit(CourseDTO courseDTO) {
+	public String memoedit(CourseDTO courseDTO) {
 		dao.memoedit(courseDTO);
+		return "course/memodit";
 	}
 	
 	@RequestMapping("memoselect.do")
-	public void memoselect(CourseDTO courseDTO, Model model) {
+	public String memoselect(CourseDTO courseDTO, Model model) {
 		CourseDTO memoresult = dao.memoselect(courseDTO);
 		model.addAttribute("memoresult",memoresult);
+		return "course/memoselect";
 	}
 	
 }

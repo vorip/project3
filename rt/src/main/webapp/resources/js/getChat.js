@@ -36,6 +36,7 @@ function getChat() {
 //		}
 //	})
 //}
+
 var ws;
 var messages;
 function openSocket(){

@@ -68,8 +68,8 @@
 	<insert id="createRoom" parameterType="chatRoomDTO">
 		INSERT INTO chatRoom
 		values
-		(#{members},#{chatRoomName},to_timestamp(#{startTime}),
-		chatRoom_seq.NEXTVAL,#{limitMember},#{leader},{#thumbnail},to_timestamp(#{endTime}))
+		(#{members},#{chatRoomName},#{startTime},
+		CHATROOM_SEQ.NEXTVAL,#{limitMember},#{leader},#{thumbNail},#{endTime})
 	</insert>
 	<insert id="addContent" parameterType="chatContentDTO">
 		INSERT INTO chatContent

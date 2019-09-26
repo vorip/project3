@@ -6,7 +6,7 @@
 
 	<insert id="insert" parameterType="courseDTO">
 		INSERT INTO course
-		VALUES(#{no},#{id},#{place_url},#{place_name},#{place_address_name},#{place_phone},#{place_x},#{place_y},#{place_memo},#{day},#{memo_index})
+		VALUES(#{no},#{id},#{place_url},#{place_name},#{place_address_name},#{place_phone},#{place_x},#{place_y},#{place_memo},#{day},#{memo_index},#{place_address_name})
 	</insert>
 	
 	<resultMap type="courseDTO" id="rsMap">
@@ -21,6 +21,7 @@
 		<result property="place_memo" column="place_memo"/>
 		<result property="day" column="day"/>
 		<result property="memo_index" column="memo_index"/>
+		<result property="place_road_address_name" column="place_road_address_name"/>
 	</resultMap>
 	
 	<!-- 일차별 버튼 눌렀을 때, 아이디, no값, day별 -->
@@ -29,7 +30,7 @@
 	</select>
 	
 	<select id="select_report" parameterType="courseDTO" resultMap="rsMap">
-		SELECT * FROM course WHERE no = #{no} AND id = #{id} 
+		SELECT * FROM course WHERE no = #{no} 
 	</select>
 	
 	<select id="selectAll" resultMap="rsMap">
@@ -54,7 +55,7 @@
 		SELECT
 		place_address_name
 		FROM course
-		WHERE no= 1 and day=(select travel_day from typeA where no = #{no}) and memo_index=1
+		WHERE no= #{no} and day=1 and memo_index=1
 	</select>
 	
 	<!-- 주아니3 -->

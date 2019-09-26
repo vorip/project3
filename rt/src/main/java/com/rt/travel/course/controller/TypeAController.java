@@ -1,5 +1,7 @@
 package com.rt.travel.course.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,4 +23,30 @@ public class TypeAController {
 		mav.setViewName("course/MapMain_TypeA");
 		return mav;
 	}
+	 @RequestMapping("showindex.do")
+	   public String show_index(int no, Model model) {
+	      TypeADTO typeADTO = dao.select_report(no);
+	      model.addAttribute("typeADTO_model",typeADTO);
+	      model.addAttribute("no", no);
+	      return "course/index";
+	   }
+	   
+	   // 여행 리스트 selectAll
+	   @RequestMapping("selectAll.do")
+	   public ModelAndView selectAll() throws Exception {
+	      List<TypeADTO> list = dao.selectAll();
+	      for (int i = 0; i < list.size(); i++) {
+	         
+	         String[] str = list.get(i).getDay_start().split(" ");
+	         String[] end = list.get(i).getDay_end().split(" ");
+	         
+	         list.get(i).setDay_start(str[0]);
+	         list.get(i).setDay_end(end[0]);
+	      }   
+	      
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("selectAll",list);
+	      mav.setViewName("course/selectAll");
+	      return mav;
+	   }
 }

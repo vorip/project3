@@ -30,9 +30,13 @@
 	</resultMap>
 	
 	<select id = "select_index" resultType="int">
-		SELECT TYPEA_SEQ.CURRVAL AS DEPT_NO FROM DUAL
+		SELECT TYPEA_SEQ.CURRVAL FROM DUAL
 	</select>
 
+	<select id = 'day_endSelect' parameterType="int" resultType="String">
+		select day_end from typeA where no = #{no}
+	</select>
+	
 	<select id="selectAll_typea" resultMap="rsMap">
 		SELECT * FROM typeA
 	</select>
@@ -40,8 +44,12 @@
 	<insert id="insert" parameterType="typeADTO">
 		INSERT INTO typeA
 		VALUES(typeA_seq.nextval,#{id},#{title},#{travel_day},#{day_start},#{travel_type},#{travel_theme},
-		#{choice_public},#{travel_intro},#{current_mem},#{max_mem},to_timestamp(to_timestamp(#{day_start})+#{travel_day}-1))
+		#{choice_public},#{travel_intro},#{current_mem},#{max_mem},to_timestamp(to_timestamp(#{day_start})+#{travel_day}-1),#{chatRoomNum})
 	</insert>
+	
+	<update id = "chatRoomNumUpdate" parameterType="typeADTO">
+		update typeA set chatRoomNum = #{chatRoomNum} where no = #{no}
+	</update>
 	
 	<select id="typeASelectAll" parameterType="String" resultMap="rsMap">
 		SELECT * FROM typeA where choice_public = #{choice_public} and current_mem <![CDATA[<]]> max_mem 
@@ -50,5 +58,9 @@
 	<update id="addCurrentMem" parameterType="Integer">
 		UPDATE TYPEA SET current_mem = current_mem + 1 where chatRoomNum = #{chatRoomNum} 
 	</update>
+	
+	<select id="select_by_num" parameterType="Integer" resultMap="rsMap">
+      SELECT * FROM typeA where no = #{db_number}
+   </select>
 	
 </mapper>

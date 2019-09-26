@@ -29,14 +29,10 @@ public class CourseDAOImpl implements CourseDAO {
 		return my.selectOne("typeADAO.select_index");
 	}
 	
+	
 	@Override
 	public List<CourseDTO> select(CourseDTO courseDTO) {
 		return my.selectList("courseDAO.select", courseDTO);
-	} 
-	
-	@Override
-	public List<CourseDTO> select_report(CourseDTO courseDTO) {
-		return my.selectList("courseDAO.select_report", courseDTO);
 	} 
 	
 	@Override
@@ -72,9 +68,5 @@ public class CourseDAOImpl implements CourseDAO {
 	@Override
 	public CourseDTO memoselect(CourseDTO courseDTO) {
 		return my.selectOne("courseDAO.memoselect", courseDTO);
-	}
-	
-	public List<TypeADTO> selectPlan(String id){
-		return my.selectList("typeADAO.select",id);
 	}
 }

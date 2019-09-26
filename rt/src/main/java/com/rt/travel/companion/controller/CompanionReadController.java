@@ -42,6 +42,11 @@ public class CompanionReadController {
 	@RequestMapping("companion")
 	public String companion(Model model,HttpSession session) {
 		model.addAttribute("companionResult", companion.companionList());
+		model.addAttribute("loginPageScript","<script>$(function() {" + 
+				"	$(\"#loginPageHref\").remove();" + 
+				"	$(\"#signHref\").remove();" + 
+				"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
+				"})</script>");
 		return "companion/companion";
 	}
 

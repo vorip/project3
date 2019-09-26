@@ -7,14 +7,23 @@ public class ChatRoomDTO {
 	private int chatRoomNum;
 	private int limitMember;
 	private String leader;
-	private String thumbnail;
+	private String thumbNail;
 	private String endTime;
+	
+	@Override
+	public String toString() {
+		return "ChatRoomDTO [members=" + members + ", chatRoomName=" + chatRoomName + ", startTime=" + startTime
+				+ ", chatRoomNum=" + chatRoomNum + ", limitMember=" + limitMember + ", leader=" + leader
+				+ ", thumbNail=" + thumbNail + ", endTime=" + endTime + "]";
+	}
+	
 	public String getMembers() {
 		return members;
 	}
 	public void setMembers(String members) {
 		this.members = members;
 	}
+	
 	public String getchatRoomName() {
 		return chatRoomName;
 	}
@@ -45,11 +54,11 @@ public class ChatRoomDTO {
 	public void setLeader(String leader) {
 		this.leader = leader;
 	}
-	public String getThumbnail() {
-		return thumbnail;
+	public String getThumbNail() {
+		return thumbNail;
 	}
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
+	public void setThumbNail(String thumbnail) {
+		this.thumbNail = thumbnail;
 	}
 	public String getEndTime() {
 		return endTime;

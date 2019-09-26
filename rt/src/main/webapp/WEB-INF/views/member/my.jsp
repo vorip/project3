@@ -78,6 +78,7 @@ var fileName = fileValue[fileValue.length-1]; // 파일명
 <body>
 <img id='getChat'onclick = "getChat();" src = "resources/img/logo.png">
 	<!-- 스킵 내비게이션 -->
+${loginPageScript}
 	<div id="skip">
 		<a href="#cont_nav">전체 메뉴 바로가기</a>
 		<a href="#cont_ban">배너 영역 바로가기</a>

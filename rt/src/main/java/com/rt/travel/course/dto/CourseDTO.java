@@ -12,14 +12,26 @@ public class CourseDTO {
 	String place_memo;
 	int day;
 	int memo_index;
+	String place_road_address_name;
 	
+	
+
 	@Override
 	public String toString() {
-		return "CourseDTO [no=" + no + ", id=" + id + ", day=" + day + ", place_url=" + place_url + ", place_name="
-				+ place_name + ", place_address_name=" + place_address_name + ", place_phone=" + place_phone
-				+ ", place_x=" + place_x + ", place_y=" + place_y + ", place_memo="+ place_memo+", memo_index="+memo_index+ "]";
+		return "CourseDTO [id=" + id + ", place_url=" + place_url + ", place_name=" + place_name
+				+ ", place_address_name=" + place_address_name + ", place_phone=" + place_phone + ", place_x=" + place_x
+				+ ", place_y=" + place_y + ", place_memo=" + place_memo + ", day=" + day + ", memo_index=" + memo_index
+				+ ", place_road_address_name=" + place_road_address_name + "]";
+	}
+
+	
+	public String getPlace_road_address_name() {
+		return place_road_address_name;
 	}
 	
+	public void setPlace_road_address_name(String place_road_address_name) {
+		this.place_road_address_name = place_road_address_name;
+	}
 	public int getMemo_index() {
 		return memo_index;
 	}

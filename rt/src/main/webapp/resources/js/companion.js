@@ -3,7 +3,7 @@ function exit() {
 	location.reload();
 }
 function showPlan(no) {
-	window.location.href = "index.list?no="+no
+	location.href = "showindex.do?no="+no;
 }
 $(function() {
 	$(".detail").click(function() {

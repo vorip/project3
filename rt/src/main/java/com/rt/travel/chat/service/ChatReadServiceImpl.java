@@ -92,7 +92,7 @@ public class ChatReadServiceImpl implements ChatReadService {
 					+ "<input type = \'hidden\' value=\'" + chatRoomDTO.getchatRoomNum() + "\'>"
 					+ "<div class=\'thumbnail\' style=\'float : left;padding : 5px;width : 55px; height : 50px; bottom : "
 					+ (divPositionVal - i * divHeight) + "px;\'>" + "<img src=\'resources/img/"
-					+ chatRoomDTO.getThumbnail() + "\'>" + "</div>"
+					+ chatRoomDTO.getThumbNail() + "\'>" + "</div>"
 					+ "<div class=\'roomName\' style=\'float : left;padding : 5px;width : 123px;bottom : "
 					+ (divPositionVal - i * divHeight) + "px; height : 50px;'>"
 					+ "<span style=\'font-size : 13px;font-weight : bold;font-family: 맑은고딕;\'>" + chatRoomDTO.getchatRoomName()

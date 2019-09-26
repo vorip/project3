@@ -15,8 +15,6 @@ public interface CourseDAO {
 
 	List<CourseDTO> select(CourseDTO courseDTO);
 
-	List<CourseDTO> select_report(CourseDTO courseDTO);
-
 	void delete(CourseDTO courseDTO);
 
 	List<CourseDTO> selectAll();
@@ -31,5 +29,4 @@ public interface CourseDAO {
 	
 	public CourseDTO memoselect(CourseDTO courseDTO);
 	
-	List<TypeADTO> selectPlan(String id);
 }

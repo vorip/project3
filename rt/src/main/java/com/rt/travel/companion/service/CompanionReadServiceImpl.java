@@ -38,13 +38,14 @@ public class CompanionReadServiceImpl {
 			String[] end = typeADTO.getDay_end().split(" ");
 			
 			companionListHtml += "<tr>\r\n" + 
-					"		<td><img id='img' src='resources/img/"+memberDTO.getThumb()+"'></td>\r\n" + 
-					"		<td>"+typeADTO.getId()+"</td>\r\n" + 
-					"		<td>"+typeADTO.getCurrent_mem()+"/"+typeADTO.getMax_mem()+"</td>\r\n" + 
-					"		<td>"+courseStart[0]+courseStart[1]+"</td>\r\n" + 
-					"		<td>"+courseEnd[0]+courseEnd[1]+"</td>\r\n" + 
-					"		<td>"+start[0]+"~"+end[0]+"</td>\r\n" + 
-					"		<td><button class = 'detail' onclick = \"showPlan('"+typeADTO.getNo()+"')\">자세히보기</button>\r\n" + 
+					"		<td style=\"text-align: center;border-bottom: 1px solid #cbcbcb;\">" 	+ 
+					"		<img id='img' src='resources/img/"+memberDTO.getThumb()+"'></td>\r\n" + 
+					"		<td style=\"text-align: center;\">"+typeADTO.getId()+"</td>\r\n" + 
+					"		<td style=\"text-align: center;\">"+typeADTO.getCurrent_mem()+"/"+typeADTO.getMax_mem()+"</td>\r\n" + 
+					"		<td style=\"text-align: center;\">"+courseStart[0]+courseStart[1]+"</td>\r\n" + 
+					"		<td style=\"text-align: center;\">"+courseEnd[0]+courseEnd[1]+"</td>\r\n" + 
+					"		<td style=\"text-align: center;\">"+start[0]+"~"+end[0]+"</td>\r\n" + 
+					"		<td style=\"text-align: center;\"><button class = 'detail' onclick = \"showPlan('"+typeADTO.getNo()+"')\" >자세히보기</button>\r\n" + 
 					"	</tr>";
 		}
 		return companionListHtml;
