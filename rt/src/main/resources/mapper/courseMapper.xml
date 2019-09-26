@@ -6,7 +6,7 @@
 
 	<insert id="insert" parameterType="courseDTO">
 		INSERT INTO course
-		VALUES(#{no},#{id},#{place_url},#{place_name},#{place_address_name},#{place_phone},#{place_x},#{place_y},#{place_memo},#{day},#{memo_index},#{place_address_name})
+		VALUES(#{no},#{id},#{place_url},#{place_name},#{place_address_name},#{place_phone},#{place_x},#{place_y},#{place_memo},#{day},#{memo_index},#{place_road_address_name})
 	</insert>
 	
 	<resultMap type="courseDTO" id="rsMap">
