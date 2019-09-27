@@ -32,7 +32,6 @@ public class CourseController {
 	// 양식에서 map으로 이동
 	@RequestMapping("index.do")
 	public String index(TypeADTO typeADTO, Model model,HttpSession session) {
-		System.out.println("1번");
 		
 		dao.typeAInsert(typeADTO);
 		typeADTO.setNo(dao.returnno());
@@ -44,7 +43,6 @@ public class CourseController {
 		chatRoomDTO.setLimitMember(typeADTO.getMax_mem());
 		chatRoomDTO.setEndTime(typeADAO.day_endSelect(typeADTO.getNo()).split(" ")[0]);
 		chatRoomDTO.setLeader((String)session.getAttribute("name"));
-		System.out.println("2번");
 		
 		chatRoomDTO.setThumbNail("thumb.jpg");
 		System.out.println(chatRoomDTO.toString());
@@ -53,16 +51,16 @@ public class CourseController {
 		System.out.println(typeADTO.toString());
 		
 		typeADAO.chatRoomNumUpdate(typeADTO);
-		System.out.println("3번");
 		model.addAttribute("typeADTO_model",typeADTO);
 		return "course/index";
 	}
 	
 	// v버튼 누르고, 코스 정보 insert
-	@RequestMapping("insert.do")
+	@RequestMapping("insert_root.do")
 	public String insert(CourseDTO courseDTO) {
+		System.out.println(courseDTO);
 		dao.courseInsert(courseDTO);
-		return "insert";
+		return "course/insert";
 	}
 	
 	// 일차별 버튼 눌렀을 때, select해서 일차, no값, id에 맞는 장소들 출력

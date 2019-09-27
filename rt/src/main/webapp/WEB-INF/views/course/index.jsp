@@ -164,7 +164,7 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=afbdd676e0cb9858d78365c02cbc33b7&libraries=services"></script>
 <script>
-sessionStorage.setItem('nowid', 'soyun');
+/* sessionStorage.setItem('id', 'soyun'); */
 
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -365,7 +365,8 @@ var day = 1;
 // **********************
 var no = ${typeADTO_model.no}; 
 var id = "${typeADTO_model.id}";
-var nowid = sessionStorage.getItem("nowid");
+var nowid = "<%=(String)session.getAttribute("id")%>";
+/*var nowid = sessionStorage.getItem("id"); */
 var memo = "메모를 입력하지 않았습니다!";
 alert(nowid);
 	if(id!=nowid){
@@ -462,7 +463,7 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
      
       // V버튼 눌렀을 때, insert 실행
           $.ajax({
-            url: 'insert.do',
+            url: 'insert_root.do',
             data: {
                "no": no,
                "id": id,

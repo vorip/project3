@@ -31,6 +31,7 @@
 	</script>
 </head>
 <body>
+<%String id = (String)session.getAttribute("id");%>
 	<!-- 타이틀 -->
 	<div class="main_title">
 		<h1>여행 만들기</h1>
@@ -47,10 +48,7 @@
 	<!-- 양식 테이블 -->
 	<div class="main_table">
 		<table class="typeA_table">
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" id="id" name="id"></td>
-			</tr>
+				<input type="hidden" id="id" name="id" value="<%=id%>">
 			<tr>
 				<td>제목<sup style="color: red">*필수</sup></td>
 				<td><input type="text" id="title" name="title"></td>

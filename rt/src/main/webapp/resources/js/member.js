@@ -1,8 +1,9 @@
 //아이디 중복체크
 $(function() {
 	
+	var id;
 	$("#checkId").click(function() {
-		var id = $("#id").val();
+		id = $("#id").val();
 		$.ajax({
 			url: "selectId",
 			data : {"id":id},
@@ -11,6 +12,7 @@ $(function() {
 					alert("중복됐어요!!")
 				}else{
 					alert("사용가능!!")
+					alert("중복확인시 id : "+id)
 					$("#sign").prop("disabled",false)
 				}
 			}
@@ -24,6 +26,13 @@ $(function() {
 		var email = $("#email").val();
 		var birth = $("#birth").val();
 		var addr = $("#sample4_postcode").val();
+		alert("id : "+id);
+		alert("pw : "+pw);
+		alert("name : "+name);
+		alert("tel : "+tel);
+		alert("email : "+email);
+		alert("birth : "+birth);
+		alert("addr : "+addr);
 		//최소 8자리 숫자,문자 특수문자 각각 1개 이상 포함
 		if(pw.search("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z0-9$@$!%*#?&]{8,}$")){
 			alert("최소 8자리 숫자,문자 특수문자 각각 1개 이상 포함해주세요.");

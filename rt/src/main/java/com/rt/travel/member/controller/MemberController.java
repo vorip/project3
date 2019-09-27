@@ -57,7 +57,7 @@ public class MemberController {
 		mail.setId("leesoyun702");
 		mail.setPw("verycuteso0425");
 		mail.setSndUsr("이소윤", "leesoyun702@gmail");
-		String id = "\"http://localhost:9002/travel/authkey?id=" + memberDTO.getId() + "\"";
+		String id = "\"http://localhost:9999/travel/authkey?id=" + memberDTO.getId() + "\"";
 		mail.SendMail(memberDTO.getEmail(), "가입완료 메일입니다.", "<a href=" + id + ">회원가입 인증하기</a>");
 
 		response.setContentType("text/html; charset=UTF-8");
