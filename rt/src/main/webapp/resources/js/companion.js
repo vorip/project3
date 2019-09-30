@@ -2,9 +2,6 @@ function exit() {
 	$("#course").remove();
 	location.reload();
 }
-function showPlan(no) {
-	location.href = "showindex.do?no="+no;
-}
 $(function() {
 	$(".detail").click(function() {
 		$(this).each(function() {

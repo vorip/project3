@@ -13,6 +13,7 @@ public class NoteDAOImpl implements NoteDAO {
 	
 	@Override
 	public void send(NoteDTO noteDTO) {
+		System.out.println(noteDTO.toString());
 		mybatis.insert("noteDAO.send",noteDTO);
 	}
 	@Override

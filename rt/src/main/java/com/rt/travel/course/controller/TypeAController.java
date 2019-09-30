@@ -2,6 +2,8 @@ package com.rt.travel.course.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.course.dto.TypeADTO;
+import com.rt.travel.member.dao.MemberDAOImpl;
 
 @Controller
 public class TypeAController {
 	@Autowired
 	TypeADAO dao;
+	@Autowired
+	MemberDAOImpl memberDAO;
 	
 	// 여행일정 만들기 탭 클릭시 A양식으로 이동
 	@RequestMapping("typea.do")
@@ -28,6 +33,7 @@ public class TypeAController {
 	      TypeADTO typeADTO = dao.select_report(no);
 	      model.addAttribute("typeADTO_model",typeADTO);
 	      model.addAttribute("no", no);
+	      model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());
 	      return "course/index";
 	   }
 	   

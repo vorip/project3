@@ -31,7 +31,7 @@ public class MyPlanList {
 					"		<td style=\"text-align: center;\">"+typeADTO.getChoice_public()+"</td>\r\n" + 
 					"		<td style=\"text-align: center;\">"+typeADTO.getTravel_intro()+"</td>\r\n" + 
 					"		<td style=\"text-align: center;\">"+start[0]+"~"+end[0]+"</td>\r\n" + 
-					"		<td style=\"text-align: center;\"><button class = 'detail' onclick = \"showPlan('"+typeADTO.getNo()+"')\" >자세히보기</button>\r\n" + 
+					"		<td style=\"text-align: center;\"><button class = 'detail' onclick = \"location.href='showindex.do?no="+typeADTO.getNo()+"'\" >자세히보기</button>\r\n" + 
 					"	</tr>";
 			
 		}

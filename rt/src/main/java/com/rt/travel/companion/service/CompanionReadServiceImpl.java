@@ -31,7 +31,7 @@ public class CompanionReadServiceImpl {
 		for (int i = 0; i < list.size(); i++) {
 			TypeADTO typeADTO = list.get(i);
 			MemberDTO memberDTO = memberDAO.select(typeADTO.getId());
-			String[] courseStart = courseDAO.placeSelectStart(1).split(" ");
+			String[] courseStart = courseDAO.placeSelectStart(typeADTO.getNo()).split(" ");
 			String[] courseEnd = courseDAO.placeSelectEnd(typeADTO.getNo()).split(" ");
 			
 			String[] start = typeADTO.getDay_start().split(" ");

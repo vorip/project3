@@ -113,7 +113,7 @@
       <!-- 여행계획서로 전송 --> 
       <div>
          <button class="nextbtn1">완성</button>
-         <button class="nextbtn2">동행신청</button>
+         <button class="nextbtn2" onclick="applyCompanion('${me}',${typeADTO_model.chatRoomNum})">동행신청</button>
       </div>
       </div> <!-- 여행 일차 등 들어가는 div  -->
       <div id="roadsidebar" style="border-bottom: 1px solid red; border-right: 1px solid red; overflow:scroll; overflow-x:hidden; float: left; height: 95%; width: 249px; "><!-- 여행 일차별 목적지 div -->
@@ -165,6 +165,21 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=afbdd676e0cb9858d78365c02cbc33b7&libraries=services"></script>
 <script>
 /* sessionStorage.setItem('id', 'soyun'); */
+
+function applyCompanion(me,chatRoomNum) {
+	$.ajax({
+		url : "applyCompanion",
+		data : {"me" : me,
+				"chatRoomNum" : chatRoomNum},
+		success : function(result) {
+			if(result.trim()=="O")
+				alert("동행신청이 완료되었습니다.")
+				//동행신청완료시 typeA의 현재인원 +1하는 처리가 들어갈 자리
+			else
+				alert("이미 신청했거나 동행중입니다.")
+		}
+	})
+}
 
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 

@@ -32,26 +32,25 @@ public class CourseController {
 	// 양식에서 map으로 이동
 	@RequestMapping("index.do")
 	public String index(TypeADTO typeADTO, Model model,HttpSession session) {
-		
+		String tmpSessionName = (String)session.getAttribute("name");
 		dao.typeAInsert(typeADTO);
 		typeADTO.setNo(dao.returnno());
 		
 		ChatRoomDTO chatRoomDTO = new ChatRoomDTO();
-		chatRoomDTO.setMembers((String)session.getAttribute("name"));
+		chatRoomDTO.setMembers(tmpSessionName);
 		chatRoomDTO.setchatRoomName(typeADTO.getTitle());
 		chatRoomDTO.setStartTime(typeADTO.getDay_start().split(" ")[0]);
 		chatRoomDTO.setLimitMember(typeADTO.getMax_mem());
 		chatRoomDTO.setEndTime(typeADAO.day_endSelect(typeADTO.getNo()).split(" ")[0]);
-		chatRoomDTO.setLeader((String)session.getAttribute("name"));
+		chatRoomDTO.setLeader(tmpSessionName);
 		
 		chatRoomDTO.setThumbNail("thumb.jpg");
-		System.out.println(chatRoomDTO.toString());
 		chatDAO.createRoom(chatRoomDTO);
 		typeADTO.setChatRoomNum(chatDAO.chatRoomIndex());
-		System.out.println(typeADTO.toString());
 		
 		typeADAO.chatRoomNumUpdate(typeADTO);
 		model.addAttribute("typeADTO_model",typeADTO);
+		model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());
 		return "course/index";
 	}
 	

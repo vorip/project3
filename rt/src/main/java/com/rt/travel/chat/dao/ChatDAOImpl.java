@@ -66,7 +66,7 @@ public class ChatDAOImpl implements ChatDAO {
 	public List<ChatRoomDTO> chatSelectAll(){
 		return mybatis.selectList("chatDAO.chatSelectAll");
 	}
-	
+	@Override
 	public int chatRoomIndex() {
 		return mybatis.selectOne("chatDAO.chatRoomIndex");
 	}

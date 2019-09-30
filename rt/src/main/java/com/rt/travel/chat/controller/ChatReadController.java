@@ -18,7 +18,6 @@ public class ChatReadController {
 	
 	@RequestMapping("getChat")
 	public String getChat(Model model,HttpSession session) {
-		session.setAttribute("name", "최한영_id");
 		model.addAttribute("result",chatService.getChat((String)session.getAttribute("name")));
 		return "ajax/ajaxResult";
 	}
