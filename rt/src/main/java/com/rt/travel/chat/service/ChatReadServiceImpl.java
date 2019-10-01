@@ -82,7 +82,7 @@ public class ChatReadServiceImpl implements ChatReadService {
             contentTime_ = chatContentDTO.getContentTime().split(" ");
             contentTime = contentTime_[0];
             contentTime2 = contentTime_[1];
-            contentTime_ = contentTime.split("-");
+            contentTime_ = contentTime.split("/");
             contentTime = contentTime_[1] + "월" + contentTime_[2] + "일";
             contentTime_ = contentTime2.split(":");
             contentTime2 = contentTime_[0] + "시" + contentTime_[1] + "분";

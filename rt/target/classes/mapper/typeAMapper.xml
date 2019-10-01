@@ -52,7 +52,9 @@
 	</update>
 	
 	<select id="typeASelectAll" parameterType="String" resultMap="rsMap">
-		SELECT * FROM typeA where choice_public = #{choice_public} and current_mem <![CDATA[<]]> max_mem 
+		<![CDATA[
+		SELECT * FROM typeA where choice_public = #{choice_public} and current_mem < max_mem
+		]]> 
 	</select>
 	
 	<update id="addCurrentMem" parameterType="Integer">
