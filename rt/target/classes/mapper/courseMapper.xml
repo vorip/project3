@@ -60,11 +60,7 @@
 	
 	<!-- 주아니3 -->
 	<select id="placeSelectEnd" parameterType="Integer" resultType="String">
-		SELECT
-		place_address_name
-		FROM course
-		WHERE no= #{no} and day=(select travel_day from typeA where no = #{no}) and memo_index=(select count(*) from
-		course where no = #{no} and day = (select travel_day from typeA where no = #{no}))
+		SELECT place_address_name FROM course WHERE  no = #{no} and memo_index = (SELECT max(memo_index) FROM course) 
 	</select>
 
 </mapper>

@@ -74,7 +74,7 @@ ${loginPageScript}
 				</div>
 			</div>
 		</div>
-	<div class="compaList" id="compaList" style="margin-left: 14%">
+	<div class="compaList" id="compaList" style="margin-left: 8%;margin-top:2%; height: 700px;">
 		<h2 style="color: #34495e;">나의 여행일정</h2>
 			<p style="display: block; margin-top: 0.5em; box-sizing: border-box;">나의 여행일정 리스트입니다.</p>
 		<table class="comTable" style="border-collapse : collapse; border-spacing:0; empty-cells : show; border: 1px solid #cbcbcb;">
@@ -87,7 +87,6 @@ ${loginPageScript}
 				<th class="td_title" style="min-width: 200px;">여행타입</th>
 				<th class="td_title" style="min-width: 200px;">여행테마</th>
 				<th class="td_title" style="min-width: 200px;">공개여부</th>
-				<th class="td_title" style="min-width: 200px;">여행소개</th>
 				<th class="td_title" style="min-width: 200px;">여행기간</th>
 				<th class="td_title" style="min-width: 200px;">자세히보기</th>
 			</tr>

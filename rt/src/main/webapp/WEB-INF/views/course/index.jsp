@@ -472,7 +472,8 @@ $(function() {
      }) //button End
     }); //JQuery End
     
-function customoverlay_add(place_url,place_name,place_address_name,place_road_address_name,place_phone,x,y){   
+function customoverlay_add(place_url,place_name,place_address_name,place_road_address_name,place_phone,x,y){ 
+    	
    memo_index++;
      // 만약 일차버튼이 on일 때, 버튼 상태값을 변수에 담고 넘겨주기!:>
      //ggg

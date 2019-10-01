@@ -103,7 +103,6 @@ ${loginPageScript}
 						<h3 class="font_color">마이페이지</h3>
 						<div class="dropdown-content">
 							<a class="menu_nav" href="myPerfectPlanList">나의 여행일정</a>
-							<a class="menu_nav" href="#">나의 동행찾기 수정</a>
 							<a class="menu_nav" href="my">회원정보보기</a>
 						</div>
 					</div>
