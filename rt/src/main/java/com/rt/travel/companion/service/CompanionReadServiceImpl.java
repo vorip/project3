@@ -38,6 +38,7 @@ public class CompanionReadServiceImpl {
 			StringTokenizer st = new StringTokenizer(courseStart , String.valueOf((char) 160));
 			String startCousre = "";
 			for (int j = 0; j < 2; j++) {
+				if(j == 0)
 				startCousre += st.nextToken() + " ";
 			}
 			
@@ -45,6 +46,7 @@ public class CompanionReadServiceImpl {
 			st = new StringTokenizer(courseEnd , String.valueOf((char) 160));
 			String endCourse = "";
 			for (int j = 0; j < 2; j++) {
+				if(j == 0)
 				endCourse += st.nextToken()+ " ";
 			}
 			

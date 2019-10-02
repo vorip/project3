@@ -27,6 +27,7 @@
 		<result property="max_mem" column="max_mem" />
 		<result property="day_end" column="day_end" />
 		<result property="chatRoomNum" column="chatRoomNum" />
+		<result property="complete" column="complete"/>
 	</resultMap>
 	
 	<select id = "select_index" resultType="int">
@@ -44,7 +45,7 @@
 	<insert id="insert" parameterType="typeADTO">
 		INSERT INTO typeA
 		VALUES(typeA_seq.nextval,#{id},#{title},#{travel_day},#{day_start},#{travel_type},#{travel_theme},
-		#{choice_public},#{travel_intro},#{current_mem},#{max_mem},to_timestamp(to_timestamp(#{day_start})+#{travel_day}-1),#{chatRoomNum})
+		#{choice_public},#{travel_intro},#{current_mem},#{max_mem},to_timestamp(to_timestamp(#{day_start})+#{travel_day}-1),#{chatRoomNum},#{complete})
 	</insert>
 	
 	<update id = "chatRoomNumUpdate" parameterType="typeADTO">
