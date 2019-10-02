@@ -53,7 +53,7 @@
 	
 	<select id="typeASelectAll" parameterType="String" resultMap="rsMap">
 		<![CDATA[
-		SELECT * FROM typeA where choice_public = #{choice_public} and current_mem < max_mem
+		SELECT * FROM typeA where choice_public = #{choice_public} and current_mem < max_mem and complete = 1 order by no desc
 		]]> 
 	</select>
 	

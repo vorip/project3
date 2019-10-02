@@ -142,8 +142,7 @@
 		birth= #{birth},
 		roadaddr = #{roadaddr},
 		totaddr= #{totaddr},
-		travel_theme= #{travel_theme},
-		thumb = #{thumb}
+		travel_theme= #{travel_theme}
 		WHERE
 		id = #{id}
 	</update>

@@ -16,6 +16,7 @@ import com.jin.mail.JinsMail;
 import com.rt.travel.course.dao.CourseDAO;
 import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.course.dto.TypeADTO;
+import com.rt.travel.main.publicModule.MainPublicModule;
 import com.rt.travel.member.dao.MemberDAOImpl;
 import com.rt.travel.member.dto.MemberDTO;
 import com.rt.travel.member.service.MemberTools;
@@ -33,16 +34,22 @@ public class MemberController {
 	CourseDAO courseDAO;
 	@Autowired
 	MyPlanList myplanList;
+	@Autowired
+	MainPublicModule mainPublicModule;
 
 	@RequestMapping("loginPage")
-	public String loginPage(Model model) {
+	public String loginPage(Model model, HttpSession session) {
 		model.addAttribute("loginPage", tool.login());
+		model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+		model.addAttribute("publicHead", mainPublicModule.head());
 		return "member/loginPage";
 	}
 
 	// 회원가입
 	@RequestMapping("sign")
-	public String sign() {
+	public String sign(Model model, HttpSession session) {
+		model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+		model.addAttribute("publicHead", mainPublicModule.head());
 		return "member/sign";
 	}
 
@@ -94,12 +101,7 @@ public class MemberController {
 			model.addAttribute("loginPage", tool.login());
 			return "member/loginPage";
 		} else {
-			model.addAttribute("loginPageScript","<script>$(function() {" + 
-					"	$(\"#loginPageHref\").remove();" + 
-					"	$(\"#signHref\").remove();" + 
-					"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
-					"})</script>");
-			return "main/main";
+			return "redirect:main.do";
 		}
 	}
 
@@ -131,20 +133,9 @@ public class MemberController {
 					model.addAttribute("loginPage", tool.login());
 					return "member/loginPage";
 				} else {
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script type='text/javascript'>");
-					out.println("alert('로그인 성공!!')");
-					out.println("</script>");
-					out.flush();
 					session.setAttribute("id", dto.getId());
 					session.setAttribute("name", dto.getName() + "_" + dto.getId());
-					model.addAttribute("loginPageScript","<script>$(function() {" + 
-							"	$(\"#loginPageHref\").remove();" + 
-							"	$(\"#signHref\").remove();" + 
-							"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
-							"})</script>");
-					return "main/main";
+					return "redirect:main.do";
 				}
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
@@ -250,9 +241,10 @@ public class MemberController {
 
 	// 마이페이지로 이동하기
 	@RequestMapping("my")
-	public String my(MemberDTO memberDTO, HttpSession session, Model model,HttpServletResponse response) throws IOException {
+	public String my(MemberDTO memberDTO, HttpSession session, Model model, HttpServletResponse response)
+			throws IOException {
 		String id = (String) session.getAttribute("id");
-		if(id==null) {
+		if (id == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script type='text/javascript'>");
@@ -261,33 +253,31 @@ public class MemberController {
 			out.flush();
 			model.addAttribute("loginPage", tool.login());
 			return "member/loginPage";
-		}else {
+		} else {
 			MemberDTO dto = memberDAO.select(id);
 			model.addAttribute("dto", dto);
 			String addr = dto.getTotaddr();
 			String[] addrs = addr.split("\\.");
-			model.addAttribute("addr",addrs[0]);
-			model.addAttribute("addr1",addrs[1]);
-			model.addAttribute("addr2",addrs[2]);
-			model.addAttribute("addr3",addrs[3]);
-			model.addAttribute("loginPageScript","<script>$(function() {" + 
-					"	$(\"#loginPageHref\").remove();" + 
-					"	$(\"#signHref\").remove();" + 
-					"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
-					"})</script>");
+			model.addAttribute("addr", addrs[0]);
+			model.addAttribute("addr1", addrs[1]);
+			model.addAttribute("addr2", addrs[2]);
+			model.addAttribute("addr3", addrs[3]);
+			model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+			model.addAttribute("publicHead", mainPublicModule.head());
 			return "member/my";
 		}
 	}
 
 	// 회원수정하기
 	@RequestMapping("updateAll")
-	public String updateAll(MemberDTO memberDTO,String travel_theme2,String addr1,HttpSession session,HttpServletResponse response) throws IOException {
+	public String updateAll(MemberDTO memberDTO, String travel_theme2, String addr1, HttpSession session,
+			HttpServletResponse response) throws IOException {
 		String id = (String) session.getAttribute("id");
 		MemberDTO dto = memberDAO.select(id);
 		String roadaddr = dto.getRoadaddr();
 		String totaddr = dto.getTotaddr();
-		
-		if(travel_theme2 != null) {
+
+		if (travel_theme2 != null) {
 			memberDTO.setTravel_theme(travel_theme2);
 			memberDTO.setTotaddr();
 			memberDAO.updateAll(memberDTO);
@@ -297,8 +287,8 @@ public class MemberController {
 			out.println("alert('수정이 완료되었습니다!!!')");
 			out.println("</script>");
 			out.flush();
-			return "member/my";
-		}else {
+			return "redirect:main.do";
+		} else {
 			memberDTO.setTotaddr();
 			memberDAO.updateAll(memberDTO);
 			response.setContentType("text/html; charset=UTF-8");
@@ -307,14 +297,15 @@ public class MemberController {
 			out.println("alert('수정이 완료되었습니다!!!')");
 			out.println("</script>");
 			out.flush();
-			return "member/my";
+			return "redirect:main.do";
 		}
 	}
-	
-	//회원탈퇴하기
+
+	// 회원탈퇴하기
 	@RequestMapping("delete")
-	public String delete(String inputId,Model model,HttpSession session,HttpServletResponse response) throws IOException {
-		inputId = (String)session.getAttribute("id");
+	public String delete(String inputId, Model model, HttpSession session, HttpServletResponse response)
+			throws IOException {
+		inputId = (String) session.getAttribute("id");
 		memberDAO.delete(inputId);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -326,36 +317,25 @@ public class MemberController {
 		model.addAttribute("loginPage", tool.login());
 		return "member/loginPage";
 	}
-	
-	//로그아웃
+
+	// 로그아웃
 	@RequestMapping("logout")
-	public String logout(Model model,HttpSession session) {
+	public String logout(Model model, HttpSession session) {
 		session.invalidate();
-		return "main/main";
+		return "redirect:main.do";
 	}
-	
-	//나의 여행계획 출력
+
+	// 나의 여행계획 출력
 	@RequestMapping("myPerfectPlanList")
-	public String myPerfectPlanList(HttpSession session,HttpServletResponse response,Model model) throws IOException {
-		String id = (String)session.getAttribute("id");
-		if(session.getAttribute("id")!=null) {
-			model.addAttribute("myPlan",myplanList.myPlan(id));
-			model.addAttribute("loginPageScript","<script>$(function() {" + 
-					"	$(\"#loginPageHref\").remove();" + 
-					"	$(\"#signHref\").remove();" + 
-					"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
-					"})</script>");
+	public String myPerfectPlanList(HttpSession session, Model model) throws IOException {
+		String id = (String) session.getAttribute("id");
+		if (session.getAttribute("id") != null) {
+			model.addAttribute("myPlan", myplanList.myPlan(id));
+			model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+			model.addAttribute("publicHead", mainPublicModule.head());
 			return "member/myPlanList";
-		}else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script type='text/javascript'>");
-			out.println("alert('로그인 하고 이용해주세요!!')");
-			out.println("</script>");
-			out.flush();
-			model.addAttribute("loginPage", tool.login());
-			return "member/loginPage";
-		} 
+		} else {
+			return "redirect:loginPage";
+		}
 	}
 }
-

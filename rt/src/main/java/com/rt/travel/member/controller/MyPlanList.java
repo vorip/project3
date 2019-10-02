@@ -34,7 +34,6 @@ public class MyPlanList {
 					+"style=\"display: inline-block;	line-height: normal; white-space: nowrap; vertical-align: middle;text-align: center;"
 					+ "	cursor: pointer;box-sizing: border-box; background-color: #1f8dd6;"
 					+ "	color: white;\" >자세히보기</button>" + "	</tr>";
-
 		}
 
 		return myPlanHtml;

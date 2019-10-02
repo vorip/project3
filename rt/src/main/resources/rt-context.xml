@@ -10,6 +10,7 @@
 <bean id = 'chatDAO' class = 'com.rt.travel.chat.dao.ChatDAOImpl'></bean>
 <bean id = 'noteDAO' class = 'com.rt.travel.note.dao.NoteDAOImpl'></bean>
 <bean id = 'memberDAO' class = 'com.rt.travel.member.dao.MemberDAOImpl'></bean>
+<bean id = 'mainPublicModule' class = 'com.rt.travel.main.publicModule.MainPublicModuleImpl'></bean>
 
 <!-- mybatis설정 -->
 <bean id = "myBatis" class="org.mybatis.spring.SqlSessionTemplate">

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.rt.travel.chat.dao.ChatDAO;
 import com.rt.travel.chatContent.dto.ChatContentDTO;
 import com.rt.travel.chatRoom.dto.ChatRoomDTO;
+import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.friend.dto.FriendDTO;
 import com.rt.travel.member.dao.MemberDAOImpl;
 
@@ -35,6 +36,8 @@ public class ChatReadServiceImpl implements ChatReadService {
    private ChatDAO chatDAO;
    @Autowired
    private MemberDAOImpl memberDAO;
+   @Autowired
+   private TypeADAO typeADAO;
 
    @Override
    public String getChat(String member) {
@@ -64,6 +67,7 @@ public class ChatReadServiceImpl implements ChatReadService {
    public String getMenuContent_chat(String member) {
       openSocket = "";
       chatDAO.deleteRoom();
+      
       list_room = chatDAO.selectRooms(member);
       int divPositionVal = 335;
       int divHeight = 60;

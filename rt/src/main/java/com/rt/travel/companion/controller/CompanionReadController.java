@@ -16,6 +16,7 @@ import com.rt.travel.course.dao.CourseDAO;
 import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.course.dto.CourseDTO;
 import com.rt.travel.course.dto.TypeADTO;
+import com.rt.travel.main.publicModule.MainPublicModule;
 import com.rt.travel.member.dao.MemberDAOImpl;
 import com.rt.travel.member.dto.MemberDTO;
 
@@ -37,6 +38,8 @@ public class CompanionReadController {
 	TypeADAO typeADAO;
 	@Autowired
 	CompanionReadServiceImpl companion;
+	@Autowired
+	MainPublicModule mainPublicModule;
 
 	// 동행자 신청 리스트
 	@RequestMapping("companion")

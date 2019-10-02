@@ -8,7 +8,7 @@ body{
 	font-size: 16px;
 }
 h2{
-	border-bottom: 2px dashed #34495e;
+	border-bottom: 2px solid #34495e;
 	padding-bottom: 0.5em;
 	margin-top: 2em;
 	display: block;

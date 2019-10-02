@@ -14,6 +14,7 @@ public class TypeADTO {
 	private int max_mem;
 	private String day_end;
 	private int chatRoomNum;
+	private int complete;
 
 
 	@Override
@@ -21,7 +22,15 @@ public class TypeADTO {
 		return "TypeADTO [no=" + no + ", id=" + id + ", title=" + title + ", travel_day=" + travel_day + ", day_start="
 				+ day_start + ", travel_type=" + travel_type + ", travel_theme=" + travel_theme + ", choice_public="
 				+ choice_public + ", travel_intro=" + travel_intro + ", current_mem=" + current_mem + ", max_mem="
-				+ max_mem + ", day_end=" + day_end + ", chatRoomNum=" + chatRoomNum + "]";
+				+ max_mem + ", day_end=" + day_end + ", chatRoomNum=" + chatRoomNum + ", complete=" + complete + "]";
+	}
+	
+	public int getComplete() {
+		return complete;
+	}
+
+	public void setComplete(int complete) {
+		this.complete = complete;
 	}
 
 	public int getChatRoomNum() {

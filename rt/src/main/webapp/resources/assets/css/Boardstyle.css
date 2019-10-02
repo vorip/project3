@@ -20,6 +20,9 @@ background: #333; line-height: 30px; width: 200px; text-align: center;}
 #cont_ban {width: 100%; height: 250px; background: #fff;}
 #cont_cont {width: 100%; height: 200px; background: #fff;}
 
+/* h태크 */
+.container .nav .nav_tit .font_style {color : #222; font-weight: normal;}
+
 /* 컨테이너 */
 .container {width: 990px; margin: 0 auto; height: inherit;/*background: rgba(255,255,255,0.3)*/;}
 
@@ -31,7 +34,7 @@ background: #333; line-height: 30px; width: 200px; text-align: center;}
 .header .header-tit {text-align: center; }
 .header .header-tit h1 {background-color: $4aa8d4; font-size: 48px;
 padding: 8px 20px 6px 20px; display: inline-block; margin-top: 40px; font-weight: bold;
-font-family: 'Nanum Pen Script', cursive;
+font-family: 'Nanum Pen Script', cursive; color : #222; font-weight: normal;
 }
 /* .header .header-tit a {display: inline-block; background-color: white; font-size: 18px; color:black;
 padding: 5px 20px 6px 20px;
@@ -50,7 +53,7 @@ padding: 5px 20px 6px 20px;
 
 .menu {overflow: hidden;}
 .menu > div {float: left; width: 20%;}
-.menu > div h3 {font-size: 35px; margin-top: 15px; cursor: pointer; font-family: 'Nanum Pen Script', cursive;}
+.menu > div h3 {font-size: 35px; margin-top: 15px; cursor: pointer; font-family: 'Nanum Pen Script', cursive; color : #222; font-weight: normal;}
 .menu .font_color {color: #fff;}
 .menu .menu_nav {font-size: 25px; background: #2f005e; color: #fff; font-family: 'Nanum Pen Script', cursive;}
 .menu .menu_nav:hover {background: #6500ca;}
@@ -163,7 +166,8 @@ table.type_01 td {
     border-bottom: 1px solid #ccc;
 }
 
-
+/* 페이지 넘버 위치 */
+.search_position {text-align: center;}
 
 
 
