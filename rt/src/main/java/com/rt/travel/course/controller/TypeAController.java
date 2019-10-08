@@ -28,14 +28,7 @@ public class TypeAController {
 		mav.setViewName("course/MapMain_TypeA");
 		return mav;
 	}
-	 @RequestMapping("showindex.do")
-	   public String show_index(int no, Model model) {
-	      TypeADTO typeADTO = dao.select_report(no);
-	      model.addAttribute("typeADTO_model",typeADTO);
-	      model.addAttribute("no", no);
-	      model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());
-	      return "course/index";
-	   }
+	
 	   
 	   // 여행 리스트 selectAll
 	   @RequestMapping("selectAll.do")
@@ -55,4 +48,10 @@ public class TypeAController {
 	      mav.setViewName("course/selectAll");
 	      return mav;
 	   }
+	   
+		@RequestMapping("choiceUpdate.do")
+		public String choiceupdate(TypeADTO typeADTO) {
+			dao.choiceUpdate(typeADTO);
+			return "course/choiceUpdate";
+		}
 }

@@ -49,10 +49,23 @@ public class CourseController {
 		typeADTO.setChatRoomNum(chatDAO.chatRoomIndex());
 		
 		typeADAO.chatRoomNumUpdate(typeADTO);
+		
+		model.addAttribute("daycount",dao.daycount());
 		model.addAttribute("typeADTO_model",typeADTO);
 		model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());
 		return "course/index";
 	}
+	
+	 @RequestMapping("showindex.do")
+	   public String show_index(int no, Model model) {
+	      TypeADTO typeADTO = typeADAO.select_report(no);
+	      model.addAttribute("daycount",dao.daycount());
+	      model.addAttribute("typeADTO_model",typeADTO);
+	      model.addAttribute("no", no);
+	      model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());
+	      return "course/index";
+	   }
+	 
 	
 	// v버튼 누르고, 코스 정보 insert
 	@RequestMapping("insert_root.do")
@@ -88,5 +101,6 @@ public class CourseController {
 		model.addAttribute("memoresult",memoresult);
 		return "course/memoselect";
 	}
+
 	
 }

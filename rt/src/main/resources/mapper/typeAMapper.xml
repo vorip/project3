@@ -65,5 +65,9 @@
 	<select id="select_by_num" parameterType="Integer" resultMap="rsMap">
       SELECT * FROM typeA where no = #{db_number}
    </select>
+   
+   <update id="choiceupdate" parameterType="typeADTO">
+   		UPDATE TYPEA SET complete = #{complete} WHERE no = #{no}
+   </update>
 	
 </mapper>

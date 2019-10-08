@@ -90,19 +90,20 @@
       <div id="memberinfo" style="border: 1px solid red; width: 398px; height: 100px; float:left">
       
       <div id="memberpic"style="margin : 10px 10px 0px 10px; background:#B7F0B1; width: 80px; height: 80px; float:left;">작성자 프사</div><!-- 사진 div -->
-		제목 : ${typeADTO_model.title}<br>
-		작성자 : ${typeADTO_model.id}<br>
-		${typeADTO_model.travel_type} / 추천: / 즐겨찾기<br>
-		
+      제목 : ${typeADTO_model.title}<br>
+      출발 날짜 : ${typeADTO_model.day_start.substring(0,10)} <button type = "button" onclick = "test()">테스트버튼</button><br>
+      작성자 : ${typeADTO_model.id}<br>
+      ${typeADTO_model.travel_type} / 추천: / 즐겨찾기<br>
+      
       </div> <!-- 회원 정보 div  -->
       
       <div id="road_date" style="border-bottom: 1px solid red; border-right: 1px solid red; border-left: 1px solid red; float: left; height: 94%; width: 148px;padding-top: 9px; text-align: center; overflow: auto;">
       
-    <%--   	<c:forEach var="courseDTO" items="${select_list}" varStatus="stat">
-		</c:forEach> --%>
-	
+    <%--      <c:forEach var="courseDTO" items="${select_list}" varStatus="stat">
+      </c:forEach> --%>
+   
       <%
-      	TypeADTO adto = (TypeADTO)request.getAttribute("typeADTO_model");
+         TypeADTO adto = (TypeADTO)request.getAttribute("typeADTO_model");
          for(int i = 1 ; i <= adto.getTravel_day() ; i++){
       %>
          <button class="tabmenu" value=<%=i%> id="default"><%=i%>일차</button>
@@ -113,14 +114,15 @@
       <!-- 여행계획서로 전송 --> 
       <div>
          <button class="nextbtn1">완성</button>
-         <button class="nextbtn2" onclick="applyCompanion('${me}',${typeADTO_model.chatRoomNum})">동행신청</button>
+         <button class="nextbtn2">동행신청</button>
+         <button class="homebtn" onclick="location.href='main.do'" style = "margin-top: 10px;">저장후 홈으로 가기</button>
       </div>
       </div> <!-- 여행 일차 등 들어가는 div  -->
       <div id="roadsidebar" style="border-bottom: 1px solid red; border-right: 1px solid red; overflow:scroll; overflow-x:hidden; float: left; height: 95%; width: 249px; "><!-- 여행 일차별 목적지 div -->
         
       </div>
    </div><!--left-container-->
-	
+   
    
    <div class="map_wrap" >
        <div id="map" style="width:1500px;height:935px;position:relative;overflow:hidden;">
@@ -129,8 +131,8 @@
               <div class="option">
                   <div>
                       <form onsubmit="searchPlaces(); return false;">
-							키워드 : <input type="text" value="" id="keyword" size="15"> 
-							<button type="submit">검색하기</button> 
+                     키워드 : <input type="text" value="" id="keyword" size="15"> 
+                     <button type="submit">검색하기</button> 
                       </form>
                   </div>
                   
@@ -142,12 +144,12 @@
               
           </div>
           
-	            <div class="custom_typecontrol radius_border">
-			        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
-			        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
-			        <span id="btnTraffic" class="btn" onclick="setMapType('traffic')">교통정보</span>
-			    </div>
-			    
+               <div class="custom_typecontrol radius_border">
+                 <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+                 <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+                 <span id="btnTraffic" class="btn" onclick="setMapType('traffic')">교통정보</span>
+             </div>
+             
        </div>
    </div>
    
@@ -164,22 +166,48 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=afbdd676e0cb9858d78365c02cbc33b7&libraries=services"></script>
 <script>
-/* sessionStorage.setItem('id', 'soyun'); */
+var start_date = new Date();
+var datetemp = "${typeADTO_model.day_start}";
+var start_dd = datetemp.substring(8,10);
+var start_mm = datetemp.substring(5,7); 
+var start_yyyy = datetemp.substring(0,4);
+start_date = start_mm+'/'+start_dd+'/'+start_yyyy;
+
+var today = new Date();
+var today_dd = today.getDate();
+var today_mm = today.getMonth()+1; //January is 0!
+var today_yyyy = today.getFullYear();
+
+if(today_dd<10) {
+   today_dd='0'+today_dd
+} 
+
+if(today_mm<10) {
+   today_mm='0'+today_mm
+} 
+
+today = today_mm+'/'+today_dd+'/'+today_yyyy;
+
+var longday = new Array();
+<c:forEach items="${daycount}" var="item1" varStatus="i">
+longday.push("${daycount.get(i.index)}");
+</c:forEach>
 
 function applyCompanion(me,chatRoomNum) {
-	$.ajax({
-		url : "applyCompanion",
-		data : {"me" : me,
-				"chatRoomNum" : chatRoomNum},
-		success : function(result) {
-			if(result.trim()=="O")
-				alert("동행신청이 완료되었습니다.")
-				//동행신청완료시 typeA의 현재인원 +1하는 처리가 들어갈 자리
-			else
-				alert("이미 신청했거나 동행중입니다.")
-		}
-	})
+   $.ajax({
+      url : "applyCompanion",
+      data : {"me" : me,
+            "chatRoomNum" : chatRoomNum},
+      success : function(result) {
+         if(result.trim()=="O")
+            alert("동행신청이 완료되었습니다.")
+            //동행신청완료시 typeA의 현재인원 +1하는 처리가 들어갈 자리
+         else
+            alert("이미 신청했거나 동행중입니다.")
+      }
+   })
 }
+
 
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
@@ -211,16 +239,16 @@ function setMapType(maptype) {
         skyviewControl.className = 'selected_btn';
     }
     else if(maptype === 'traffic'){
-		 if(trafficControl.className == "btn"){
-			map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
-         	trafficControl.className = 'selected_btn';
-		 }
-		 
-		 else{
-			 trafficControl.className = 'btn';
-			 map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);  
-		 }
-		 
+       if(trafficControl.className == "btn"){
+         map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+            trafficControl.className = 'selected_btn';
+       }
+       
+       else{
+          trafficControl.className = 'btn';
+          map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);  
+       }
+       
     }
 }
 
@@ -330,8 +358,8 @@ function displayPlaceInfo(place) {
     placeOverlay.setMap(map);  
   
     if(id!=nowid){
-    	$("#customoverlay_add").remove();
-	}
+       $("#customoverlay_add").remove();
+   }
     
 }
   
@@ -358,11 +386,11 @@ function ourmarkeradd(y,x){                                       // -----------
 }
 
 function ourmarker_alldel(){
-	for(var i = 0 ; i < ourmarker.length ; i++){
-		ourmarker[i].setMap(null);
-	}
-	ourindex = 0;
-	ourmarker = [];
+   for(var i = 0 ; i < ourmarker.length ; i++){
+      ourmarker[i].setMap(null);
+   }
+   ourindex = 0;
+   ourmarker = [];
 }
 
 function ourmarkerdel(delete_num){
@@ -377,6 +405,7 @@ function ourmarkerdel(delete_num){
 var delete_index = 0;
 var memo_index = 0;
 var day = 1;
+
 // **********************
 var no = ${typeADTO_model.no}; 
 var id = "${typeADTO_model.id}";
@@ -384,31 +413,95 @@ var nowid = "<%=(String)session.getAttribute("id")%>";
 /*var nowid = sessionStorage.getItem("id"); */
 var memo = "메모를 입력하지 않았습니다!";
 alert(nowid);
-	if(id!=nowid){
-		$(".memo_write").remove();
-		$(".nextbtn1").remove();
-	}
-	else{
-		$(".nextbtn2").remove();
-	}
+var choice = ${typeADTO_model.complete};
+if(choice == 1){
+	choice = 0;
+}
 
 // **********************
 
-// 완성 눌렀을 때, 계획서로 이동
-  $(function() {
+function applychoice(){// 완성 눌렀을 때,
+	choice = ${typeADTO_model.complete};
+	if(choice == 0){
+		choice = 1;
+	}
+	    $.ajax({
+		      url : "choiceUpdate.do",
+		      data : {
+		    	  "complete" : choice,
+		    	  "no" : no
+		          },
+		      success : function(result) {
+		    	  
+		      }
+		   }) 
+}
+$(function() {
+   
+   if(id!=nowid){
+      $(".memo_write").remove();
+      $(".nextbtn1").remove();
+      
+   }
+   else{
+	   $.ajax({
+		    url : "choiceUpdate.do",
+		    data : {
+		  	  "complete" : choice,
+		  	  "no" : no
+		        },
+		    success : function(result) {
+		    }
+		 }) 
+      $(".nextbtn2").remove();
+   }
+  
+   
    $(".nextbtn1").click(function() {
-         location.href = "report.do?id="+id+"&no="+no;
-   })
-}); 
+		var indexOX = true;
+		var daybetween = ${typeADTO_model.travel_day};
+		if(daybetween>longday.length){
+			indexOX=false;
+		}
+		for(var i = 0 ; i < longday.length ; i++){
+			if(longday[i]==0){
+				indexOX=false;
+			}
+		}
+		  
+		if(indexOX){
+			applychoice();
+			location.href = "myPerfectPlanList";
+		}
+		else{
+		   	alert("날짜당 한개 이상의 경로를 추가해주세요");
+		}
+	})
+  
+   
+   if(start_date>today){
+       $(".nextbtn2").click(function() {
+             applyCompanion('${me}',${typeADTO_model.chatRoomNum});
+             location.href = "main.do";
+          })
+    }
+    else{
+    	$(".nextbtn2").click(function() {
+       		alert("이미 출발/종료된 여행입니다.");
+     	})
+    }
+   
+});
 
- $.ajax({						/* 페이지 첫 로딩시 select */
+
+ $.ajax({                  /* 페이지 첫 로딩시 select */
        url: 'select.do',
        data: {"id":id,"no":no,"day":day}, 
        success: function(result){
         $("#roadsidebar").append(result);
         delete_index = $("#select_delete_index").val();
         if(id!=nowid){
-        	$("#place_delete").attr("disabled","disabled");
+           $("#place_delete").attr("disabled","disabled");
         }
         refreshline();
        },
@@ -420,17 +513,17 @@ alert(nowid);
 $(function() {
 
    $(".memo_write").click(function() {
-	   
-	   var place_memo = $("#memo_text").val();
-	   var hidden_memo_index = $("#hidden_memo_index").attr("value");
-	   
+      
+      var place_memo = $("#memo_text").val();
+      var hidden_memo_index = $("#hidden_memo_index").attr("value");
+      
       $.ajax({
          url: 'memoedit.do',
          data : {
-        	 "day" : day,
-			 "memo_index" : hidden_memo_index,
-			 "place_memo" : place_memo,
-			 "no" : no
+          "day" : day,
+          "memo_index" : hidden_memo_index,
+          "place_memo" : place_memo,
+          "no" : no
          },
          success: function() {
             alert("메모 추가 완료:>");
@@ -452,7 +545,7 @@ $(function() {
        success: function(result){
         $("#roadsidebar").empty();
         $("#roadsidebar").append(result);
-        delete_index = $("#select_delete_index").val(); 		/* delete index 유지 */
+        delete_index = $("#select_delete_index").val();       /* delete index 유지 */
 
         if(id!=nowid){
            $("#place_delete").attr("disabled","disabled");
@@ -460,20 +553,28 @@ $(function() {
         refreshline();
         ourmarker_alldel();
         for(var i = 0 ; i <= delete_index ; i++){
-        	var x = $("#road_place_"+i).find("#place_x").val();
-        	var y = $("#road_place_"+i).find("#place_y").val();
-        	ourmarkeradd(y,x);
+           var x = $("#road_place_"+i).find("#place_x").val();
+           var y = $("#road_place_"+i).find("#place_y").val();
+           ourmarkeradd(y,x);
         }
        },
        error: function() {
          alert("실패:/");
       } //error End
       }) //Ajax End
+      
+      
      }) //button End
     }); //JQuery End
     
 function customoverlay_add(place_url,place_name,place_address_name,place_road_address_name,place_phone,x,y){ 
-    	
+       
+   if(typeof longday[day-1] == "undefined"){
+	longday[day-1] = 1;
+   }
+   else{
+   	longday[day-1] = longday[day-1]+1;
+   }
    memo_index++;
      // 만약 일차버튼이 on일 때, 버튼 상태값을 변수에 담고 넘겨주기!:>
      //ggg
@@ -505,7 +606,7 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
     var div = document.createElement('div');
     div.className = 'roadrow';
     div.innerHTML = '<div style="height: 200px; width: 99%; border: 1px solid ;position:relative"id =road_place_'+delete_index+'>'+place_url+"<br>"+
-    				"<span id =side_place_name>"+place_name+"</span><br>"+place_address_name+"<br>"+place_road_address_name+"<br>"+place_phone+
+                "<span id =side_place_name>"+place_name+"</span><br>"+place_address_name+"<br>"+place_road_address_name+"<br>"+place_phone+
                     '<button id="open_memo" class="open_memo" onclick=memo_open('+memo_index+') style="position:absolute; bottom:0px; left:0px">메모추가</button>'+
                     '<button id="place_move" style="position:absolute; bottom:0px; left:81px" onclick=panTo('+y+','+x+')>위치보기</button>'+
                     '<button id="place_delete" style="position:absolute; bottom:0px; right:0px" onclick=customoverlay_delete('+delete_index+','+memo_index+')>위치삭제</button>'+
@@ -515,16 +616,16 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
                     
    
    if(delete_index>1){
-	   var road_search = document.createElement('div');   
-	   road_search.className = 'road_search';
-	   road_search.id = 'road_search_'+Number(delete_index-1);
-	   
-	   var side_place_name = $("#road_place_"+Number(delete_index-1)).find("#side_place_name").text();
-	   road_search.innerHTML = '<div style = "height:20px; width : 99%; background: #C0FFFF; text-align: center;">'+
-								'<a href=https://map.kakao.com/?eName='+place_name+'&sName='+side_place_name+' id = "road_url" target="_blank">↕길찾기↕</a>'+
-								'</div>';
-								
-	   document.getElementById('roadsidebar').appendChild(road_search);
+      var road_search = document.createElement('div');   
+      road_search.className = 'road_search';
+      road_search.id = 'road_search_'+Number(delete_index-1);
+      
+      var side_place_name = $("#road_place_"+Number(delete_index-1)).find("#side_place_name").text();
+      road_search.innerHTML = '<div style = "height:20px; width : 99%; background: #C0FFFF; text-align: center;">'+
+                        '<a href=https://map.kakao.com/?eName='+place_name+'&sName='+side_place_name+' id = "road_url" target="_blank">↕길찾기↕</a>'+
+                        '</div>';
+                        
+      document.getElementById('roadsidebar').appendChild(road_search);
    }
     document.getElementById('roadsidebar').appendChild(div);
    ourmarkeradd(y,x);
@@ -533,27 +634,27 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
 
 function memo_open(memo_index_open){
             location.href="#open";
-			$("#hidden_memo_index").val(memo_index_open);
-			
-			 $.ajax({
-			      url: 'memoselect.do',
-			      data: {
-			    	"day" : day,
-					"memo_index" : memo_index_open,
-					"no" : no
-			      },
-			      success: function(result) {
-			         $("#memo_text").val(result) /* result = 메모내용 */
-			      },
-			      error: function() {
-			         alert('메모 셀렉트 실패:/');
-			      }
-			    }); 
-			 
+         $("#hidden_memo_index").val(memo_index_open);
+         
+          $.ajax({
+               url: 'memoselect.do',
+               data: {
+                "day" : day,
+               "memo_index" : memo_index_open,
+               "no" : no
+               },
+               success: function(result) {
+                  $("#memo_text").val(result) /* result = 메모내용 */
+               },
+               error: function() {
+                  alert('메모 셀렉트 실패:/');
+               }
+             }); 
+          
 }
 
 function customoverlay_delete(delete_num,memo_index){  
-     
+   longday[day-1] = longday[day-1]-1;
      $.ajax({
       url: 'delete.do',
       data: {
@@ -576,15 +677,13 @@ function customoverlay_delete(delete_num,memo_index){
    
     $("div").remove("#road_place_"+delete_num);
     if(delete_num==1){
-	    $("div").remove("#road_search_"+delete_num);
+       $("div").remove("#road_search_"+delete_num);
     }
     else{
-    	$("div").remove("#road_search_"+Number(delete_num-1));
-    	  var first = $("#road_place_"+Number(delete_num-1)).find("#side_place_name").text();
-    	  alert(first);
+       $("div").remove("#road_search_"+Number(delete_num-1));
+         var first = $("#road_place_"+Number(delete_num-1)).find("#side_place_name").text();
           var second = $("#road_place_"+Number(delete_num+1)).find("#side_place_name").text();
-          alert(second);
-    	$("#road_search_"+delete_num).find("#road_url").prop('href',"https://map.kakao.com/?eName="+second+"&sName="+first);
+       $("#road_search_"+delete_num).find("#road_url").prop('href',"https://map.kakao.com/?eName="+second+"&sName="+first);
     }
     
     for(var i=delete_num+1 ; i <= delete_index; i++){
@@ -597,10 +696,10 @@ function customoverlay_delete(delete_num,memo_index){
        $("#road_place_"+i).attr('id','road_place_'+(i-1)); 
        
        if(delete_num>1){
-    	   $("#road_search_"+Number(i-1)).attr('id','road_search_'+Number(i-2));
+          $("#road_search_"+Number(i-1)).attr('id','road_search_'+Number(i-2));
        }
        else{
-	       $("#road_search_"+i).attr('id','road_search_'+(i-1));
+          $("#road_search_"+i).attr('id','road_search_'+(i-1));
        }
      
        
@@ -808,48 +907,56 @@ var lineshow;
 
 function deleteClickLine() {
     if (lineshow) {
-    	lineshow.setMap(null);    
-    	lineshow = null;        
+       lineshow.setMap(null);    
+       lineshow = null;        
     }
 }
 
 function refreshline(){
-	
- 	deleteClickLine();
-	
-	var line_x;
-	var line_y;
-	
-	var line_setpos = [delete_index];
+   
+    deleteClickLine();
+   
+   var line_x;
+   var line_y;
+   
+   var line_setpos = [delete_index];
 
-	
-	for(var i = 1 ; i <= delete_index ; i++){
+   
+   for(var i = 1 ; i <= delete_index ; i++){
 
-		line_x = $("#road_place_"+i).find("#place_x").val();
-		line_y = $("#road_place_"+i).find("#place_y").val();
-		
-		var lineloc = new kakao.maps.LatLng(line_y, line_x);
-		line_setpos[i-1] = lineloc;
-		
-		if(i==1){
-			 lineshow = new kakao.maps.Polyline({
-				map:map,
-				path:[lineloc],
-				strokeWeight: 5, // 선의 두께입니다 
-			    strokeColor: '#FE7AFA', // 선의 색깔입니다
-			    strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-			    strokeStyle: 'solid' // 선의 스타일입니다
-			 })
-		}
-		else{
-			 var path = lineshow.getPath();
-			 path.push(lineloc);
-			 lineshow.setPath(path);
-		}
-		
-	} 
-		
+      line_x = $("#road_place_"+i).find("#place_x").val();
+      line_y = $("#road_place_"+i).find("#place_y").val();
+      
+      var lineloc = new kakao.maps.LatLng(line_y, line_x);
+      line_setpos[i-1] = lineloc;
+      
+      if(i==1){
+          lineshow = new kakao.maps.Polyline({
+            map:map,
+            path:[lineloc],
+            strokeWeight: 5, // 선의 두께입니다 
+             strokeColor: '#FE7AFA', // 선의 색깔입니다
+             strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+             strokeStyle: 'solid' // 선의 스타일입니다
+          })
+      }
+      else{
+          var path = lineshow.getPath();
+          path.push(lineloc);
+          lineshow.setPath(path);
+      }
+      
+   } 
+   
 }
+
+function test(){
+	for(var i = 0 ; i<longday.length ; i++){
+		alert(longday[i]);
+	}
+}
+      
+
 </script>
 </div>
 </body>

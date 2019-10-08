@@ -63,5 +63,9 @@
 		SELECT place_address_name FROM course WHERE no = #{no} and 
 		memo_index = (SELECT max(memo_index) FROM course) 
 	</select>
+	
+	<select id="daycount" resultType="Integer">
+		select COUNT(*) from course group by day 
+	</select>
 
 </mapper>

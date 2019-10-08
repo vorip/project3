@@ -48,11 +48,18 @@ public class TypeADAOImpl implements TypeADAO {
 		System.out.println(adto);
 		return adto;
 	}
+	
 	public String day_endSelect(int no) {
 		return my.selectOne("typeADAO.day_endSelect",no);
 	}
+	
 	@Override
 	public void chatRoomNumUpdate(TypeADTO typeADTO) {
 		my.update("typeADAO.chatRoomNumUpdate",typeADTO);
+	}
+	
+	@Override
+	public void choiceUpdate(TypeADTO typeADTO) {
+		my.update("typeADAO.choiceupdate",typeADTO);
 	}
 }

@@ -29,4 +29,8 @@ public interface CourseDAO {
 	
 	public CourseDTO memoselect(CourseDTO courseDTO);
 	
+	public List<Integer> daycount();
+
+	
+	
 }

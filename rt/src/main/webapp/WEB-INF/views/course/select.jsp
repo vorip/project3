@@ -35,13 +35,16 @@
 		<%
 			}
 		%>
+		
 			<div class="roadrow">
-				<div style="height: 200px; width: 99%; border: 1px solid ;position:relative;"id ='road_place_<%=i%>'>
-				${courseDTO.place_url}<br>
-				<span id =side_place_name>${courseDTO.place_name}</span>
+				<div style="height: 200px; width: 99%; border: 1px solid ;position:relative; font-size: 15px; "id ='road_place_<%=i%>'>
+				<%=i+"> "%><span id =side_place_name>${courseDTO.place_name}</span><br>
+				기본 주소<br>
 				${courseDTO.place_address_name}<br>
-				도로명주소넣기<br>
-				${courseDTO.place_phone}
+				도로명 주소<br>
+				${courseDTO.place_road_address_name}<br>
+				TEL : ${courseDTO.place_phone}<br>
+				<a href="${courseDTO.place_url}">웹 브라우저로 보기</a><br>
 			      <button id="open_memo" class="open_memo" onclick = "memo_open(${courseDTO.memo_index})" style="position:absolute; bottom:0px; left:0px">메모추가</button>
 			      <button id="place_move" style="position:absolute; bottom:0px; left:81px;" onclick='panTo(${courseDTO.place_y},${courseDTO.place_x})'>위치보기</button>
 			      <button id="place_delete" style="position:absolute; bottom:0px; right:0px;" onclick='customoverlay_delete(<%=i %>,${courseDTO.memo_index})'>위치삭제</button>

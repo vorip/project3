@@ -24,4 +24,6 @@ public interface TypeADAO {
 	void chatRoomNumUpdate(TypeADTO typeADTO);
 	
 	public String day_endSelect(int no);
+	
+	void choiceUpdate(TypeADTO typeADTO); 
 }

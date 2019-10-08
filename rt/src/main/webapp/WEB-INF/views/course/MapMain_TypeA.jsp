@@ -115,8 +115,8 @@
 				<td>공개설정</td>
 				<td>
 					<fieldset>
-						<input type="radio" name="choice_public" value="공개" checked><label>공개</label>
-						<input type="radio" name="choice_public" value="비공개"><label>비공개</label>
+						<input type="radio" name="choice_public" value="공개미완" checked><label>공개</label>
+						<input type="radio" name="choice_public" value="비공개미완"><label>비공개</label>
 					</fieldset>
 					<div style="font-size: 12px; color:grey;">* 공개로 설정하면 다른 사람들이 여행지를 검색할 수 있습니다:></div>
 				</td>
