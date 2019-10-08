@@ -67,7 +67,7 @@
    </select>
    
    <update id="choiceupdate" parameterType="typeADTO">
-   		UPDATE TYPEA SET complete = #{complete} WHERE no = #{no}
+   		UPDATE TYPEA SET complete = #{complete} WHERE no = #{no} 
    </update>
 	
 </mapper>

@@ -23,14 +23,14 @@ public class MyPlanList {
 			String[] start = typeADTO.getDay_start().split(" ");
 			String[] end = typeADTO.getDay_end().split(" ");
 
-			myPlanHtml += "<tr>\r\n" + "		<td style=\"text-align: center;\">" + typeADTO.getTitle() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;\">" + typeADTO.getTravel_day() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;\">" + typeADTO.getTravel_type() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;\">" + typeADTO.getTravel_theme() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;\">" + typeADTO.getChoice_public() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;\">" + typeADTO.getTravel_intro() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;\">" + start[0] + "~" + end[0] + "</td>\r\n"
-					+ "		<td style=\"text-align: center;\"><button class = 'detail' onclick = \"location.href='showindex.do?no="+typeADTO.getNo() + "'\""  
+			myPlanHtml += "<tr>\r\n" + "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTitle() + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_day() + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_type() + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_theme() + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getChoice_public() + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_intro() + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + start[0] + "~" + end[0] + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\"><button class = 'detail' onclick = \"location.href='showindex.do?no="+typeADTO.getNo() + "'\""  
 					+"style=\"display: inline-block;	line-height: normal; white-space: nowrap; vertical-align: middle;text-align: center;"
 					+ "	cursor: pointer;box-sizing: border-box; background-color: #1f8dd6;"
 					+ "	color: white;\" >자세히보기</button>" + "	</tr>";

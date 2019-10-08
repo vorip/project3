@@ -18,15 +18,14 @@ ${publicBody}
 		<table class="comTable" style="border-collapse : collapse; border-spacing:0; empty-cells : show; border: 1px solid #cbcbcb;">
 		
 			<tr style="text-align: center;">
-				<th class="td_title" style="min-width: 200px;border-width: 0 0 1px 0;border-bottom: 1px solid #cbcbcb;border-left: 1px solid #cbcbcb;
-			font-size: inherit; margin: 0; overflow: visible; padding: 0.5em 1em; font-weight: bold; color: #666;">프로필</th>
-				<th class="td_title" style="min-width: 200px;">제목</th>
-				<th class="td_title" style="min-width: 200px;" >여행일수</th>
-				<th class="td_title" style="min-width: 200px;">여행타입</th>
-				<th class="td_title" style="min-width: 200px;">여행테마</th>
-				<th class="td_title" style="min-width: 200px;">공개여부</th>
-				<th class="td_title" style="min-width: 200px;">여행기간</th>
-				<th class="td_title" style="min-width: 200px;">자세히보기</th>
+				<th class="td_title" style="min-width: 150px;padding-top: 8px;padding-bottom: 8px;">프로필</th>
+				<th class="td_title" style="min-width: 200px;padding-top: 8px;padding-bottom: 8px;">제목</th>
+				<th class="td_title" style="min-width: 150px;padding-top: 8px;padding-bottom: 8px;">여행일수</th>
+				<th class="td_title" style="min-width: 150px;padding-top: 8px;padding-bottom: 8px;">여행타입</th>
+				<th class="td_title" style="min-width: 150px;padding-top: 8px;padding-bottom: 8px;">여행테마</th>
+				<th class="td_title" style="min-width: 150px;padding-top: 8px;padding-bottom: 8px;">공개여부</th>
+				<th class="td_title" style="min-width: 200px;padding-top: 8px;padding-bottom: 8px;">여행기간</th>
+				<th class="td_title" style="min-width: 150px;padding-top: 8px;padding-bottom: 8px;">자세히보기</th>
 			</tr>
 			${myPlan}
 		</table>

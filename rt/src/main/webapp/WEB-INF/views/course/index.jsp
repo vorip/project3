@@ -115,7 +115,7 @@
       <div>
          <button class="nextbtn1">완성</button>
          <button class="nextbtn2">동행신청</button>
-         <button class="homebtn" onclick="location.href='main.do'" style = "margin-top: 10px;">저장후 홈으로 가기</button>
+         <button class="homebtn" onclick="location.href='main.do'" style = "margin-top: 10px;">홈으로 가기</button>
       </div>
       </div> <!-- 여행 일차 등 들어가는 div  -->
       <div id="roadsidebar" style="border-bottom: 1px solid red; border-right: 1px solid red; overflow:scroll; overflow-x:hidden; float: left; height: 95%; width: 249px; "><!-- 여행 일차별 목적지 div -->
@@ -605,14 +605,21 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
     delete_index++;
     var div = document.createElement('div');
     div.className = 'roadrow';
-    div.innerHTML = '<div style="height: 200px; width: 99%; border: 1px solid ;position:relative"id =road_place_'+delete_index+'>'+place_url+"<br>"+
-                "<span id =side_place_name>"+place_name+"</span><br>"+place_address_name+"<br>"+place_road_address_name+"<br>"+place_phone+
+    div.innerHTML = '<div style="height: 200px; width: 99%; border: 1px solid ;position:relative; font-size:14px"id =road_place_'+delete_index+'>'+
+    				'<span style="font-size: 14px; background: #ffa2fc; border-radius: 40% ;padding-left: 5px; padding-right: 5px; padding-bottom: 1px;color: white"><b>'+delete_index+'</b></span>'+
+                    '<span id =side_place_name><a href="'+place_url+'">'+place_name+'</a></span><br>'+
+                    '<b>~~~~ 기본 주소 ~~~~</b><br>'+
+                    place_address_name+"<br>"+
+                    '<b>~~~~ 도로명 주소 ~~~~</b><br>'+
+                    place_road_address_name+"<br>"+
+                    'TEL : '+place_phone+
                     '<button id="open_memo" class="open_memo" onclick=memo_open('+memo_index+') style="position:absolute; bottom:0px; left:0px">메모추가</button>'+
                     '<button id="place_move" style="position:absolute; bottom:0px; left:81px" onclick=panTo('+y+','+x+')>위치보기</button>'+
                     '<button id="place_delete" style="position:absolute; bottom:0px; right:0px" onclick=customoverlay_delete('+delete_index+','+memo_index+')>위치삭제</button>'+
                     '<input type = "hidden" id = "memo_val">'+
                     '<input type = "hidden" id = "place_x" value = '+x+'> '+
                     '<input type = "hidden" id = "place_y" value = '+y+'> </div></div>';
+                    
                     
    
    if(delete_index>1){
