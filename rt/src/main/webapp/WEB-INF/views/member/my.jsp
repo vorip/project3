@@ -130,7 +130,7 @@ ${publicBody}
       </tr>
       <tr>
          <td width="180" class="td_title">사진</td>
-         <td><img id="img" src="resources/img/${dto.thumb}" ><input type="file" value="변경하기" id="fileChange" multiple></td>
+         <td><img id="img" src="resources/img/${dto.thumb}" ></td>
       </tr>
       <tr>
          <td width="180" class="td_title">탈퇴</td>
