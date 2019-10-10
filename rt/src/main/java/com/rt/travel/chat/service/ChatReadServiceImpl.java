@@ -86,7 +86,7 @@ public class ChatReadServiceImpl implements ChatReadService {
             contentTime_ = chatContentDTO.getContentTime().split(" ");
             contentTime = contentTime_[0];
             contentTime2 = contentTime_[1];
-            contentTime_ = contentTime.split("/");
+            contentTime_ = contentTime.split("-");
             contentTime = contentTime_[1] + "월" + contentTime_[2] + "일";
             contentTime_ = contentTime2.split(":");
             contentTime2 = contentTime_[0] + "시" + contentTime_[1] + "분";
@@ -101,7 +101,7 @@ public class ChatReadServiceImpl implements ChatReadService {
                + (divPositionVal - i * divHeight) + "px; height : 50px;'>"
                + "<span style=\'font-size : 13px;font-weight : bold;font-family: 맑은고딕;\'>" + chatRoomDTO.getchatRoomName()
                + "</span>" + "<span style=\'font-size : 10px;font-family: 맑은고딕;margin-left : 10px;\'>"
-               + chatRoomDTO.getLimitMember() + "</span><br>" + "<span id=\'" + chatRoomDTO.getchatRoomNum()
+               + chatRoomDTO.getMembers().split(",").length + "</span><br>" + "<span id=\'" + chatRoomDTO.getchatRoomNum()
                + "\'style=\'font-size : 12px;font-family: 맑은고딕; color : #666562;\'>" + content + "</span>" + "</div>"
                + "<div class=\'time\' style=\'float : left;padding : 5px;width : 55px; bottom : "
                + (divPositionVal - i * divHeight) + "px;height : 50px;\'>" + "<span id=\'t1"

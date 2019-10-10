@@ -253,7 +253,7 @@ function sendNoteDiv(name) {
          $("body").append(result);
          getMove("sendNoteDiv");
          $("#chatDiv").css('pointer-events','none');
-         $("#noteList").css('pointer-events','none')
+         $("#noteList").css('pointer-events','none');
          $("#sendNote").attr('disabled',true);
          $("#noteContent").keyup(function() {
             if($("#noteContent").val().trim().length>0){
@@ -290,6 +290,7 @@ function sendNote() {
             alert("쪽지전송이 완료되었습니다.");
             $("#sendNoteDiv").remove();
             $("#chatDiv").css('pointer-events','all');
+            $("#noteList").css('pointer-events','all');
          }
    })
 }
