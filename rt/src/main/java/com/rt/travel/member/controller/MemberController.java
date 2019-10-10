@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -54,7 +55,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("insert")
-	public String insert(MemberDTO memberDTO, HttpServletResponse response, Model model) throws IOException {
+	public String insert(MemberDTO memberDTO, HttpServletResponse response,HttpSession session,HttpServletRequest request, Model model) throws IOException {
 		memberDTO.setAuthKey('0');
 		memberDTO.setTotaddr();
 		memberDTO.setThumb("thumb.jpg");
@@ -64,9 +65,9 @@ public class MemberController {
 		mail.setId("leesoyun702");
 		mail.setPw("verycuteso0425");
 		mail.setSndUsr("이소윤", "leesoyun702@gmail");
-		String id = "\"http://localhost:9999/travel/authkey?id=" + memberDTO.getId() + "\"";
+		
+		String id = "\"http://localhost:"+request.getServerPort()+"/travel/authkey?id=" + memberDTO.getId() + "\"";
 		mail.SendMail(memberDTO.getEmail(), "가입완료 메일입니다.", "<a href=" + id + ">회원가입 인증하기</a>");
-
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script type='text/javascript'>");
@@ -74,6 +75,8 @@ public class MemberController {
 		out.println("</script>");
 		out.flush();
 		model.addAttribute("loginPage", tool.login());
+		model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+		model.addAttribute("publicHead", mainPublicModule.head());
 		return "member/loginPage";
 	}
 

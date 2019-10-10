@@ -27,8 +27,8 @@ public class ChatDAOImpl implements ChatDAO {
 		return mybatis.selectOne("chatDAO.selectRoom",chatRoomNum);
 	}
 	@Override
-	public void deleteRoom() {
-		mybatis.delete("chatDAO.deleteRoom");
+	public void deleteRoom(int chatRoomNum) {
+		mybatis.delete("chatDAO.deleteRoom",chatRoomNum);
 	}
 	@Override
 	public void addContent(ChatContentDTO chatContentDTO) {

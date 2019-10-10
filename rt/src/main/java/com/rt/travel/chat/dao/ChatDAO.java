@@ -13,7 +13,7 @@ public interface ChatDAO {
 
 	ChatRoomDTO selectRoom(int chatRoomNum);
 
-	void deleteRoom();
+	void deleteRoom(int chatRoomNum);
 
 	void addContent(ChatContentDTO chatContentDTO);
 

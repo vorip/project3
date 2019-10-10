@@ -50,12 +50,8 @@
 		SELECT PLACE_MEMO FROM course WHERE DAY = #{day} AND MEMO_INDEX = #{memo_index} AND no = #{no}
 	</select>
 	
-	<!-- 주아니2 -->
 	<select id="placeSelectStart" parameterType="Integer" resultType="String">
-		SELECT
-		place_address_name
-		FROM course
-		WHERE no= #{no} and day=1 and memo_index=1
+		select place_address_name from course where no = #{no} and memo_index = (select min(memo_index) from course where day = 1)
 	</select>
 	
 	<!-- 주아니3 -->

@@ -32,9 +32,9 @@ public class CompanionReadServiceImpl {
 		for (int i = 0; i < list.size(); i++) {
 			TypeADTO typeADTO = list.get(i);
 			MemberDTO memberDTO = memberDAO.select(typeADTO.getId());
-			
+			System.out.println("companionreadserviceimpl_no : " +typeADTO.getNo());
 			String courseStart = courseDAO.placeSelectStart(typeADTO.getNo());
-			
+			System.out.println("companionreadserviceimpl : " +courseStart);
 			StringTokenizer st = new StringTokenizer(courseStart , String.valueOf((char) 160));
 			String startCousre = "";
 			for (int j = 0; j < 2; j++) {
@@ -49,7 +49,6 @@ public class CompanionReadServiceImpl {
 				if(j == 0)
 				endCourse += st.nextToken()+ " ";
 			}
-			
 			
 			String[] start = typeADTO.getDay_start().split(" ");
 			String[] end = typeADTO.getDay_end().split(" ");

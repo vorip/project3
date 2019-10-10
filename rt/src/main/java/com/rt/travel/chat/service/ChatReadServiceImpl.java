@@ -66,9 +66,13 @@ public class ChatReadServiceImpl implements ChatReadService {
    @Override
    public String getMenuContent_chat(String member) {
       openSocket = "";
-      chatDAO.deleteRoom();
       
       list_room = chatDAO.selectRooms(member);
+      
+      for(int i=0;i<list_room.size();i++) {
+          chatDAO.deleteRoom(list_room.get(i).getchatRoomNum());
+       }
+      
       int divPositionVal = 335;
       int divHeight = 60;
       menuListHtml = "";
@@ -86,7 +90,11 @@ public class ChatReadServiceImpl implements ChatReadService {
             contentTime_ = chatContentDTO.getContentTime().split(" ");
             contentTime = contentTime_[0];
             contentTime2 = contentTime_[1];
-            contentTime_ = contentTime.split("-");
+            if(contentTime.contains("-")) {
+            	contentTime_ = contentTime.split("-");
+            }else {
+            	contentTime_ = contentTime.split("/");
+            }
             contentTime = contentTime_[1] + "월" + contentTime_[2] + "일";
             contentTime_ = contentTime2.split(":");
             contentTime2 = contentTime_[0] + "시" + contentTime_[1] + "분";

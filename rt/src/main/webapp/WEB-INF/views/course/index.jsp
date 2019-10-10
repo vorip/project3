@@ -91,7 +91,7 @@
       
       <div id="memberpic"style="margin : 10px 10px 0px 10px; background:#B7F0B1; width: 80px; height: 80px; float:left;">작성자 프사</div><!-- 사진 div -->
       제목 : ${typeADTO_model.title}<br>
-      출발 날짜 : ${typeADTO_model.day_start.substring(0,10)} <button type = "button" onclick = "test()">테스트버튼</button><br>
+      출발 날짜 : ${typeADTO_model.day_start.substring(0,10)} <button type = "button" onclick = "test2()">테스트버튼</button><br>
       작성자 : ${typeADTO_model.id}<br>
       ${typeADTO_model.travel_type} / 추천: / 즐겨찾기<br>
       
@@ -412,7 +412,6 @@ var id = "${typeADTO_model.id}";
 var nowid = "<%=(String)session.getAttribute("id")%>";
 /*var nowid = sessionStorage.getItem("id"); */
 var memo = "메모를 입력하지 않았습니다!";
-alert(nowid);
 var choice = ${typeADTO_model.complete};
 if(choice == 1){
 	choice = 0;
@@ -439,6 +438,7 @@ function applychoice(){// 완성 눌렀을 때,
 $(function() {
    
    if(id!=nowid){
+	   
       $(".memo_write").remove();
       $(".nextbtn1").remove();
       
@@ -454,6 +454,7 @@ $(function() {
 		    }
 		 }) 
       $(".nextbtn2").remove();
+	   alert("이전에 완성했었던것도 비공개로 전환됩니다!\r\n완성 버튼을 꼭 누르셔서 공개로 전환해주세요");
    }
   
    
@@ -479,17 +480,16 @@ $(function() {
 	})
   
    
-   if(start_date>today){
-       $(".nextbtn2").click(function() {
-             applyCompanion('${me}',${typeADTO_model.chatRoomNum});
+      $(".nextbtn2").click(function() {
+	    if(start_date>today){
+    	   var me = '${me}';
+    	   var chroomnum = ${typeADTO_model.chatRoomNum};
+             applyCompanion(me,chroomnum);
              location.href = "main.do";
-          })
-    }
-    else{
-    	$(".nextbtn2").click(function() {
+	    }else{
        		alert("이미 출발/종료된 여행입니다.");
-     	})
-    }
+    	} 
+     })
    
 });
 
@@ -504,6 +504,11 @@ $(function() {
            $("#place_delete").attr("disabled","disabled");
         }
         refreshline();
+        for(var i = 0 ; i <= delete_index ; i++){
+            var x = $("#road_place_"+i).find("#place_x").val();
+            var y = $("#road_place_"+i).find("#place_y").val();
+            ourmarkeradd(y,x);
+         }
        },
        error: function() {
          alert("실패:/");
@@ -680,7 +685,7 @@ function customoverlay_delete(delete_num,memo_index){
    var x = $("#road_place_"+delete_num).find("#place_x").val();
    var y = $("#road_place_"+delete_num).find("#place_y").val();
    
-   ourmarkerdel(delete_num);
+   ourmarkerdel(delete_num+1);
    
     $("div").remove("#road_place_"+delete_num);
     if(delete_num==1){
@@ -957,7 +962,7 @@ function refreshline(){
    
 }
 
-function test(){
+function test2(){
 	for(var i = 0 ; i<longday.length ; i++){
 		alert(longday[i]);
 	}

@@ -24,7 +24,6 @@ public class MyPlanList {
 			String[] end = typeADTO.getDay_end().split(" ");
 
 			myPlanHtml += "<tr>\r\n" + "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTitle() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_day() + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_type() + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_theme() + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getChoice_public() + "</td>\r\n"

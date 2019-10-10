@@ -81,10 +81,11 @@
 		SET members=#{members} WHERE chatRoomNum = #{chatRoomNum}
 	</update>
 
-	<delete id="deleteRoom">
-		DELETE FROM chatRoom
-		WHERE endTime <![CDATA[<]]> SYSDATE
-	</delete>
+	<delete id="deleteRoom" parameterType="int">
+      DELETE FROM chatRoom
+      WHERE endTime <![CDATA[<]]> SYSDATE and chatRoomNum=#{chatRoomNum}
+   </delete>
+   
 	<select id="chatRoomIndex" resultType="Integer">
 	SELECT ChatRoom_SEQ.CURRVAL AS DEPT_NO FROM DUAL
 	</select>

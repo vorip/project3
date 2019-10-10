@@ -45,33 +45,30 @@ public class CompanionReadController {
 	@RequestMapping("companion")
 	public String companion(Model model,HttpSession session) {
 		model.addAttribute("companionResult", companion.companionList());
-		model.addAttribute("loginPageScript","<script>$(function() {" + 
-				"	$(\"#loginPageHref\").remove();" + 
-				"	$(\"#signHref\").remove();" + 
-				"$(\".header_menu\").append(\"<a href='logout'>로그아웃</a>\");"+
-				"})</script>");
+		model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+		model.addAttribute("publicHead", mainPublicModule.head());
 		return "companion/companion";
 	}
 
-	@RequestMapping("detail")
-	public void detail(String leader, Model model) {
-		List<ChatRoomDTO> list = chatDAO.chatSelectAll();
-		String inputId = "";
-		
-		for (int i = 0; i < list.size(); i++) {
-			leader = list.get(i).getLeader();
-			String[] id = leader.split("_");
-			inputId = id[1];
-			
-		}
-		courseDTO = courseDAO.select(inputId);
-		typeADTO = typeADAO.select(inputId);
-		int days = Integer.parseInt(typeADTO.getDay_start());
-		int term = days + typeADTO.getTravel_day();
-		
-		model.addAttribute("leader",leader);
-		model.addAttribute("typeA", typeADTO);
-		model.addAttribute("course", courseDTO);
-		model.addAttribute("term", term);
-	}
+//	@RequestMapping("detail")
+//	public void detail(String leader, Model model) {
+//		List<ChatRoomDTO> list = chatDAO.chatSelectAll();
+//		String inputId = "";
+//		
+//		for (int i = 0; i < list.size(); i++) {
+//			leader = list.get(i).getLeader();
+//			String[] id = leader.split("_");
+//			inputId = id[1];
+//			
+//		}
+//		courseDTO = courseDAO.select(inputId);
+//		typeADTO = typeADAO.select(inputId);
+//		int days = Integer.parseInt(typeADTO.getDay_start());
+//		int term = days + typeADTO.getTravel_day();
+//		
+//		model.addAttribute("leader",leader);
+//		model.addAttribute("typeA", typeADTO);
+//		model.addAttribute("course", courseDTO);
+//		model.addAttribute("term", term);
+//	}
 }
