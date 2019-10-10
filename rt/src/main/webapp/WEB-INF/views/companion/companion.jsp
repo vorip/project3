@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="resources/css/chat.css">
 
 	${publicHead}
+	<link rel="stylesheet" href="resources/css/chat.css">
+	<script src="resources/js/getChat.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	function showPlan(no) {
@@ -18,6 +20,7 @@
 </head>
 <body>
 	<script src="resources/js/companion.js"></script>
+	<img id='getChat'onclick = "getChat();" src = "resources/img/logo.png">
 ${publicBody}
 	<div class="compaList" id="compaList" style="margin-left: 14%">
 		<h2 style="color: #34495e;">동행찾기 리스트</h2>
