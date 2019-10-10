@@ -56,8 +56,7 @@
 	
 	<!-- 주아니3 -->
 	<select id="placeSelectEnd" parameterType="Integer" resultType="String">
-		SELECT place_address_name FROM course WHERE no = #{no} and 
-		memo_index = (SELECT max(memo_index) FROM course) 
+		select place_address_name from course where  no = #{no} and memo_index = (select max(memo_index) from course where day=(select max(day) from course where no = #{no}) )
 	</select>
 	
 	<select id="daycount" resultType="Integer">
