@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rt.travel.course.dao.TypeADAO;
 import com.rt.travel.course.dto.TypeADTO;
+import com.rt.travel.main.publicModule.MainPublicModule;
 import com.rt.travel.member.dao.MemberDAOImpl;
 
 @Controller
@@ -20,12 +21,16 @@ public class TypeAController {
 	TypeADAO dao;
 	@Autowired
 	MemberDAOImpl memberDAO;
+	@Autowired
+	MainPublicModule mainPublicModule;
 	
 	// 여행일정 만들기 탭 클릭시 A양식으로 이동
 	@RequestMapping("typea.do")
-	public ModelAndView typea() throws Exception{
+	public ModelAndView typea(Model model,HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("course/MapMain_TypeA");
+		model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+		model.addAttribute("publicHead", mainPublicModule.head());
 		return mav;
 	}
 	

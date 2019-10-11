@@ -89,11 +89,11 @@
    <div id = "left-container" style = "float:left; height : 88%; width : 400px; "><!-- 좌측 div  -->
       <div id="memberinfo" style="border: 1px solid red; width: 398px; height: 100px; float:left">
       
-      <div id="memberpic"style="margin : 10px 10px 0px 10px; background:#B7F0B1; width: 80px; height: 80px; float:left;">작성자 프사</div><!-- 사진 div -->
+      <div id="memberpic"style="margin : 10px 10px 0px 10px;  width: 80px; height: 80px; float:left;"><img src="resources/img/thumb.jpg" width="70px;"></div><!-- 사진 div -->
       제목 : ${typeADTO_model.title}<br>
-      출발 날짜 : ${typeADTO_model.day_start.substring(0,10)} <button type = "button" onclick = "test2()">테스트버튼</button><br>
+      출발 날짜 : ${typeADTO_model.day_start.substring(0,10)} <br>
       작성자 : ${typeADTO_model.id}<br>
-      ${typeADTO_model.travel_type} / 추천: / 즐겨찾기<br>
+   여행타입 :  ${typeADTO_model.travel_type}<br>
       
       </div> <!-- 회원 정보 div  -->
       
@@ -113,9 +113,9 @@
       
       <!-- 여행계획서로 전송 --> 
       <div>
-         <button class="nextbtn1">완성</button>
-         <button class="nextbtn2">동행신청</button>
-         <button class="homebtn" onclick="location.href='main.do'" style = "margin-top: 10px;">홈으로 가기</button>
+         <button class="nextbtn1" style="border-radius: 5px;box-sizing: border-box;background-color: #1f8dd6;background-color: #1f8dd6;color: white;">완성</button><br>
+         <button class="nextbtn2"style="border-radius: 5px;box-sizing: border-box;background-color: #1f8dd6;background-color: #1f8dd6;color: white;">동행신청</button>
+         <button class="homebtn" onclick="location.href='main.do'" style = "margin-top: 10px;border-radius: 5px;box-sizing: border-box;background-color: #1f8dd6;background-color: #1f8dd6;color: white;">홈으로 가기</button>
       </div>
       </div> <!-- 여행 일차 등 들어가는 div  -->
       <div id="roadsidebar" style="border-bottom: 1px solid red; border-right: 1px solid red; overflow:scroll; overflow-x:hidden; float: left; height: 95%; width: 249px; "><!-- 여행 일차별 목적지 div -->
@@ -132,7 +132,7 @@
                   <div>
                       <form onsubmit="searchPlaces(); return false;">
                      키워드 : <input type="text" value="" id="keyword" size="15"> 
-                     <button type="submit">검색하기</button> 
+                     <button type="submit" style="border-radius: 5px;box-sizing: border-box;background-color: #1f8dd6;background-color: #1f8dd6;color: white;">검색하기</button> 
                       </form>
                   </div>
                   

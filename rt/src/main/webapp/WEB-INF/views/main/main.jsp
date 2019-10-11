@@ -38,7 +38,7 @@
 	$.getJSON('http://api.openweathermap.org/data/2.5/weather?id=1835848&APPID=d5196c99956fe82fdb246da58c2ff9ef&units=metric', function (data) {
 		var $t_city = data.name;
 		var $now = new Date($.now()); //현재 시간 출력
-		var $cDate = $now.getFullYear() + "/" + $now.getMonth() + "월" + $now.getDate() + 1 + "일" + $now.getHours() + ":" + $now.getMinutes();
+		var $cDate = $now.getFullYear() + "-" + ($now.getMonth()+1) + "-" + $now.getDate() +" " + $now.getHours() + ":" + $now.getMinutes();
 		var $cTemp = data.main.temp;
 		var $maxTemp = data.main.temp_max;
 		var $minTemp = data.main.temp_min;

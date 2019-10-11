@@ -255,6 +255,8 @@ public class MemberController {
 			out.println("</script>");
 			out.flush();
 			model.addAttribute("loginPage", tool.login());
+			model.addAttribute("publicBody", mainPublicModule.body(session.getAttribute("id")));
+			model.addAttribute("publicHead", mainPublicModule.head());
 			return "member/loginPage";
 		} else {
 			MemberDTO dto = memberDAO.select(id);

@@ -29,25 +29,22 @@
 	};
 
 	</script>
+	${publicHead}
 </head>
 <body>
+${publicBody}
 <%String id = (String)session.getAttribute("id");%>
 	<!-- 타이틀 -->
-	<div class="main_title">
-		<h1>여행 만들기</h1>
-		<h3>여행 기본정보 입력</h3>
+	<div class="main_title" align="center">
+		<h1 style="border-bottom: 2px solid #34495e;padding-bottom: 20px; padding-top: 20px;">여행 만들기</h1>
+		<h3 style="padding-bottom: 10px; padding-top: 10px;">여행 기본정보 입력</h3>
 	</div>  
 	
 <form action="index.do" id = "index_submit">
-	<!-- 타입 이동 버튼 -->
-	<div class="type_button">
-		<div onClick="location.href='MapMain_TypeA.jsp'" class="typeA_button">자세한 계획</div>
-		<div onClick="location.href='MapMain_TypeB.jsp'" class="typeB_button">대략적인 계획</div>
-	</div>
 	
 	<!-- 양식 테이블 -->
-	<div class="main_table">
-		<table class="typeA_table">
+	<div class="main_table" style="height: 600px">
+		<table class="typeA_table" style="font-size: 18px; width: 750px; height: 500px;">
 				<input type="hidden" id="id" name="id" value="<%=id%>">
 			<tr>
 				<td>제목<sup style="color: red">*필수</sup></td>
@@ -126,10 +123,22 @@
 				<td><input type="text" id="travel_intro" name="travel_intro"></td>
 			</tr>
 		</table>
+		<button type="submit" id = "next_btn" style="display: inline-block; margin-left: 330px; margin-top:20px;
+	zoom:1;
+	line-height: normal;
+	white-space: nowrap;
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	box-sizing: border-box;
+	background-color: #1f8dd6;
+	color: white;
+	padding: 0.5em 2em;
+	border-radius: 5px;">다음</button>
 	</div>
 	<input type="hidden" value="1" name="current_mem" id="current_mem">
 	<div>
-		<button type="submit" id = "next_btn">다음</button>
+		
 	</div>
 	</form>
 
@@ -141,18 +150,6 @@ body {
 	font-size: 16px;
 }
 
-.typeA_button {
-	text-align: center; 
-	padding: 1em; 
-	border:1px solid #7f8c8d;
-	width: 100px;
-}
-
-.typeB_button {
-	text-align: center; 
-	padding: 1em; 
-	border:1px solid #7f8c8d;	
-}
 
 sub {
 	top: -0.5em;
@@ -165,10 +162,9 @@ sub {
 }
 
 .main_table {
-	display: table-row-group;
-	vertical-align: middle;
-	border-color: inherit;
-}
+	position: absolute;
+	margin-left: 32%;
+	}
 
 tr {
 	display: table-row;

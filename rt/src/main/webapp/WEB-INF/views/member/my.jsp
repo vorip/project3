@@ -62,7 +62,7 @@ function sample4_execDaumPostcode() {
              }
          }
    }).open();
-   }
+  }
 var fileValue = $("#fileChange").val().split("\\");
 var fileName = fileValue[fileValue.length-1]; // 파일명
 
@@ -78,12 +78,12 @@ ${publicBody}
    <table class="myTable" >
       <tr>
          <td width="180" class="td_title">아이디</td>
-         <td><input type="text" name="id" id="id" value="${dto.id}" readonly="readonly">
-         <input type="hidden" name="pw" value="${dto.pw}" id="pw"></td>
+         <td>${dto.id}</td>
       </tr>
       <tr>
          <td width="180" class="td_title">이름</td>
-         <td><input type="text" name="name" id="name" value="${dto.name}"></td>
+         <td>${dto.name}
+         <input type="hidden" name="pw" value="${dto.pw}" id="pw"></td>
       </tr>
       <tr>
          <td width="180" class="td_title">전화번호</td>
@@ -130,7 +130,7 @@ ${publicBody}
       </tr>
       <tr>
          <td width="180" class="td_title">사진</td>
-         <td><img id="img" src="resources/img/${dto.thumb}" ></td>
+         <td><img id="img" src="resources/img/${dto.thumb}"></td>
       </tr>
       <tr>
          <td width="180" class="td_title">탈퇴</td>
