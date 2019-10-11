@@ -14,6 +14,7 @@
 		<typeAlias type="com.rt.travel.member.dto.CompanionDTO" alias="companionDTO"></typeAlias>
 		<typeAlias type="com.rt.travel.board.dto.BoardDTO" alias="bDTO"></typeAlias>
 		<typeAlias type="com.rt.travel.note.dto.NoteDTO" alias="noteDTO"></typeAlias>
+		<typeAlias alias="commentDTO" type="com.rt.travel.boardcomment.dto.CommentDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/BoardMapper.xml" />
@@ -23,5 +24,6 @@
 		<mapper resource="mapper/typeAMapper.xml" />
 		<mapper resource="mapper/typeBMapper.xml" />
 		<mapper resource="mapper/note-mapper.xml" />
+		<mapper resource="mapper/boardCommentMapper.xml"/>
 	</mappers>
 </configuration>

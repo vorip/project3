@@ -15,6 +15,7 @@ public class BoardDTO {
 	private int cnt; //댓글 갯수
 	private String show; //화면 표시여부
 	private String[] files; //첨부파일 배열
+	
 	public int getBno() {
 		return bno;
 	}

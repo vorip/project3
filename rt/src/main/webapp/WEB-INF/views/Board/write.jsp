@@ -15,16 +15,17 @@
 		$("#btnSave").click(function () {
 			var title = $("#title").val();
 			var content = $("#p_content").val();
-			if(title == ""){
+			/* if(title == ""){
 				alert("제목을 입력하세요");
 				document.form1.title.focus();
 				return false;
-			}
+			} */
 			/* if(content == ""){
 				alert("내용을 입력하세요");
 				document.form1.content.focus();
 				return;
 			} */
+			alert("글이 등록되었습니다.");
 			document.form1.submit();
 		});
 	});

@@ -66,9 +66,6 @@ public String body(Object id) {
             "                  <h3 class=\"font_color\">소통광장</h3>\r\n" + 
             "                  <div class=\"dropdown-content\">\r\n" + 
             "                     <a class=\"menu_nav\" href=\"list.do?page=1\">여행후기 게시판</a>\r\n" + 
-            "                     <a class=\"menu_nav\" href=\"#\">?? 게시판</a>\r\n" + 
-            "                     <a class=\"menu_nav\" href=\"#\">?? 게시판</a>\r\n" + 
-            "                     <a class=\"menu_nav\" href=\"#\">동행찾는 여행일정</a>\r\n" + 
             "                  </div>\r\n" + 
             "               </div>\r\n" + 
             "               <div class=\"dropdown\">\r\n" + 
@@ -142,9 +139,6 @@ public String body(Object id) {
          "                  <h3 class=\"font_color\">소통광장</h3>\r\n" + 
          "                  <div class=\"dropdown-content\">\r\n" + 
          "                     <a class=\"menu_nav\" href=\"list.do?page=1\">여행후기 게시판</a>\r\n" + 
-         "                     <a class=\"menu_nav\" href=\"#\">?? 게시판</a>\r\n" + 
-         "                     <a class=\"menu_nav\" href=\"#\">?? 게시판</a>\r\n" + 
-         "                     <a class=\"menu_nav\" href=\"#\">동행찾는 여행일정</a>\r\n" + 
          "                  </div>\r\n" + 
          "               </div>\r\n" + 
          "               <div class=\"dropdown\">\r\n" + 
@@ -256,11 +250,55 @@ public String body2() {
             "         </div>\r\n" + 
             "         <!-- content -->\r\n" + 
             "         \r\n" + 
-            "         <div id=\"footer\">\r\n" + 
-            "               <div class=\"container\">footer</div>\r\n" + 
-            "         </div>\r\n" + 
-            "         <!-- footer -->\r\n" + 
-            "      \r\n" + 
-            "   </div>";
+            "         <div id=\"footer\">\r\n" +
+            "				<div class=\"container\">" + 
+            "					<h2 class=\"ir_su\">푸터 영역</h2>\r\n"+ 
+            "						<div class=\"footer\">\r\n" + 
+            "							<ul>\r\n" + 
+            "								<li><a href=\"\">사이트 도움말</a></li>\r\n" + 
+            "								<li><a href=\"\">사이트 이용약관</a></li>\r\n" + 
+            "								<li><a href=\"\">사이트 운영규칙</a></li>\r\n" + 
+            "								<li><a href=\"\"><strong>사이트 개인정보취급방침</strong></a></li>\r\n" + 
+            "								<li><a href=\"\">책임의 한계와 법적고지</a></li>\r\n" + 
+            "								<li><a href=\"\">게시중단요청 서비스</a></li>\r\n" + 
+            "								<li><a href=\"\">고객센터</a></li>\r\n" + 
+            "							</ul>\r\n" + 
+            "							<address>\r\n" + 
+            "							Copyright&copy;rt.co.kr All Right Rederved"+ 
+            "							</address>\r\n"+ 
+            "						</div>\r\n" + 
+            "					</div>\r\n" + 
+            "			</div>\r\n" + 
+            "			<!-- footer -->\r\n" + 
+            "			\r\n"+ 
+            "		</div>";
    }
+
+@Override
+public String footer() {
+	return ""+
+			"         <div id=\"footer\">\r\n" +
+			"				<div class=\"container\">" + 
+			"					<h2 class=\"ir_su\">푸터 영역</h2>\r\n"+ 
+			"						<div class=\"footer\">\r\n" + 
+			"							<ul>\r\n" + 
+			"								<li><a href=\"\">사이트 도움말</a></li>\r\n" + 
+			"								<li><a href=\"\">사이트 이용약관</a></li>\r\n" + 
+			"								<li><a href=\"\">사이트 운영규칙</a></li>\r\n" + 
+			"								<li><a href=\"\"><strong>사이트 개인정보취급방침</strong></a></li>\r\n" + 
+			"								<li><a href=\"\">책임의 한계와 법적고지</a></li>\r\n" + 
+			"								<li><a href=\"\">게시중단요청 서비스</a></li>\r\n" + 
+			"								<li><a href=\"\">고객센터</a></li>\r\n" + 
+			"							</ul>\r\n" + 
+			"							<address>\r\n" + 
+			"							Copyright&copy;rt.co.kr All Right Rederved"+ 
+			"							</address>\r\n"+ 
+			"						</div>\r\n" + 
+			"					</div>\r\n" + 
+			"			</div>\r\n" + 
+			"			<!-- footer -->\r\n" + 
+			"			\r\n"+ 
+			"		</div>";
+
+	}
 }

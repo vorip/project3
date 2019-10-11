@@ -7,5 +7,7 @@ public interface MainPublicModule {
 	String body(Object id);
 
 	String body2();
+	
+	String footer();
 
 }

@@ -22,6 +22,7 @@
 		
 		var title = $("#title").text();
 		var content = $("#p_content").val();
+		alert("내용이 수정되었습니다.")
 		/* if(title == ""){
 			alert("제목을 입력하세요");
 			document.form1.title.focus();

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.rt.travel.board.dto.BoardDTO;
+import com.rt.travel.boardcomment.dto.CommentDTO;
 
 public interface BoardService {
 
@@ -15,13 +16,20 @@ public interface BoardService {
 	public void update(BoardDTO bDTO) throws Exception;
 	
 	public void delete(int bno) throws Exception;
-	/*
-	 * //게시글 전체 목록 => 검색옵션, 키워드 매개변수 추가 public List<BoardDTO> listAll(String
-	 * searchOption, String keyword) throws Exception; //게시글 레코드 갯수 메서드 추가 public
-	 * int countArticle(String searchOption, String keyword) throws Exception;
-	 */
 	
-	public List<BoardDTO> listAll() throws Exception;
+	public List<CommentDTO> commentList(int bno) throws Exception;
+	
+	public List<BoardDTO> listAll(int page) throws Exception;
+	
+	public String board_count_list() throws Exception;
+	
+	public String board_count_search() throws Exception;
+	
+	public String board_search_title(String searchWord) throws Exception;
+	
+	public String board_search_content(String searchWord) throws Exception;
+	
+	public String board_search_writer(String searchWord) throws Exception;
 	
 	public void increaseViewcnt(int bno, HttpSession session) throws Exception;
 }
