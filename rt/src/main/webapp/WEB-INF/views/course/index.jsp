@@ -106,7 +106,7 @@
          TypeADTO adto = (TypeADTO)request.getAttribute("typeADTO_model");
          for(int i = 1 ; i <= adto.getTravel_day() ; i++){
       %>
-         <button class="tabmenu" value=<%=i%> id="default"><%=i%>일차</button>
+         <button class="tabmenu" value=<%=i%> id="default_<%=i%>" style = "background-color: #E6E6E6"><%=i%>일차</button>
       <%
          }
       %>
@@ -509,6 +509,9 @@ $(function() {
             var y = $("#road_place_"+i).find("#place_y").val();
             ourmarkeradd(y,x);
          }
+        
+        $("#default_"+day).css("background","#747474");
+        $("#default_"+day).css("color","white");
        },
        error: function() {
          alert("실패:/");
@@ -531,18 +534,14 @@ $(function() {
           "no" : no
          },
          success: function() {
-            alert("메모 추가 완료:>");
-            
          },
-         error: function() {
-            alert("실패:/");
-         }
       })
    })
 });
-
+var last_day = 0;
 $(function() {
      $(".tabmenu").click(function(){/* 일차변경 */
+    	 last_day = day;
          day = $(this).val();
       $.ajax({
        url: 'select.do',
@@ -568,7 +567,11 @@ $(function() {
       } //error End
       }) //Ajax End
       
+      $("#default_"+last_day).css("background","#e6e6e6");
+      $("#default_"+last_day).css("color","black");
       
+      $("#default_"+day).css("background","#747474");
+      $("#default_"+day).css("color","white");
      }) //button End
     }); //JQuery End
     
@@ -618,7 +621,7 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
                     '<b>~~~~ 도로명 주소 ~~~~</b><br>'+
                     place_road_address_name+"<br>"+
                     'TEL : '+place_phone+
-                    '<button id="open_memo" class="open_memo" onclick=memo_open('+memo_index+') style="position:absolute; bottom:0px; left:0px">메모추가</button>'+
+                    '<button id="open_memo" class="open_memo" onclick=memo_open('+memo_index+') style="position:absolute; bottom:0px; left:0px; width:69px">메 모</button>'+
                     '<button id="place_move" style="position:absolute; bottom:0px; left:81px" onclick=panTo('+y+','+x+')>위치보기</button>'+
                     '<button id="place_delete" style="position:absolute; bottom:0px; right:0px" onclick=customoverlay_delete('+delete_index+','+memo_index+')>위치삭제</button>'+
                     '<input type = "hidden" id = "memo_val">'+
@@ -645,13 +648,14 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
 }
 
 function memo_open(memo_index_open){
-            location.href="#open";
+	
+         location.href="#open";
          $("#hidden_memo_index").val(memo_index_open);
          
           $.ajax({
                url: 'memoselect.do',
                data: {
-                "day" : day,
+               "day" : day,
                "memo_index" : memo_index_open,
                "no" : no
                },

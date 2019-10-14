@@ -46,7 +46,7 @@
 				${courseDTO.place_road_address_name}<br>
 				TEL : ${courseDTO.place_phone}<br>
 				
-			      <button id="open_memo" class="open_memo" onclick = "memo_open(${courseDTO.memo_index})" style="position:absolute; bottom:0px; left:0px">메모추가</button>
+			      <button id="open_memo" class="open_memo" onclick = "memo_open(${courseDTO.memo_index})" style="position:absolute; bottom:0px; left:0px ; width : 69px">메 모</button>
 			      <button id="place_move" style="position:absolute; bottom:0px; left:81px;" onclick='panTo(${courseDTO.place_y},${courseDTO.place_x})'>위치보기</button>
 			      <button id="place_delete" style="position:absolute; bottom:0px; right:0px;" onclick='customoverlay_delete(<%=i %>,${courseDTO.memo_index})'>위치삭제</button>
 			      <input type = "hidden" id = "memo_val">
