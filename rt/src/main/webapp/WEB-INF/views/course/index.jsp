@@ -92,7 +92,7 @@
       <div id="memberpic"style="margin : 10px 10px 0px 10px;  width: 80px; height: 80px; float:left;"><img src="resources/img/thumb.jpg" width="70px;"></div><!-- 사진 div -->
       제목 : ${typeADTO_model.title}<br>
       출발 날짜 : ${typeADTO_model.day_start.substring(0,10)} <br>
-      작성자 : ${typeADTO_model.id}<br>
+      작성자 : ${typeADTO_model.id} <button type ="button" onclick ="test2()">테스트</button><br>
    여행타입 :  ${typeADTO_model.travel_type}<br>
       
       </div> <!-- 회원 정보 div  -->

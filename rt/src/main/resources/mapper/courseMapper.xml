@@ -60,7 +60,7 @@
 	</select>
 	
 	<select id="daycount" resultType="Integer">
-		select COUNT(*) from course group by day order by day asc
+		select COUNT(*) from course where no = 397 group by day order by day asc
 	</select>
 
 </mapper>

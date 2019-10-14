@@ -91,6 +91,7 @@ public class CourseController {
 	
 	@RequestMapping("memoedit.do")
 	public String memoedit(CourseDTO courseDTO) {
+		System.out.println(courseDTO);
 		dao.memoedit(courseDTO);
 		return "course/memodit";
 	}
