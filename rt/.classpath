@@ -36,10 +36,18 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/user/.m2/repository/websocket/jackson-databind-2.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/.m2/repository/websocket/jinsMail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/.m2/repository/websocket/logback-classic-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/.m2/repository/websocket/mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/user/.m2/repository/websocket/spring-websocket-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/choi/.m2/repository/websocket/jackson-databind-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/choi/.m2/repository/websocket/jinsMail.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/choi/.m2/repository/websocket/logback-classic-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/choi/.m2/repository/websocket/mail.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/choi/.m2/repository/websocket/spring-websocket-4.2.4.RELEASE.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

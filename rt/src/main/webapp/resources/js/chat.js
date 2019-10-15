@@ -1,3 +1,9 @@
+function enterkey() {
+        if (window.event.keyCode == 13) {
+             // 엔터키가 눌렸을 때 실행할 내용
+             login();
+        }
+}
 $(function() {
    $("#contentSubmit").click(function() {
       var data = 
@@ -37,10 +43,11 @@ $(function() {
                      }
                   })
                })
-               $(".addCon").click(function() {
-                              $(this).each(function() {
-                                 var content = $("#textA"+$(this).val()).val()
-                                 var chatRoomNum = $(this).val()
+               $(".textA").keydown(function(key) {
+            	   if(key.keyCode==13){
+                              $(".addCon").each(function() {
+                                 var content = $("#textA"+$(".addCon").val()).val()
+                                 var chatRoomNum = $(".addCon").val()
                                  var date = new Date();
                                  $.ajax({
                                     url : "addContent",
@@ -63,6 +70,7 @@ $(function() {
                                     }
                                  })
                               })
+            	   }
                            })
             }
          })
@@ -96,10 +104,11 @@ $(function() {
                                  }
                               })
                            })
-                           $(".addCon").click(function() {
-                              $(this).each(function() {
-                                 var content = $("#textA"+$(this).val()).val()
-                                 var chatRoomNum = $(this).val()
+                           $(".textA").keydown(function(key) {
+                        	  if(key.keyCode==13){
+                              $(".addCon").each(function() {
+                                 var content = $("#textA"+$(".addCon").val()).val()
+                                 var chatRoomNum = $(".addCon").val()
                                  var date = new Date();
                                  $.ajax({
                                     url : "addContent",
@@ -122,6 +131,7 @@ $(function() {
                                     }
                                  })
                               })
+                        	   }
                            })
                         }
                      })
