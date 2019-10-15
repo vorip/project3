@@ -17,26 +17,26 @@ import com.rt.travel.member.service.MemberTools;
 @Controller
 public class ChatReadController {
 
-	@Autowired
-	ChatReadService chatService;
-	@Autowired
-	MemberTools memberTools;
+   @Autowired
+   ChatReadService chatService;
+   @Autowired
+   MemberTools memberTools;
 
-	@RequestMapping("getChat")
-	public String getChat(Model model, HttpSession session, HttpServletResponse response) {
-		model.addAttribute("result", chatService.getChat((String) session.getAttribute("name"))+"<>"+session.getAttribute("name"));
-		return "ajax/ajaxResult";
-	}
+   @RequestMapping("getChat")
+   public String getChat(Model model, HttpSession session, HttpServletResponse response) {
+      model.addAttribute("result", chatService.getChat((String) session.getAttribute("name")));
+      return "ajax/ajaxResult";
+   }
 
-	@RequestMapping("menuChange_chat")
-	public String menuChange_chat(Model model, HttpSession session) {
-		model.addAttribute("result", chatService.getMenuContent_chat((String) session.getAttribute("name")));
-		return "ajax/ajaxResult";
-	}
+   @RequestMapping("menuChange_chat")
+   public String menuChange_chat(Model model, HttpSession session) {
+      model.addAttribute("result", chatService.getMenuContent_chat((String) session.getAttribute("name")));
+      return "ajax/ajaxResult";
+   }
 
-	@RequestMapping("menuChange_friend")
-	public String menuChange_friend(Model model, HttpSession session) {
-		model.addAttribute("result", chatService.getMenuContent_friend((String) session.getAttribute("name")));
-		return "ajax/ajaxResult";
-	}
+   @RequestMapping("menuChange_friend")
+   public String menuChange_friend(Model model, HttpSession session) {
+      model.addAttribute("result", chatService.getMenuContent_friend((String) session.getAttribute("name")));
+      return "ajax/ajaxResult";
+   }
 }
