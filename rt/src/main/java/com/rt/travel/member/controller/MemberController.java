@@ -275,52 +275,29 @@ public class MemberController {
 
 	// 회원수정하기
 	@RequestMapping("updateAll")
-	public String updateAll(MemberDTO memberDTO, String travel_theme2, String addr1, HttpSession session,
-			HttpServletResponse response) throws IOException {
-		String id = (String) session.getAttribute("id");
-		MemberDTO dto = memberDAO.select(id);
-		String roadaddr = dto.getRoadaddr();
-		String totaddr = dto.getTotaddr();
+	public String updateAll(MemberDTO memberDTO, String travel_theme2, String addr1, HttpSession session) throws IOException {
 
 		if (travel_theme2 != null) {
 			memberDTO.setTravel_theme(travel_theme2);
 			memberDTO.setTotaddr();
 			memberDAO.updateAll(memberDTO);
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script type='text/javascript'>");
-			out.println("alert('수정이 완료되었습니다!!!')");
-			out.println("</script>");
-			out.flush();
 			return "redirect:main.do";
 		} else {
 			memberDTO.setTotaddr();
 			memberDAO.updateAll(memberDTO);
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script type='text/javascript'>");
-			out.println("alert('수정이 완료되었습니다!!!')");
-			out.println("</script>");
-			out.flush();
 			return "redirect:main.do";
 		}
 	}
 
 	// 회원탈퇴하기
 	@RequestMapping("delete")
-	public String delete(String inputId, Model model, HttpSession session, HttpServletResponse response)
+	public String delete(String inputId, Model model, HttpSession session)
 			throws IOException {
 		inputId = (String) session.getAttribute("id");
 		memberDAO.delete(inputId);
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script type='text/javascript'>");
-		out.println("alert('탈퇴가 완료되었습니다!')");
-		out.println("</script>");
-		out.flush();
 		session.invalidate();
 		model.addAttribute("loginPage", tool.login());
-		return "member/loginPage";
+		return "redirect:main.do";
 	}
 
 	// 로그아웃

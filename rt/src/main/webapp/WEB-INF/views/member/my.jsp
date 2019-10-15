@@ -78,12 +78,13 @@ ${publicBody}
    <table class="myTable" >
       <tr>
          <td width="180" class="td_title">아이디</td>
-         <td>${dto.id}</td>
+         <td >${dto.id} <input type="hidden" value="${dto.id}" name="id"></td>
       </tr>
       <tr>
          <td width="180" class="td_title">이름</td>
          <td>${dto.name}
-         <input type="hidden" name="pw" value="${dto.pw}" id="pw"></td>
+         <input type="hidden" name="pw" value="${dto.pw}" id="pw">
+         <input type="hidden" name="name" value="${dto.name}"></td>
       </tr>
       <tr>
          <td width="180" class="td_title">전화번호</td>
@@ -138,8 +139,8 @@ ${publicBody}
       </tr>
       
    </table>
-   <input type="button" class="purebtn" id="update" value="수정하기" >
    </form>
+   <input type="button" class="purebtn" id="update" value="수정하기" >
    <form action='main.do'>
    		<button type = 'submit' class ='purebtn'>메인으로</button>
    </form>

@@ -24,10 +24,10 @@ public class MyPlanList {
 			String[] end = typeADTO.getDay_end().split(" ");
 
 			myPlanHtml += "<tr>\r\n" + "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTitle() + "</td>\r\n"
+					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_day() + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_type() + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_theme() + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getChoice_public() + "</td>\r\n"
-					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + typeADTO.getTravel_intro() + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\">" + start[0] + "~" + end[0] + "</td>\r\n"
 					+ "		<td style=\"text-align: center;  border-top: 1px solid #cbcbcb; padding-top: 5px;padding-bottom: 5px;\"><button class = 'detail' onclick = \"location.href='showindex.do?no="+typeADTO.getNo() + "'\""  
 					+"style=\"display: inline-block;	line-height: normal; white-space: nowrap; vertical-align: middle;text-align: center;"

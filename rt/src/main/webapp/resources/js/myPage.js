@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#update").click(function() {
+		alert("수정이 완료되었습니다!!")
 		document.form1.action = "updateAll";
 		document.form1.submit();
 	})
@@ -8,6 +9,7 @@ $(document).ready(function() {
 		var pw2 = $("#pw").val();
 		var pwCheck = prompt("비밀번호를 입력하세요.");
 		if(pwCheck == pw2){
+			alert("탈퇴가 완료되었습니다!")
 			document.form1.action = "delete";
 			document.form1.submit();
 		}else{

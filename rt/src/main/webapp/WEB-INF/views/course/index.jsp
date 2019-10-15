@@ -403,7 +403,7 @@ function ourmarkerdel(delete_num){
 }
 
 var delete_index = 0;
-var memo_index = 0;
+var memo_index = ${memoindex};
 var day = 1;
 
 // **********************

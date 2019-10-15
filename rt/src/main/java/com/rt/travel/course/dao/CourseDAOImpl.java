@@ -74,6 +74,12 @@ public class CourseDAOImpl implements CourseDAO {
 	public List<Integer> daycount(int no) {
 		return my.selectList("courseDAO.daycount" , no);
 	}
+	
+	@Override
+	public int memoIndexCount(int no) {
+		return my.selectOne("courseDAO.memoIndexCount" , no);
+	}
+
 
 
 	

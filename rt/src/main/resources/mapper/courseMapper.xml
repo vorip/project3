@@ -62,5 +62,9 @@
 	<select id="daycount" parameterType="Integer" resultType="Integer">
 		select COUNT(*) from course where no = #{no} group by day order by day asc
 	</select>
+	
+	<select id="memoIndexCount" parameterType = "Integer" resultType="Integer">
+		select memo_index from course where no = #{no} and memo_index = (select max(memo_index) from course)
+	</select>
 
 </mapper>

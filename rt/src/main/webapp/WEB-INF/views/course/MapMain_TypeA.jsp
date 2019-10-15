@@ -20,11 +20,6 @@
 		         alert("필수항목을 입력해주세요");
 		         return false;
 		      }
-		      else{
-		    	  alert("실행됨");
-	        	  document.getElementById('index_submit').submit();
-		    	  return true;
-		      }
 	    };
 	};
 
