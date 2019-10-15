@@ -16,6 +16,7 @@ public class MainPublicModuleImpl implements MainPublicModule {
    @Override
    public String head() {
       return "" + "" + "   <!-- CSS STYLE -->"
+            + "   <link rel=\"stylesheet\" href=\"resources/assets/css/reset.css\">"
             + "   <link rel=\"stylesheet\" href=\"resources/assets/css/Boardstyle.css\">" + "" + "   <!-- 웹 폰트 -->"
             + "   <link href=\"https://fonts.googleapis.com/css?family=Black+Han+Sans|Orbitron&display=swap\" rel=\"stylesheet\">"
             + "   <link href=\"https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap\" rel=\"stylesheet\">"
@@ -27,8 +28,9 @@ public class MainPublicModuleImpl implements MainPublicModule {
       if (sessionId != null)
          return "<script>" + "$(function() {" + "   $(\"#loginPageHref\").remove();"
                + "   $(\"#signHref\").remove();"
-               + "$(\".header_menu\").append(\"<a id='logOut' href='logout'>로그아웃</a>\");" + "})" + "</script>"
-               + "   <!-- 스킵 내비게이션 -->\r\n" + "   <div id=\"skip\">\r\n"
+               + "$(\".header_menu\").append(\"<a id='logOut' class='header_menu_a' href='logout'>로그아웃</a>\");"
+               + "})"
+               + "</script>" + "   <!-- 스킵 내비게이션 -->\r\n" + "   <div id=\"skip\">\r\n"
                + "      <a href=\"#cont_nav\">전체 메뉴 바로가기</a>\r\n"
                + "      <a href=\"#cont_ban\">배너 영역 바로가기</a>\r\n"
                + "      <a href=\"#cont_cont\">컨텐츠 영역 바로가기</a>\r\n" + "   </div>\r\n"
@@ -39,7 +41,7 @@ public class MainPublicModuleImpl implements MainPublicModule {
                + "               </div>\r\n" + "               <div class=\"dropdown\">\r\n"
                + "                  <h3 class=\"font_color\">여행일정</h3>\r\n"
                + "                  <div class=\"dropdown-content\">\r\n"
-               + "                     <a class=\"menu_nav\" href=\"typea.do\">여행일정 만들기</a>\r\n"
+               + "                     <a class=\"menu_nav\" id = \"insertPlan\" href=\"typea.do\">여행일정 만들기</a>\r\n"
                + "                  </div>\r\n" + "               </div>\r\n"
                + "               <div class=\"dropdown\">\r\n"
                + "                  <h3 class=\"font_color\">동행찾기</h3>\r\n"
@@ -60,8 +62,8 @@ public class MainPublicModuleImpl implements MainPublicModule {
                + "         </div>\r\n" + "      </div>\r\n" + "      <!-- menu -->\r\n"
                + "         <div id=\"header\">\r\n" + "            <div class=\"container\">\r\n"
                + "               <div class=\"header\">\r\n" + "                  <div class=\"header_menu\">\r\n"
-               + "                     <a id=\"loginPageHref\" href=\"loginPage\">로그인</a>\r\n"
-               + "                     <a id=\"signHref\" href=\"sign\">회원가입</a>\r\n"
+               + "                     <a id=\"loginPageHref\" style='text-decoration: none;' href=\"loginPage\">로그인</a>\r\n"
+               + "                     <a id=\"signHref\" style='text-decoration: none;' href=\"sign\">회원가입</a>\r\n"
                + "                  </div>\r\n" + "               <!-- //헤더 메뉴 -->\r\n"
                + "               <div class=\"header-tit\">\r\n"
                + "                  <h1>모두의 정보 &amp; 모정!!</h1><br>\r\n"
@@ -76,7 +78,12 @@ public class MainPublicModuleImpl implements MainPublicModule {
                + "         </div>\r\n" + "         <!-- header -->\r\n" + "         \r\n"
                + "         <!-- cont_nav -->\r\n" + "         \r\n" + "            </div>\r\n";
       else
-         return "   <!-- 스킵 내비게이션 -->\r\n" + "   <div id=\"skip\">\r\n"
+         return " <script>$(function(){\r\n" + 
+         		"$(\"#insertPlan\").click(function(){\r\n" + 
+         		"alert(\"로그인 후 이용 가능한 컨텐츠입니다.\");"+ 
+         		"return false;\r\n" + 
+         		"})\r\n" + 
+         		"})</script>  <!-- 스킵 내비게이션 -->\r\n" + "   <div id=\"skip\">\r\n"
                + "      <a href=\"#cont_nav\">전체 메뉴 바로가기</a>\r\n"
                + "      <a href=\"#cont_ban\">배너 영역 바로가기</a>\r\n"
                + "      <a href=\"#cont_cont\">컨텐츠 영역 바로가기</a>\r\n" + "   </div>\r\n"
@@ -87,7 +94,7 @@ public class MainPublicModuleImpl implements MainPublicModule {
                + "               </div>\r\n" + "               <div class=\"dropdown\">\r\n"
                + "                  <h3 class=\"font_color\">여행일정</h3>\r\n"
                + "                  <div class=\"dropdown-content\">\r\n"
-               + "                     <a class=\"menu_nav\" href=\"typea.do\">여행일정 만들기</a>\r\n"
+               + "                     <a class=\"menu_nav\" href=\"typea.do\" id=\"insertPlan\">여행일정 만들기</a>\r\n"
                + "                  </div>\r\n" + "               </div>\r\n"
                + "               <div class=\"dropdown\">\r\n"
                + "                  <h3 class=\"font_color\">동행찾기</h3>\r\n"
@@ -136,15 +143,15 @@ public class MainPublicModuleImpl implements MainPublicModule {
       }
       String body2 = "            <div id = \"cont_cont\">\r\n" + "               <div class=\"container\">\r\n"
             + "                  <div class=\"cont\">\r\n" + "                     <div class=\"column col\">\r\n"
-            + "                        <h3><span class=\"ico_img ir_pm\">아이콘</span><span class=\"ico_tit\">Notice</span></h3>\r\n"
-            + "                        <p class=\"col_desc\">게시판 내용 리스트</p>\r\n"
+            + "                        <h3 style='margin: 0; padding: 0;'><span class=\"ico_img ir_pm\">아이콘</span><span class=\"ico_tit\">Notice</span></h3>\r\n"
+            + "                        <p class=\"col_desc\" style='margin: 0; padding: 0;'>게시판 내용 리스트</p>\r\n"
             + "                        <!-- 게시판 -->\r\n" + "                        <div class=\"notice\">\r\n"
-            + "                           <h4>Web Publisher Notice</h4>\r\n"
+            + "                           <h4 style='margin: 0; padding: 0;'>Web Publisher Notice</h4>\r\n"
             + "                           <table class=\"type_01 \"border=\"1\">\r\n"
             + "                               <thead>\r\n" + "                               <tr>\r\n"
-            + "                                   <th scope=\"co_1\">작성자</th>\r\n"
+            + "                                   <th scope=\"co_1\">닉네임</th>\r\n"
             + "                                   <th scope=\"co_2\">제목</th>\r\n"
-            + "                                   <th scope=\"co_3\">조회수</th>\r\n"
+            + "                                   <th id='maintable' scope=\"co_3\">조회수</th>\r\n"
             + "                                   <th scope=\"co_4\">작성날짜</th>\r\n"
             + "                               </tr>\r\n" + "                               </thead>\r\n"
             + "                               <tbody>\r\n";
@@ -152,12 +159,11 @@ public class MainPublicModuleImpl implements MainPublicModule {
       for (int i = 0; i < mainBoardList.size(); i++) {
          boardDTO = mainBoardList.get(i);
          SimpleDateFormat formatType = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-         body2 += " <tr>\r\n" 
-               + "       <th scope=\"row\">작성자</th>\r\n"
-               + "      <td><a href = \"view.do?bno="+boardDTO.getBno()+"\">"+ boardDTO.getTitle() +"</a><span style=\"margin: 10px; color: red;\">"+boardDTO.getCommentCount()+"</span></td>\r\n"
-               + "      <td>"+ boardDTO.getViewcnt()+"</td>\r\n"
-               + "      <td>"+ formatType.format(boardDTO.getRegdate()) +"</td>\r\n"
-               + "</tr>\r\n";
+         body2 += " <tr>\r\n" + "       <th scope=\"row\">작성자</th>\r\n" + "      <td><a href = \"view.do?bno="
+               + boardDTO.getBno() + "\">" + boardDTO.getTitle() + "</a><span style=\"margin: 10px; color: red;\">"
+               +"("+ boardDTO.getCommentCount()+")" + "</span></td>\r\n" + "      <td style='width'>"
+               + boardDTO.getViewcnt() + "</td>\r\n" + "      <td>" + formatType.format(boardDTO.getRegdate())
+               + "</td>\r\n" + "</tr>\r\n";
       }
 
       return body2 += "                          </tbody>\r\n" + "                           </table>\r\n"
@@ -175,7 +181,6 @@ public class MainPublicModuleImpl implements MainPublicModule {
             + "                        <li><a href=\"\">사이트 운영규칙</a></li>\r\n"
             + "                        <li><a href=\"\"><strong>사이트 개인정보취급방침</strong></a></li>\r\n"
             + "                        <li><a href=\"\">책임의 한계와 법적고지</a></li>\r\n"
-            + "                        <li><a href=\"\">게시중단요청 서비스</a></li>\r\n"
             + "                        <li><a href=\"\">고객센터</a></li>\r\n"
             + "                     </ul>\r\n" + "                     <address>\r\n"
             + "                     Copyright&copy;rt.co.kr All Right Rederved"
@@ -186,15 +191,15 @@ public class MainPublicModuleImpl implements MainPublicModule {
 
    @Override
    public String footer() {
-      return "" + "      <div class=\"footer\">\r\n" + "         <div id=\"footer\">\r\n"
-            + "            <div class=\"container\">" + "               <h2 class=\"ir_su\">푸터 영역</h2>\r\n"
-            + "                  <div class=\"footer\">\r\n" + "                     <ul>\r\n"
+      return "" + "      <div class=\"footer\" style='margin: 0; padding: 0;'>\r\n" + ""
+            + "            <div class=\"container\">" + ""            
+            + "                  <div class=\"footer\">\r\n" + ""
+            + "                     <ul>\r\n" + ""
             + "                        <li><a href=\"\">사이트 도움말</a></li>\r\n"
             + "                        <li><a href=\"\">사이트 이용약관</a></li>\r\n"
             + "                        <li><a href=\"\">사이트 운영규칙</a></li>\r\n"
             + "                        <li><a href=\"\"><strong>사이트 개인정보취급방침</strong></a></li>\r\n"
             + "                        <li><a href=\"\">책임의 한계와 법적고지</a></li>\r\n"
-            + "                        <li><a href=\"\">게시중단요청 서비스</a></li>\r\n"
             + "                        <li><a href=\"\">고객센터</a></li>\r\n"
             + "                     </ul>\r\n" + "                     <address>\r\n"
             + "                     Copyright&copy;rt.co.kr All Right Rederved"

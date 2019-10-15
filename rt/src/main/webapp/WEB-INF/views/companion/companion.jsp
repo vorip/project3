@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="resources/css/chat.css">
 
 	${publicHead}
+	<link rel="stylesheet" href="resources/assets/css/weather.css">
 	<link rel="stylesheet" href="resources/css/chat.css">
 	<script src="resources/js/getChat.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
