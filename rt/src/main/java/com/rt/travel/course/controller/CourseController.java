@@ -32,6 +32,7 @@ public class CourseController {
 	// 양식에서 map으로 이동
 	@RequestMapping("index.do")
 	public String index(TypeADTO typeADTO, Model model,HttpSession session) {
+		System.out.println("새로 만들어쪙");
 		String tmpSessionName = (String)session.getAttribute("name");
 		dao.typeAInsert(typeADTO);
 		typeADTO.setNo(dao.returnno());
@@ -50,7 +51,7 @@ public class CourseController {
 		
 		typeADAO.chatRoomNumUpdate(typeADTO);
 		
-		model.addAttribute("daycount",dao.daycount());
+		model.addAttribute("daycount",dao.daycount(typeADTO.getNo()));
 		model.addAttribute("typeADTO_model",typeADTO);
 		model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());
 		return "course/index";
@@ -59,7 +60,7 @@ public class CourseController {
 	 @RequestMapping("showindex.do")
 	   public String show_index(int no, Model model) {
 	      TypeADTO typeADTO = typeADAO.select_report(no);
-	      model.addAttribute("daycount",dao.daycount());
+	      model.addAttribute("daycount",dao.daycount(typeADTO.getNo()));
 	      model.addAttribute("typeADTO_model",typeADTO);
 	      model.addAttribute("no", no);
 	      model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());

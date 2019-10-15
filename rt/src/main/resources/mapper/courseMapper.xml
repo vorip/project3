@@ -59,8 +59,8 @@
 		select place_address_name from course where  no = #{no} and memo_index = (select max(memo_index) from course where day=(select max(day) from course where no = #{no}) )
 	</select>
 	
-	<select id="daycount" resultType="Integer">
-		select COUNT(*) from course where no = 397 group by day order by day asc
+	<select id="daycount" parameterType="Integer" resultType="Integer">
+		select COUNT(*) from course where no = #{no} group by day order by day asc
 	</select>
 
 </mapper>

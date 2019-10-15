@@ -92,7 +92,7 @@
       <div id="memberpic"style="margin : 10px 10px 0px 10px;  width: 80px; height: 80px; float:left;"><img src="resources/img/thumb.jpg" width="70px;"></div><!-- 사진 div -->
       제목 : ${typeADTO_model.title}<br>
       출발 날짜 : ${typeADTO_model.day_start.substring(0,10)} <br>
-      작성자 : ${typeADTO_model.id} <button type ="button" onclick ="test2()">테스트</button><br>
+      작성자 : ${typeADTO_model.id}<br>
    여행타입 :  ${typeADTO_model.travel_type}<br>
       
       </div> <!-- 회원 정보 div  -->
@@ -581,7 +581,7 @@ function customoverlay_add(place_url,place_name,place_address_name,place_road_ad
 	longday[day-1] = 1;
    }
    else{
-   	longday[day-1] = longday[day-1]+1;
+   	longday[day-1]++;
    }
    memo_index++;
      // 만약 일차버튼이 on일 때, 버튼 상태값을 변수에 담고 넘겨주기!:>
@@ -670,7 +670,7 @@ function memo_open(memo_index_open){
 }
 
 function customoverlay_delete(delete_num,memo_index){  
-   longday[day-1] = longday[day-1]-1;
+   longday[day-1] = longday[day-1]--;
      $.ajax({
       url: 'delete.do',
       data: {
