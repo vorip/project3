@@ -60,7 +60,7 @@ public class CourseController {
 	 @RequestMapping("showindex.do")
 	   public String show_index(int no, Model model) {
 	      TypeADTO typeADTO = typeADAO.select_report(no);
-	      model.addAttribute("daycount",dao.daycount(typeADTO.getNo()));
+	      model.addAttribute("daycount",dao.daycount(no));
 	      model.addAttribute("typeADTO_model",typeADTO);
 	      model.addAttribute("no", no);
 	      model.addAttribute("me",memberDAO.select(typeADTO.getId()).getName()+"_"+typeADTO.getId());
